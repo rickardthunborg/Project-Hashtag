@@ -28,7 +28,7 @@ namespace Project_Hashtag.Pages
             }
 
             // Find the account in the database.
-            var account = database.Accounts.Find(accountID);
+            var account = database.Users.Find(accountID);
             string subject = account.OpenIDSubject;
             string issuer = account.OpenIDIssuer;
             string name = account.Name;

@@ -25,18 +25,18 @@ builder.Services.AddAuthentication(options =>
         string issuer = context.Principal.FindFirst(ClaimTypes.NameIdentifier).Issuer;
         string name = context.Principal.FindFirst(ClaimTypes.Name).Value;
 
-        var account = db.Accounts
+        var account = db.Users
             .FirstOrDefault(p => p.OpenIDIssuer == issuer && p.OpenIDSubject == subject);
 
         if (account == null)
         {
-            account = new Account
+            account = new User
             {
                 OpenIDIssuer = issuer,
                 OpenIDSubject = subject,
                 Name = name
             };
-            db.Accounts.Add(account);
+            db.Users.Add(account);
         }
         else
         {

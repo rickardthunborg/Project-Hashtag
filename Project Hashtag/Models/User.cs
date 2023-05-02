@@ -1,6 +1,6 @@
 ﻿namespace Project_Hashtag.Models
 {
-    public class Account
+    public class User
     {
         public int ID { get; set; }
         public string OpenIDIssuer { get; set; }

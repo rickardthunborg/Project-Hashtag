@@ -8,21 +8,21 @@ namespace Project_Hashtag.Data
         {
             // If there are no fake accounts, add some.
             string fakeIssuer = "https://example.com";
-            if (!database.Accounts.Any(a => a.OpenIDIssuer == fakeIssuer))
+            if (!database.Users.Any(a => a.OpenIDIssuer == fakeIssuer))
             {
-                database.Accounts.Add(new Account
+                database.Users.Add(new User
                 {
                     OpenIDIssuer = fakeIssuer,
                     OpenIDSubject = "1111111111",
                     Name = "Brad"
                 });
-                database.Accounts.Add(new Account
+                database.Users.Add(new User
                 {
                     OpenIDIssuer = fakeIssuer,
                     OpenIDSubject = "2222222222",
                     Name = "Angelina"
                 });
-                database.Accounts.Add(new Account
+                database.Users.Add(new User
                 {
                     OpenIDIssuer = fakeIssuer,
                     OpenIDSubject = "3333333333",

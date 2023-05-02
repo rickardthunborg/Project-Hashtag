@@ -17,7 +17,7 @@ namespace Project_Hashtag.Pages.Shared.Components.LoginMenu
 
         public async Task<IViewComponentResult> InvokeAsync(int maxPriority, bool isDone)
         {
-            var accounts = database.Accounts.OrderBy(a => a.Name);
+            var accounts = database.Users.OrderBy(a => a.Name);
             var selectList = accounts.Select(p => new SelectListItem
             {
                 Value = p.ID.ToString(),
