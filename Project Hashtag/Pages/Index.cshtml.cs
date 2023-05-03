@@ -19,6 +19,7 @@ namespace Project_Hashtag.Pages
             this.database = database;
 
             this.LoggedIn = accessControl;
+
         }
 
         public void OnGet()
@@ -26,12 +27,13 @@ namespace Project_Hashtag.Pages
             this.Posts = database.Posts.OrderBy(p => p.CreatedDate).ToList();
             this.Users = database.Users.ToList();
             this.Tags = database.Tags.ToList();
+       
 
         }
 
 
-        [HttpPost]
-        public async Task<IActionResult> CreatePost(int tag, string desc)
+        
+        public async Task<IActionResult> OnPost(int tag, string desc)
         {
             try
             {
@@ -39,7 +41,7 @@ namespace Project_Hashtag.Pages
                 database.Posts.Add(post);
                 await database.SaveChangesAsync();
 
-                return RedirectToPage("index");
+                return RedirectToPage("/index");
             }
             catch
             {
