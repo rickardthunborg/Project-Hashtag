@@ -14,7 +14,7 @@
     <input type="text" name="desc">
     <p>Choose a tag:</p>
     <select name="tag">
-        @foreach (var tag in Model.Tags)
+        @foreach (var tag in @Model.Tags!)
         {
             <option value="@tag.Id"> @tag.Name</option>
         }

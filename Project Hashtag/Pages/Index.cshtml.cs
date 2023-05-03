@@ -9,9 +9,9 @@ namespace Project_Hashtag.Pages
     {
         private readonly AppDbContext database;
         private readonly AccessControl LoggedIn;
-        public List<Post> Posts;
+        public List<Post> Posts = new List<Post>();
         public List<User> Users;
-        public List<Tag> Tags;
+        public List<Tag> Tags = new List<Tag>();
 
 
         public IndexModel(AppDbContext database, AccessControl accessControl)
@@ -39,7 +39,7 @@ namespace Project_Hashtag.Pages
                 database.Posts.Add(post);
                 await database.SaveChangesAsync();
 
-                return RedirectToPage();
+                return RedirectToPage("index");
             }
             catch
             {
