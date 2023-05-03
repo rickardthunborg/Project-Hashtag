@@ -35,17 +35,21 @@
             <form method="post" asp-page-handler="like" asp-route-id="@post.ID"><button type="submit">Like</button></form>
 
             <p>Comments: </p>
-
             <ul>
                 @foreach (var comment in Model.Comments.Where(x => x.PostID == post.ID).OrderBy(z => z.CreatedDate))
                 {
-                    <li>@comment.Text</li>
+                    var user = Model.Users.Single(x => x.ID == comment.UserID);
+
+                    <li>
+                        <p>@comment.Text </p>
+                        <p><pre>  by: @user.Name</pre></p>
+                    </li>
                 }
             </ul>
 
             <form method="post" asp-page-handler="comment" asp-route-id="@post.ID">
                 <input type="text" name="content"> 
-                <button type="submit">Like</button>
+                <button type="submit">Comment</button>
                 </form>
 
         </li>

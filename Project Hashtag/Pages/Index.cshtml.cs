@@ -1,7 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.EntityFrameworkCore;
 using Project_Hashtag.Data;
 using Project_Hashtag.Models;
+using System.ComponentModel.Design;
 
 namespace Project_Hashtag.Pages
 {
@@ -35,6 +37,7 @@ namespace Project_Hashtag.Pages
 
         public IActionResult OnPostComment(int id, string content)
         {
+           
 
             Comment comment = new Comment() { Text = content, PostID = id, UserID = LoggedIn.LoggedInAccountID };
             database.Comments.Add(comment);
