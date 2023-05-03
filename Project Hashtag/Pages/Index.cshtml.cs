@@ -11,6 +11,7 @@ namespace Project_Hashtag.Pages
         private readonly AccessControl LoggedIn;
         public List<Post> Posts = new List<Post>();
         public List<User> Users;
+        public List<Comment> Comments;
         public List<Tag> Tags = new List<Tag>();
 
 
@@ -27,6 +28,21 @@ namespace Project_Hashtag.Pages
             this.Posts = database.Posts.OrderBy(p => p.CreatedDate).ToList();
             this.Users = database.Users.ToList();
             this.Tags = database.Tags.ToList();
+            this.Comments = database.Comments.ToList();
+
+        }
+
+
+        public IActionResult OnPostComment(int id, string content)
+        {
+
+            Comment comment = new Comment() { Text = content, PostID = id, UserID = LoggedIn.LoggedInAccountID };
+            database.Comments.Add(comment);
+            database.SaveChanges();
+
+            return RedirectToPage("/index");
+
+
         }
 
         public IActionResult OnPostLike(int id)

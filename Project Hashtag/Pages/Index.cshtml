@@ -34,6 +34,20 @@
             <p>Likes: @post.LikeCount</p>
             <form method="post" asp-page-handler="like" asp-route-id="@post.ID"><button type="submit">Like</button></form>
 
+            <p>Comments: </p>
+
+            <ul>
+                @foreach (var comment in Model.Comments.Where(x => x.PostID == post.ID).OrderBy(z => z.CreatedDate))
+                {
+                    <li>@comment.Text</li>
+                }
+            </ul>
+
+            <form method="post" asp-page-handler="comment" asp-route-id="@post.ID">
+                <input type="text" name="content"> 
+                <button type="submit">Like</button>
+                </form>
+
         </li>
     }
 </ul>
