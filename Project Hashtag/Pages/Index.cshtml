@@ -6,3 +6,30 @@
 }
 
 <h1>Welcome, @accessControl.LoggedInAccountName!</h1>
+
+
+<p>Add new post+</p>
+<form method="post" asp-action="CreatePost">
+    <p>Text:</p>
+    <input type="text" name="desc">
+    <p>Choose a tag:</p>
+    <select name="tag">
+        @foreach (var tag in Model.Tags)
+        {
+            <option value="@tag.Id"> @tag.Name</option>
+        }
+    </select>
+    <button type="submit">Post</button>
+</form> 
+
+<ul>
+    @foreach (var post in Model.Posts)
+    {
+        <li>
+            <p>
+                Posted by: @Model.Users.Single(x => x.ID == post.UserID).Name
+            </p>
+            <p> @post.Description</p>
+        </li>
+    }
+</ul>
