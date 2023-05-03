@@ -6,5 +6,7 @@
         public string OpenIDIssuer { get; set; }
         public string OpenIDSubject { get; set; }
         public string Name { get; set; }
+
+        public List<Like> Likes { get; set; }
     }
 }

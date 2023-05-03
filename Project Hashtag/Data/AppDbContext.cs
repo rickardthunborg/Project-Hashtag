@@ -14,6 +14,8 @@ namespace Project_Hashtag.Data
 
         public DbSet<Tag> Tags { get; set; }
 
+        public DbSet<Like> Likes { get; set; }
+
         public AppDbContext(DbContextOptions<AppDbContext> options)
             : base(options)
         {
@@ -28,6 +30,18 @@ namespace Project_Hashtag.Data
                 .HasOne(c => c.User)
                 .WithMany()
                 .HasForeignKey(c => c.UserID)
+                .OnDelete(DeleteBehavior.NoAction);
+
+            modelBuilder.Entity<Like>()
+                .HasOne(l => l.User)
+                .WithMany(u => u.Likes)
+               .HasForeignKey(l => l.UserID)
+               .OnDelete(DeleteBehavior.NoAction);
+
+            modelBuilder.Entity<Like>()
+                .HasOne(l => l.Post)
+                .WithMany(p => p.Likes)
+                .HasForeignKey(l => l.PostID)
                 .OnDelete(DeleteBehavior.NoAction);
         }
     }

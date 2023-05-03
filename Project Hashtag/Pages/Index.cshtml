@@ -27,9 +27,13 @@
     {
         <li>
             <p>
-                Posted by: @Model.Users.Single(x => x.ID == post.UserID).Name
+                Posted by: @Model.Users.Single(x => x.ID == post.UserID).Name 
             </p>
             <p> @post.Description</p>
+            <p> Date: @post.CreatedDate</p>
+            <p>Likes: @post.LikeCount</p>
+            <form method="post" asp-page-handler="like" asp-route-id="@post.ID"><button type="submit">Like</button></form>
+
         </li>
     }
 </ul>

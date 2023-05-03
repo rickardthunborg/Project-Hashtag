@@ -8,7 +8,7 @@
 
         public string? PictureUrl { get; set; }
 
-        public int Likes { get; set; } = 0;
+        public int LikeCount { get; set; } = 0;
 
         public int UserID { get; set; }
 
@@ -23,6 +23,8 @@
         public Tag? Tag { get; set; }
 
         public List<Comment> Comments { get; set; } =  new List<Comment>();
+
+        public List<Like> Likes { get; set; }
 
     }
 }

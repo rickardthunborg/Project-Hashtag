@@ -27,11 +27,12 @@ namespace Project_Hashtag.Pages
             this.Posts = database.Posts.OrderBy(p => p.CreatedDate).ToList();
             this.Users = database.Users.ToList();
             this.Tags = database.Tags.ToList();
-       
-
         }
 
-
+        public IActionResult OnPostLike(int id)
+        {
+            return RedirectToPage("/index");
+        }
         
         public async Task<IActionResult> OnPost(int tag, string desc)
         {
