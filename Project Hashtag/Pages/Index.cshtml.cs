@@ -31,7 +31,44 @@ namespace Project_Hashtag.Pages
 
         public IActionResult OnPostLike(int id)
         {
-            return RedirectToPage("/index");
+
+
+            Post post = database.Posts.FirstOrDefault(x => x.ID == id);
+            Like like = database.Likes.FirstOrDefault(x => x.PostID == post.ID && x.UserID == LoggedIn.LoggedInAccountID);
+
+            if (like == null)
+            {   
+                try
+                {
+                    like = new Like() { PostID = id, UserID = LoggedIn.LoggedInAccountID };
+                    database.Likes.Add(like);
+                    post.LikeCount += 1;
+                    database.SaveChanges();
+
+                    return RedirectToPage("/index");
+                }
+                catch
+                {
+                    return NotFound();
+                }
+
+            }
+            else
+            {
+                try
+                {
+                    database.Likes.Remove(like);
+                    post.LikeCount--;
+                    database.SaveChanges();
+
+                    return RedirectToPage("/index");
+                }
+                catch
+                {
+                    return NotFound();
+                }
+            }
+
         }
         
         public async Task<IActionResult> OnPost(int tag, string desc)
