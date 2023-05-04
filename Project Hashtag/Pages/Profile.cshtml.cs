@@ -12,7 +12,7 @@ namespace Project_Hashtag.Pages
 {
     public class ProfileModel : PageModel
     {
-        private readonly Project_Hashtag.Data.AppDbContext database;
+        readonly Project_Hashtag.Data.AppDbContext database;
         private AccessControl LoggedIn;
 
 
@@ -22,6 +22,8 @@ namespace Project_Hashtag.Pages
             this.LoggedIn = accessControl;
         }
 
+
+        public List<User> Users { get; set; } = new List<User>();
         public User User { get;set; } = default!;
         public List<Post> userPosts;
         public List<Comment> Comments;
@@ -40,7 +42,7 @@ namespace Project_Hashtag.Pages
 
         }
 
-        public IActionResult OnPostLike(int id)
+        public IActionResult OnPostLike(int id, int userId)
         {
 
 
@@ -88,6 +90,7 @@ namespace Project_Hashtag.Pages
                 User =  database.Users.Single(u => u.ID == id);
                 userPosts = database.Posts.Where(x => x.UserID == id).ToList();
                 this.Comments = database.Comments.ToList();
+                this.Users = database.Users.ToList();
             }
         }
     }

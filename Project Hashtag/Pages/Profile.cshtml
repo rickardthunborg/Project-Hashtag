@@ -18,7 +18,10 @@
             <p> @post.Description</p>
             <p> Date: @post.CreatedDate</p>
             <p>Likes: @post.LikeCount</p>
-            <form method="post" asp-page-handler="like" asp-route-id="@post.ID"><button type="submit">Like</button></form>
+            <form method="post" asp-page-handler="like" asp-route-id="@post.ID">
+                <input hidden name="userId" value="@Model.User.ID">
+                <button type="submit">Like</button>
+            </form>
 
             <p>Comments: </p>
             <ul>
@@ -27,14 +30,14 @@
 
                     <li>
                         <p>@comment.Text </p>
-                        <a asp-page="Profile" asp-route-id="@Model.User.ID"><pre>  by: @Model.User.Name</pre></a>
+                        <a asp-page="Profile" asp-route-id="@Model.Users.Single(x => x.ID == comment.UserID)"><pre>  by: @Model.Users.Single(x => x.ID == comment.UserID).Name</pre></a>
                     </li>
                 }
             </ul>
 
             <form method="post" asp-page-handler="comment" asp-route-id="@post.ID">
                 <input type="text" name="content">
-                <input hidden name="userId" value="@Model.User.ID"></input>
+                <input hidden name="userId" value="@Model.User.ID">
                 <button type="submit">Comment</button>
             </form>
 
