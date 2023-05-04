@@ -1,0 +1,46 @@
+﻿@page "{id:int}"
+@model Project_Hashtag.Pages.ProfileModel
+
+@{
+    ViewData["Title"] = "Profile";
+}
+
+<h2>@Model.User.Name</h2>
+
+<p> User posts: </p>
+<ul>
+    @foreach (var post in Model.userPosts)
+    {
+        <li>
+            <p>
+                Posted by: @Model.User.Name
+            </p>
+            <p> @post.Description</p>
+            <p> Date: @post.CreatedDate</p>
+            <p>Likes: @post.LikeCount</p>
+            <form method="post" asp-page-handler="like" asp-route-id="@post.ID">
+                <input hidden name="userId" value="@Model.User.ID">
+                <button type="submit">Like</button>
+            </form>
+
+            <p>Comments: </p>
+            <ul>
+                @foreach (var comment in Model.Comments.Where(x => x.PostID == post.ID).OrderBy(z => z.CreatedDate))
+                {
+
+                    <li>
+                        <p>@comment.Text </p>
+                        <a asp-page="Profile" asp-route-id="@Model.Users.Single(x => x.ID == comment.UserID)"><pre>  by: @Model.Users.Single(x => x.ID == comment.UserID).Name</pre></a>
+                    </li>
+                }
+            </ul>
+
+            <form method="post" asp-page-handler="comment" asp-route-id="@post.ID">
+                <input type="text" name="content">
+                <input hidden name="userId" value="@Model.User.ID">
+                <button type="submit">Comment</button>
+            </form>
+
+        </li>
+    }
+</ul>
