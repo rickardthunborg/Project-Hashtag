@@ -32,6 +32,8 @@ namespace Project_Hashtag.Data
 
             if (!database.Tags.Any())
             {
+                database.Tags.Add(new Tag { Name = "No tag" });
+
                 database.Tags.Add(new Tag { Name = "Food" });
 
                 database.Tags.Add(new Tag { Name = "Travel" });

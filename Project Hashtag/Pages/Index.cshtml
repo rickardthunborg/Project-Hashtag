@@ -30,6 +30,10 @@
                 Posted by: @Model.Users.Single(x => x.ID == post.UserID).Name 
             </p>
             <p> @post.Description</p>
+            @if (@Model.Tags.Single(x => x.Id == post.TagID).Id != 1)
+            {
+                <p>Tag: @Model.Tags.Single(x => x.Id == post.TagID).Name</p>
+            }
             <p> Date: @post.CreatedDate</p>
             <p>Likes: @post.LikeCount</p>
             <form method="post" asp-page-handler="like" asp-route-id="@post.ID"><button type="submit">Like</button></form>
