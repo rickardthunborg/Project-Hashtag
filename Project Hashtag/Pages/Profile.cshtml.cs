@@ -28,7 +28,7 @@ namespace Project_Hashtag.Pages
 
 
 
-        public IActionResult OnPostComment(int id, string content)
+        public IActionResult OnPostComment(int id, string content, int userId)
         {
 
 
@@ -36,8 +36,7 @@ namespace Project_Hashtag.Pages
             database.Comments.Add(comment);
             database.SaveChanges();
 
-            return RedirectToPage("./Profile" + User.ID);
-
+            return RedirectToPage("Profile", new { id = userId });
 
         }
 
@@ -57,7 +56,7 @@ namespace Project_Hashtag.Pages
                     post.LikeCount += 1;
                     database.SaveChanges();
 
-                    return RedirectToPage(new { id = User.ID});
+                    return RedirectToPage("Profile", new { id = userId });
                 }
                 catch
                 {
@@ -73,7 +72,7 @@ namespace Project_Hashtag.Pages
                     post.LikeCount--;
                     database.SaveChanges();
 
-                    return RedirectToPage(new { id = User.ID });
+                    return RedirectToPage("Profile", new { id = userId });
                 }
                 catch
                 {

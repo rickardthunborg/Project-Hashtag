@@ -34,6 +34,7 @@
 
             <form method="post" asp-page-handler="comment" asp-route-id="@post.ID">
                 <input type="text" name="content">
+                <input hidden name="userId" value="@Model.User.ID"></input>
                 <button type="submit">Comment</button>
             </form>
 
