@@ -57,6 +57,19 @@ namespace Project_Hashtag.Data
                 .WithMany(p => p.Reports)
                 .HasForeignKey(r => r.PostID)
                 .OnDelete(DeleteBehavior.NoAction);
+
+            modelBuilder.Entity<Follow>()
+                .HasKey(f => new { f.FollowerId, f.FollowingId });
+
+            modelBuilder.Entity<Follow>()
+                .HasOne(f => f.Follower)
+                .WithMany(u => u.Followers)
+                .HasForeignKey(f => f.FollowerId);
+
+            modelBuilder.Entity<Follow>()
+                .HasOne(f => f.Following)
+                .WithMany()
+                .HasForeignKey(f => f.FollowingId);
         }
     }
 }

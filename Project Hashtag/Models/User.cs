@@ -8,6 +8,7 @@
         public string Name { get; set; }
 
         public List<Like> Likes { get; set; }
+        public List<Follow> Followers { get; set; }
 
         public List<Report> Reports { get; set; }
     }
