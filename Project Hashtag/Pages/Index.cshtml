@@ -42,7 +42,7 @@
 
                     <li>
                         <p>@comment.Text </p>
-                        <p><pre>  by: @user.Name</pre></p>
+                        <a asp-page="Profile" asp-route-id="@user.ID"><pre>  by: @user.Name</pre></a>
                     </li>
                 }
             </ul>
