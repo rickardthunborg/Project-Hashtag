@@ -37,15 +37,16 @@ namespace Project_Hashtag.Pages
 
         public IActionResult OnPostComment(int id, string content)
         {
-           
+            try
+            {
+                Comment.AddComment(LoggedIn.LoggedInAccountID, id, content, database);
 
-            Comment comment = new Comment() { Text = content, PostID = id, UserID = LoggedIn.LoggedInAccountID };
-            database.Comments.Add(comment);
-            database.SaveChanges();
-
-            return RedirectToPage("/index");
-
-
+                return RedirectToPage("/index");
+            }
+            catch
+            {
+                return RedirectToPage();
+            }
         }
 
         public IActionResult OnPostLike(int id)

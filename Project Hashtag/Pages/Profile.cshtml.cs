@@ -32,14 +32,16 @@ namespace Project_Hashtag.Pages
 
         public IActionResult OnPostComment(int id, string content, int userId)
         {
+            try
+            {
+                Comment.AddComment(LoggedIn.LoggedInAccountID, id, content, database);
 
-
-            Comment comment = new Comment() { Text = content, PostID = id, UserID = LoggedIn.LoggedInAccountID };
-            database.Comments.Add(comment);
-            database.SaveChanges();
-
-            return RedirectToPage("Profile", new { id = userId });
-
+                return RedirectToPage("Profile", new { id = userId });
+            }
+            catch
+            {
+                return RedirectToPage();
+            }
         }
 
         public IActionResult OnPostLike(int id, int userId)
