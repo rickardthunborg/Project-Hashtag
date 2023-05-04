@@ -12,8 +12,8 @@ using Project_Hashtag.Data;
 namespace Project_Hashtag.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20230504064523_1")]
-    partial class _1
+    [Migration("20230504103517_report")]
+    partial class report
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -113,6 +113,29 @@ namespace Project_Hashtag.Migrations
                     b.ToTable("Posts");
                 });
 
+            modelBuilder.Entity("Project_Hashtag.Models.Report", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"), 1L, 1);
+
+                    b.Property<int>("PostID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("UserID")
+                        .HasColumnType("int");
+
+                    b.HasKey("ID");
+
+                    b.HasIndex("PostID");
+
+                    b.HasIndex("UserID");
+
+                    b.ToTable("Reports");
+                });
+
             modelBuilder.Entity("Project_Hashtag.Models.Tag", b =>
                 {
                     b.Property<int>("Id")
@@ -210,11 +233,32 @@ namespace Project_Hashtag.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("Project_Hashtag.Models.Report", b =>
+                {
+                    b.HasOne("Project_Hashtag.Models.Post", "Post")
+                        .WithMany("Reports")
+                        .HasForeignKey("PostID")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("Project_Hashtag.Models.User", "User")
+                        .WithMany("Reports")
+                        .HasForeignKey("UserID")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.Navigation("Post");
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("Project_Hashtag.Models.Post", b =>
                 {
                     b.Navigation("Comments");
 
                     b.Navigation("Likes");
+
+                    b.Navigation("Reports");
                 });
 
             modelBuilder.Entity("Project_Hashtag.Models.Tag", b =>
@@ -225,6 +269,8 @@ namespace Project_Hashtag.Migrations
             modelBuilder.Entity("Project_Hashtag.Models.User", b =>
                 {
                     b.Navigation("Likes");
+
+                    b.Navigation("Reports");
                 });
 #pragma warning restore 612, 618
         }
