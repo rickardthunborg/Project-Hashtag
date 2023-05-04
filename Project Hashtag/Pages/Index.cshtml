@@ -25,9 +25,10 @@
 <ul>
     @foreach (var post in Model.Posts)
     {
+        var poster = Model.Users.Single(x => post.UserID == x.ID);
         <li>
             <p>
-                Posted by: @Model.Users.Single(x => x.ID == post.UserID).Name 
+                <a asp-page="Profile" asp-route-userId="@poster.ID"><pre> @poster.Name</pre></a>
             </p>
             <p> @post.Description</p>
             @if (@Model.Tags.Single(x => x.Id == post.TagID).Id != 1)
