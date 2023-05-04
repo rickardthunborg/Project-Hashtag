@@ -1,4 +1,4 @@
-﻿@page "{id:int}"
+﻿@page "{userId:int}"
 @model Project_Hashtag.Pages.ProfileModel
 
 @{
@@ -30,7 +30,7 @@
 
                     <li>
                         <p>@comment.Text </p>
-                        <a asp-page="Profile" asp-route-id="@Model.Users.Single(x => x.ID == comment.UserID)"><pre>  by: @Model.Users.Single(x => x.ID == comment.UserID).Name</pre></a>
+                        <a asp-page="Profile" asp-route-userId="@comment.UserID"><pre>  by: @Model.Users.Single(x => x.ID == comment.UserID).Name</pre></a>
                     </li>
                 }
             </ul>

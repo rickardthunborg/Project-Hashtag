@@ -85,12 +85,12 @@ namespace Project_Hashtag.Pages
             }
 
         }
-        public void OnGetAsync(int id)
+        public void OnGetAsync(int userId)
         {
             if (database.Users != null)
             {
-                User =  database.Users.Single(u => u.ID == id);
-                userPosts = database.Posts.Where(x => x.UserID == id).ToList();
+                User =  database.Users.Single(u => u.ID == userId);
+                userPosts = database.Posts.Where(x => x.UserID == userId).ToList();
                 this.Comments = database.Comments.ToList();
                 this.Users = database.Users.ToList();
             }
