@@ -10,14 +10,16 @@ namespace Project_Hashtag.Pages
 {
     public class IndexModel : PageModel
     {
-        private readonly AppDbContext database;
-        private readonly AccessControl LoggedIn;
+        public readonly AppDbContext database;
+        public readonly AccessControl LoggedIn;
+
+
         public List<Post> Posts = new List<Post>();
         public List<User> Users;
         public List<Comment> Comments;
         public List<Tag> Tags = new List<Tag>();
         public List<Report> Reports = new List<Report>();
-        public int amountOfReporters;
+        public List<Follow> PeopleYouFollow;
 
 
         public IndexModel(AppDbContext database, AccessControl accessControl)
@@ -35,15 +37,7 @@ namespace Project_Hashtag.Pages
             this.Tags = database.Tags.ToList();
             this.Comments = database.Comments.ToList();
             this.Reports = database.Reports.ToList();
-            var peopleYouFollow = database.Follows.Where(f => f.UserID == LoggedIn.LoggedInAccountID).ToList();
-
-            this.amountOfReporters = database.Reports.Where(r => peopleYouFollow.Select(p => p.FollowingId).Contains(r.UserID)).Count();
-
-
-
-
-
-
+            PeopleYouFollow = database.Follows.Where(f => f.FollowingId == LoggedIn.LoggedInAccountID).ToList();
         }
 
 
