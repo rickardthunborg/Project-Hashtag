@@ -14,13 +14,13 @@
 <body>
     <div class="parentNavBarContainer"> 
         <div class="div1NavBar"> </div> 
-        <div class="div2NavBar">
-            <img src="FaceGramLogo.svg" alt="FaceGram Logo Gold" class="svg-logo" type="image/svg+xml" id="FaceGramNavBarLogo">
-        </div>
+        <a class="div2NavBar" asp-page="./index">
+        <img src="~/FaceGramLogo.svg" alt="FaceGram Logo Gold" class="svg-logo" type="image/svg+xml" id="FaceGramNavBarLogo">
+        </a>
         <div class="div3NavBar">
             <h1>@accessControl.LoggedInAccountName</h1>
         </div> 
-    </div>
+    </div>   
     <header>
         <environment names="Development">
             @await Component.InvokeAsync(nameof(FakeLoginMenu))

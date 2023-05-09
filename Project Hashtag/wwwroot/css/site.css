@@ -20,6 +20,10 @@ li {
     margin-bottom: 20px;
 }
 
+a {
+    color: aqua;
+}
+
 p {
     margin: 0;
 }
@@ -69,4 +73,9 @@ button[type="submit"]:hover {
 #FaceGramNavBarLogo {
     max-width: 40%;
     max-height: 40%;
+}
+
+.flow {
+    width: clamp(200px, 100%, 500px);
+    margin: auto;
 }

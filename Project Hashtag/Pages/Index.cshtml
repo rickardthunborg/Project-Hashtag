@@ -20,7 +20,7 @@
     <button type="submit">Post</button>
 </form> 
 
-<ul>
+<ul class="flow">
     @foreach (var post in Model.Posts)
     {
         var poster = Model.Users.Single(x => post.UserID == x.ID);
