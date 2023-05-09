@@ -40,7 +40,21 @@ namespace Project_Hashtag.Pages
             PeopleYouFollow = database.Follows.Where(f => f.FollowingId == LoggedIn.LoggedInAccountID).ToList();
         }
 
+        public IActionResult OnPostDeleteComment(int id)
+        {
+            try
+            {
+                Comment comment = database.Comments.Single(c => c.PostID == id);
+                Comment.DeleteComment(comment, database);
 
+                return RedirectToPage("/index");
+            }
+            catch
+            {
+                return RedirectToPage();
+            }
+        }
+        
         public IActionResult OnPostComment(int id, string content)
         {
             try
