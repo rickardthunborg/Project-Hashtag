@@ -5,3 +5,5 @@ obj/
 .vscode/
 appsettings.Development.json
 .idea/
+Project Hashtag/Properties/launchSettings.json
+Project Hashtag/appsettings.json
