@@ -25,7 +25,7 @@ builder.Services.AddAuthentication(options =>
         string subject = context.Principal.FindFirstValue(ClaimTypes.NameIdentifier);
         string issuer = context.Principal.FindFirst(ClaimTypes.NameIdentifier).Issuer;
         string name = context.Principal.FindFirst(ClaimTypes.Name).Value;
-        string pictureUrl = context.Principal.FindFirstValue("picture");
+        string avatar = context.Principal.FindFirstValue("picture");
 
         var account = db.Users
             .FirstOrDefault(p => p.OpenIDIssuer == issuer && p.OpenIDSubject == subject);
@@ -37,7 +37,7 @@ builder.Services.AddAuthentication(options =>
                 OpenIDIssuer = issuer,
                 OpenIDSubject = subject,
                 Name = name,
-                Avatar = pictureUrl
+                Avatar = avatar
             };
             db.Users.Add(account);
         }
@@ -45,7 +45,6 @@ builder.Services.AddAuthentication(options =>
         {
             // If the account already exists, just update the name and picture URL in case they have changed.
             account.Name = name;
-            account.Avatar = pictureUrl;
         }
 
         await db.SaveChangesAsync();

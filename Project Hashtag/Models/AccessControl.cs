@@ -19,8 +19,10 @@ namespace Project_Hashtag.Data
 
             LoggedInAccountID = db.Users.Single(p => p.OpenIDIssuer == issuer && p.OpenIDSubject == subject).ID;
             LoggedInAccountName = user.FindFirst(ClaimTypes.Name).Value;
-            var avatarClaim = user.FindFirst("urn:google:image");
-            LoggedInAvatar = avatarClaim != null ? avatarClaim.Value : null;
+
+            if(user.FindFirst("urn:google:image") != null){
+                LoggedInAvatar = user.FindFirst("urn:google:image").Value;
+            }
         }
     }
 }
