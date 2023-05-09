@@ -109,8 +109,7 @@ namespace Project_Hashtag.Pages
                 return RedirectToPage("Profile", new { id = userId });
             }
 
-            amountOfFollowers = database.Follows.Where(f => f.FollowingId == User.ID).Count();
-            amountFollowing = database.Follows.Where(f => f.FollowerId == User.ID).Count();
+            
 
 
             return RedirectToPage("Profile", new { id = userId });
@@ -125,6 +124,8 @@ namespace Project_Hashtag.Pages
                 this.Comments = database.Comments.ToList();
                 this.Users = database.Users.ToList();
                 this.FollowText = Follow.GetFollowStatus(userId, LoggedIn.LoggedInAccountID, database);
+                this.amountOfFollowers = database.Follows.Where(f => f.UserID == User.ID).Count();
+                this.amountFollowing = database.Follows.Where(f => f.FollowingId == User.ID).Count();
             }
         }
     }
