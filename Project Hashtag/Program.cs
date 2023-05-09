@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
@@ -34,18 +35,19 @@ builder.Services.AddAuthentication(options =>
             {
                 OpenIDIssuer = issuer,
                 OpenIDSubject = subject,
-                Name = name
+                Name = name,
             };
             db.Users.Add(account);
         }
         else
         {
-            // If the account already exists, just update the name in case it has changed.
+            // If the account already exists, just update the name and picture URL in case they have changed.
             account.Name = name;
         }
 
         await db.SaveChangesAsync();
     };
+
 })
 .AddOpenIdConnect("Google", options =>
 {
@@ -65,6 +67,7 @@ builder.Services.AddAuthentication(options =>
     */
     options.ClientId = builder.Configuration["Authentication:Google:ClientId"];
     options.ClientSecret = builder.Configuration["Authentication:Google:ClientSecret"];
+    options.ClaimActions.MapJsonKey("urn:google:image", "picture", "url");
     options.ResponseType = OpenIdConnectResponseType.Code;
     options.CallbackPath = "/signin-oidc-google";
     options.Scope.Add("openid");

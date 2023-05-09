@@ -9,6 +9,7 @@ namespace Project_Hashtag.Data
     {
         public int LoggedInAccountID { get; set; }
         public string LoggedInAccountName { get; set; }
+        public string LoggedInAvatar { get; set; }
 
         public AccessControl(AppDbContext db, IHttpContextAccessor httpContextAccessor)
         {
@@ -18,6 +19,10 @@ namespace Project_Hashtag.Data
 
             LoggedInAccountID = db.Users.Single(p => p.OpenIDIssuer == issuer && p.OpenIDSubject == subject).ID;
             LoggedInAccountName = user.FindFirst(ClaimTypes.Name).Value;
+
+            if(user.FindFirst("urn:google:image") != null){
+                LoggedInAvatar = user.FindFirst("urn:google:image").Value;
+            }
         }
     }
 }
