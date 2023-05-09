@@ -1,0 +1,72 @@
+@font-face {
+    font-family: 'PoppinsTVG-SemiBold';
+    src: url('PoppinsTVG-SemiBold.woff2') format('woff2');
+}
+
+html, body {
+    font-family: 'PoppinsTVG-SemiBold', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #1F2023;
+    color: #F0F7EE;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+li {
+    margin-bottom: 20px;
+}
+
+p {
+    margin: 0;
+}
+
+input[type="text"], select {
+    display: block;
+    margin-bottom: 10px;
+}
+
+button[type="submit"] {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button[type="submit"]:hover {
+    background-color: #3e8e41;
+}
+
+.parentNavBarContainer {
+    display: grid;
+    grid-template: "a b c" /1fr 1fr 1fr;
+    height: 10vh; /* 10% of viewport height */
+}
+
+.div1NavBar {
+    grid-area: a;
+    background-color: #2E3136;
+}
+
+.div2NavBar {
+    grid-area: b;
+    background-color: #2E3136; /* Add background color for visibility */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.div3NavBar {
+    grid-area: c;
+    background-color: #2E3136; /* Add background color for visibility */
+}
+
+#FaceGramNavBarLogo {
+    max-width: 40%;
+    max-height: 40%;
+}

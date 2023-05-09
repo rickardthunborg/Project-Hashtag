@@ -89,21 +89,20 @@ namespace Project_Hashtag.Pages
             }
 
         }
-
-        public IActionResult OnPostFollow( int userId)
+        public IActionResult OnPostFollow(int userId)
         {
             string followStatus = Follow.GetFollowStatus(userId, LoggedIn.LoggedInAccountID, database);
 
             if (followStatus == "Follow" || followStatus == "Follow back")
             {
-                database.Follows.Add(new Follow { FollowerId = LoggedIn.LoggedInAccountID, FollowingId = userId });
+                database.Follows.Add(new Follow { FollowingId = LoggedIn.LoggedInAccountID, UserID = userId });
                 database.SaveChanges();
 
                 return RedirectToPage("Profile", new { id = userId });
             }
             else if (followStatus == "Unfollow")
             {
-                Follow f = database.Follows.Single(x => x.FollowerId == LoggedIn.LoggedInAccountID && x.FollowingId == userId);
+                Follow f = database.Follows.Single(x => x.FollowingId == LoggedIn.LoggedInAccountID && x.UserID == userId);
                 database.Follows.Remove(f);
                 database.SaveChanges();
 
