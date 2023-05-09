@@ -24,6 +24,10 @@
     @foreach (var post in Model.Posts)
     {
         var poster = Model.Users.Single(x => post.UserID == x.ID);
+        if (post.ID == Model.LoggedIn.LoggedInAccountID)
+        {
+            continue;
+        }
         <li>
             <p>
                 <a asp-page="Profile" asp-route-userId="@poster.ID"> <pre> @poster.Name</pre></a>
@@ -49,6 +53,8 @@
                     <li>
                         <p>@comment.Text </p>
                         <a asp-page="Profile" asp-route-userId="@user.ID"><pre>  by: @user.Name</pre></a>
+                        <form method="post" asp-page-handler="deletecomment" asp-route-id="@post.ID"><button type="submit">Delete Comment</button></form>
+
                     </li>
                 }
             </ul>
