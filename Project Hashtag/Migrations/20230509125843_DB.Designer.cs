@@ -12,8 +12,8 @@ using Project_Hashtag.Data;
 namespace Project_Hashtag.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20230509083111_Namechange")]
-    partial class Namechange
+    [Migration("20230509125843_DB")]
+    partial class DB
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -175,6 +175,9 @@ namespace Project_Hashtag.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"), 1L, 1);
+
+                    b.Property<string>("Avatar")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
                         .IsRequired()

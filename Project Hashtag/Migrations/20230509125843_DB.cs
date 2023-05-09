@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Project_Hashtag.Migrations
 {
-    public partial class follows : Migration
+    public partial class DB : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -30,7 +30,8 @@ namespace Project_Hashtag.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     OpenIDIssuer = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     OpenIDSubject = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Avatar = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -41,20 +42,20 @@ namespace Project_Hashtag.Migrations
                 name: "Follows",
                 columns: table => new
                 {
-                    FollowerId = table.Column<int>(type: "int", nullable: false),
+                    UserID = table.Column<int>(type: "int", nullable: false),
                     FollowingId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Follows", x => new { x.FollowerId, x.FollowingId });
-                    table.ForeignKey(
-                        name: "FK_Follows_Users_FollowerId",
-                        column: x => x.FollowerId,
-                        principalTable: "Users",
-                        principalColumn: "ID");
+                    table.PrimaryKey("PK_Follows", x => new { x.UserID, x.FollowingId });
                     table.ForeignKey(
                         name: "FK_Follows_Users_FollowingId",
                         column: x => x.FollowingId,
+                        principalTable: "Users",
+                        principalColumn: "ID");
+                    table.ForeignKey(
+                        name: "FK_Follows_Users_UserID",
+                        column: x => x.UserID,
                         principalTable: "Users",
                         principalColumn: "ID");
                 });
