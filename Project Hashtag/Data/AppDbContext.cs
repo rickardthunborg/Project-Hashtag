@@ -17,6 +17,8 @@ namespace Project_Hashtag.Data
         public DbSet<Like> Likes { get; set; }
 
         public DbSet<Report> Reports { get; set; }
+
+        public DbSet<Follow> Follows { get; set; }
         public AppDbContext(DbContextOptions<AppDbContext> options)
             : base(options)
         {
@@ -25,7 +27,6 @@ namespace Project_Hashtag.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            // ...
 
             modelBuilder.Entity<Comment>()
                 .HasOne(c => c.User)
@@ -64,12 +65,16 @@ namespace Project_Hashtag.Data
             modelBuilder.Entity<Follow>()
                 .HasOne(f => f.Follower)
                 .WithMany(u => u.Followers)
-                .HasForeignKey(f => f.FollowerId);
+                .HasForeignKey(f => f.FollowerId)
+                .OnDelete(DeleteBehavior.NoAction);
+
 
             modelBuilder.Entity<Follow>()
                 .HasOne(f => f.Following)
                 .WithMany()
-                .HasForeignKey(f => f.FollowingId);
+                .HasForeignKey(f => f.FollowingId)
+                .OnDelete(DeleteBehavior.NoAction);
+
         }
     }
 }

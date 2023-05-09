@@ -52,6 +52,21 @@ namespace Project_Hashtag.Migrations
                     b.ToTable("Comments");
                 });
 
+            modelBuilder.Entity("Project_Hashtag.Models.Follow", b =>
+                {
+                    b.Property<int>("FollowerId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("FollowingId")
+                        .HasColumnType("int");
+
+                    b.HasKey("FollowerId", "FollowingId");
+
+                    b.HasIndex("FollowingId");
+
+                    b.ToTable("Follows");
+                });
+
             modelBuilder.Entity("Project_Hashtag.Models.Like", b =>
                 {
                     b.Property<int>("Id")
@@ -195,6 +210,25 @@ namespace Project_Hashtag.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("Project_Hashtag.Models.Follow", b =>
+                {
+                    b.HasOne("Project_Hashtag.Models.User", "Follower")
+                        .WithMany("Followers")
+                        .HasForeignKey("FollowerId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("Project_Hashtag.Models.User", "Following")
+                        .WithMany()
+                        .HasForeignKey("FollowingId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.Navigation("Follower");
+
+                    b.Navigation("Following");
+                });
+
             modelBuilder.Entity("Project_Hashtag.Models.Like", b =>
                 {
                     b.HasOne("Project_Hashtag.Models.Post", "Post")
@@ -266,6 +300,8 @@ namespace Project_Hashtag.Migrations
 
             modelBuilder.Entity("Project_Hashtag.Models.User", b =>
                 {
+                    b.Navigation("Followers");
+
                     b.Navigation("Likes");
 
                     b.Navigation("Reports");

@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Project_Hashtag.Migrations
 {
-    public partial class likes2 : Migration
+    public partial class follows : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -35,6 +35,28 @@ namespace Project_Hashtag.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Users", x => x.ID);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Follows",
+                columns: table => new
+                {
+                    FollowerId = table.Column<int>(type: "int", nullable: false),
+                    FollowingId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Follows", x => new { x.FollowerId, x.FollowingId });
+                    table.ForeignKey(
+                        name: "FK_Follows_Users_FollowerId",
+                        column: x => x.FollowerId,
+                        principalTable: "Users",
+                        principalColumn: "ID");
+                    table.ForeignKey(
+                        name: "FK_Follows_Users_FollowingId",
+                        column: x => x.FollowingId,
+                        principalTable: "Users",
+                        principalColumn: "ID");
                 });
 
             migrationBuilder.CreateTable(
@@ -117,6 +139,30 @@ namespace Project_Hashtag.Migrations
                         principalColumn: "ID");
                 });
 
+            migrationBuilder.CreateTable(
+                name: "Reports",
+                columns: table => new
+                {
+                    ID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    PostID = table.Column<int>(type: "int", nullable: false),
+                    UserID = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Reports", x => x.ID);
+                    table.ForeignKey(
+                        name: "FK_Reports_Posts_PostID",
+                        column: x => x.PostID,
+                        principalTable: "Posts",
+                        principalColumn: "ID");
+                    table.ForeignKey(
+                        name: "FK_Reports_Users_UserID",
+                        column: x => x.UserID,
+                        principalTable: "Users",
+                        principalColumn: "ID");
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_Comments_PostID",
                 table: "Comments",
@@ -126,6 +172,11 @@ namespace Project_Hashtag.Migrations
                 name: "IX_Comments_UserID",
                 table: "Comments",
                 column: "UserID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Follows_FollowingId",
+                table: "Follows",
+                column: "FollowingId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Likes_PostID",
@@ -146,6 +197,16 @@ namespace Project_Hashtag.Migrations
                 name: "IX_Posts_UserID",
                 table: "Posts",
                 column: "UserID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Reports_PostID",
+                table: "Reports",
+                column: "PostID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Reports_UserID",
+                table: "Reports",
+                column: "UserID");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -154,7 +215,13 @@ namespace Project_Hashtag.Migrations
                 name: "Comments");
 
             migrationBuilder.DropTable(
+                name: "Follows");
+
+            migrationBuilder.DropTable(
                 name: "Likes");
+
+            migrationBuilder.DropTable(
+                name: "Reports");
 
             migrationBuilder.DropTable(
                 name: "Posts");

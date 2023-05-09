@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.CodeAnalysis.Operations;
 using Microsoft.EntityFrameworkCore;
 using Project_Hashtag.Data;
 using Project_Hashtag.Models;
@@ -13,7 +14,7 @@ namespace Project_Hashtag.Pages
     public class ProfileModel : PageModel
     {
         readonly Project_Hashtag.Data.AppDbContext database;
-        private AccessControl LoggedIn;
+        public AccessControl LoggedIn;
 
 
         public ProfileModel(Project_Hashtag.Data.AppDbContext context, AccessControl accessControl)
@@ -27,6 +28,7 @@ namespace Project_Hashtag.Pages
         public User User { get;set; } = default!;
         public List<Post> userPosts;
         public List<Comment> Comments;
+        public string FollowText;
 
 
 
@@ -85,6 +87,30 @@ namespace Project_Hashtag.Pages
             }
 
         }
+
+        public IActionResult OnPostFollow( int userId)
+        {
+            string followStatus = Follow.GetFollowStatus(userId, LoggedIn.LoggedInAccountID, database);
+
+            if (followStatus == "Follow" || followStatus == "Follow back")
+            {
+                database.Follows.Add(new Follow { FollowerId = LoggedIn.LoggedInAccountID, FollowingId = userId });
+                database.SaveChanges();
+
+                return RedirectToPage("Profile", new { id = userId });
+            }
+            else if (followStatus == "Unfollow")
+            {
+                Follow f = database.Follows.Single(x => x.FollowerId == LoggedIn.LoggedInAccountID && x.FollowingId == userId);
+                database.Follows.Remove(f);
+                database.SaveChanges();
+
+                return RedirectToPage("Profile", new { id = userId });
+            }
+
+            return RedirectToPage("Profile", new { id = userId });
+        }
+
         public void OnGetAsync(int userId)
         {
             if (database.Users != null)
@@ -93,6 +119,7 @@ namespace Project_Hashtag.Pages
                 userPosts = database.Posts.Where(x => x.UserID == userId).ToList();
                 this.Comments = database.Comments.ToList();
                 this.Users = database.Users.ToList();
+                this.FollowText = Follow.GetFollowStatus(userId, LoggedIn.LoggedInAccountID, database);
             }
         }
     }
