@@ -29,6 +29,8 @@ namespace Project_Hashtag.Pages
         public List<Post> userPosts;
         public List<Comment> Comments;
         public string FollowText;
+        public int amountOfFollowers;
+        public int amountFollowing;
 
 
 
@@ -107,6 +109,10 @@ namespace Project_Hashtag.Pages
 
                 return RedirectToPage("Profile", new { id = userId });
             }
+
+            amountOfFollowers = database.Follows.Where(f => f.FollowingId == User.ID).Count();
+            amountFollowing = database.Follows.Where(f => f.FollowerId == User.ID).Count();
+
 
             return RedirectToPage("Profile", new { id = userId });
         }
