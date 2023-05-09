@@ -31,7 +31,7 @@ namespace Project_Hashtag.Pages
 
         }
 
-        public async void OnGet(string search)
+        public IActionResult OnGet(string search)
         {
             search = search?.ToLower();
 
@@ -39,6 +39,11 @@ namespace Project_Hashtag.Pages
             {
                 this.QueriedPosts = database.Posts.Where(p => p.Description.ToLower().Contains(search)).ToList();
                 this.QueriedUsers = database.Users.Where(u => u.Name.ToLower().Contains(search)).ToList();
+                return Page();
+            }
+            else
+            {
+                return RedirectToPage("/index");
             }
 
         }
