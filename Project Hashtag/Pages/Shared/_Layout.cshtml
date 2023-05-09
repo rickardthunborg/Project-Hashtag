@@ -1,4 +1,5 @@
 ﻿@using Project_Hashtag.Pages.Shared.Components.LoginMenu;
+@inject Project_Hashtag.Data.AccessControl accessControl
 
 <!DOCTYPE html>
 <html lang="en">
@@ -11,6 +12,15 @@
     @await RenderSectionAsync("Scripts", required: false)
 </head>
 <body>
+    <div class="parentNavBarContainer"> 
+        <div class="div1NavBar"> </div> 
+        <div class="div2NavBar">
+            <img src="FaceGramLogo.svg" alt="FaceGram Logo Gold" class="svg-logo" type="image/svg+xml" id="FaceGramNavBarLogo">
+        </div>
+        <div class="div3NavBar">
+            <h1>@accessControl.LoggedInAccountName</h1>
+        </div> 
+    </div>
     <header>
         <environment names="Development">
             @await Component.InvokeAsync(nameof(FakeLoginMenu))
