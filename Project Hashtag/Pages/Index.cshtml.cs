@@ -20,6 +20,7 @@ namespace Project_Hashtag.Pages
         public List<Tag> Tags = new List<Tag>();
         public List<Report> Reports = new List<Report>();
         public List<Follow> PeopleYouFollow;
+        public string search;
 
 
         public IndexModel(AppDbContext database, AccessControl accessControl)
@@ -30,14 +31,23 @@ namespace Project_Hashtag.Pages
 
         }
 
-        public void OnGet()
+        public IActionResult OnGet()
         {
+            string searchQuery = Request.Query["search"];
+
+            if (!string.IsNullOrEmpty(searchQuery))
+            {
+                return RedirectToPage("/search", new { query = searchQuery });
+            }
+
             this.Posts = database.Posts.OrderByDescending(x => x.CreatedDate).ToList();
             this.Users = database.Users.ToList();
             this.Tags = database.Tags.ToList();
             this.Comments = database.Comments.ToList();
             this.Reports = database.Reports.ToList();
             PeopleYouFollow = database.Follows.Where(f => f.FollowingId == LoggedIn.LoggedInAccountID).ToList();
+            return Page();
+
         }
 
         public IActionResult OnPostDeleteComment(int id)
@@ -45,6 +55,10 @@ namespace Project_Hashtag.Pages
             try
             {
                 Comment comment = database.Comments.Single(c => c.PostID == id);
+                if(comment.UserID != LoggedIn.LoggedInAccountID)
+                {
+                    return Forbid();
+                }
                 Comment.DeleteComment(comment, database);
 
                 return RedirectToPage("/index");

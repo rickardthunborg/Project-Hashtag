@@ -5,7 +5,13 @@
     ViewData["Title"] = "Profile";
 }
 
+
+<form method="get" action="/Search">
+    <input type="text" asp-for="@Model.search" placeholder="Search for profile or post...">
+    <button type="submit">Search</button>
+</form>
 <h2>@Model.User.Name</h2>
+
 <p>Following: @Model.amountFollowing Followers: @Model.amountOfFollowers</p>
 @if (Model.User.ID != @Model.LoggedIn.LoggedInAccountID)
 {
@@ -14,6 +20,24 @@
     <button type="submit">@Model.FollowText</button>
 </form>
     
+}
+@if(Model.User.ID == Model.LoggedIn.LoggedInAccountID)
+{
+    <p>Add new post+</p>
+    <link rel="stylesheet" href="~/css/site.css" />
+    <form method="post">
+        <p>Text:</p>
+        <input type="text" name="desc">
+        <p>Choose a tag:</p>
+        <select name="tag">
+            @foreach (var tag in Model.Tags)
+            {
+                <option value="@tag.Id"> @tag.Name</option>
+            }
+        </select>
+        <button type="submit">Post</button>
+    </form>
+
 }
 
 <p> User posts: </p>
@@ -49,6 +73,15 @@
                 <input hidden name="userId" value="@Model.User.ID">
                 <button type="submit">Comment</button>
             </form>
+
+            @if (Model.User.ID == Model.LoggedIn.LoggedInAccountID)
+            {
+                <form method="post" asp-page-handler="delete" asp-route-id="@post.ID">
+                    <input hidden name="userId" value="@Model.User.ID">
+                    <button type="submit">Delete</button>
+                </form>
+            }
+
 
         </li>
     }

@@ -28,10 +28,34 @@ namespace Project_Hashtag.Pages
         public User User { get;set; } = default!;
         public List<Post> userPosts;
         public List<Comment> Comments;
+        public List<Tag> Tags = new List<Tag>();
         public string FollowText;
         public int amountOfFollowers;
         public int amountFollowing;
+        public string search;
 
+
+
+        public IActionResult OnPostDelete(int id, int userId)
+        {
+
+            try
+            {
+                Post post = database.Posts.Find(id);
+                if(post.UserID != userId)
+                {
+                    return Forbid();
+                }
+                Post.DeletePost(post, database);
+
+                return RedirectToPage("Profile", new { id = userId });
+            }
+            catch
+            {
+                return NotFound();
+            }
+
+        }
 
 
         public IActionResult OnPostComment(int id, string content, int userId)
@@ -126,6 +150,7 @@ namespace Project_Hashtag.Pages
                 this.FollowText = Follow.GetFollowStatus(userId, LoggedIn.LoggedInAccountID, database);
                 this.amountOfFollowers = database.Follows.Where(f => f.UserID == User.ID).Count();
                 this.amountFollowing = database.Follows.Where(f => f.FollowingId == User.ID).Count();
+                this.Tags = database.Tags.ToList();
             }
         }
     }

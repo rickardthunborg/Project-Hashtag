@@ -1,4 +1,7 @@
-﻿namespace Project_Hashtag.Models
+﻿using Microsoft.AspNetCore.Mvc.ActionConstraints;
+using Project_Hashtag.Data;
+
+namespace Project_Hashtag.Models
 {
     public class Post
     {
@@ -48,6 +51,14 @@
             {
                 return $"{timeSince.Seconds} s ago";
             }
+        }
+
+        public static void DeletePost(Post post, AppDbContext database)
+        {
+            var reports = database.Reports.Where(r => r.PostID == post.ID);
+            database.Reports.RemoveRange(reports);
+            database.Posts.Remove(post);
+            database.SaveChanges();
         }
     }
 }

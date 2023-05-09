@@ -5,6 +5,11 @@
     ViewData["Title"] = "Home page";
 }
 
+<form method="get" action="/Search">
+    <input type="text" asp-for="@Model.search" placeholder="Search for profile...">
+    <button type="submit">Search</button>
+</form>
+
 <p>Add new post+</p>
 <link rel="stylesheet" href="~/css/site.css" />
 <form method="post">

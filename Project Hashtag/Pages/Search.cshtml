@@ -1,0 +1,78 @@
+﻿@page
+@model Project_Hashtag.Pages.SearchModel
+@{
+
+}
+
+<h2>Search results:</h2>
+
+<form method="get" action="/Search">
+    <input type="text" asp-for="@Model.search" placeholder="Search for profile or post...">
+    <button type="submit">Search</button>
+</form>
+
+<h3>Matching users:</h3>
+
+<ul class="flow">
+
+    <li>
+
+    @foreach(var user in Model.QueriedUsers)
+    {
+            <p>
+                <a asp-page="Profile" asp-route-userId="@user.ID"> <pre> @user.Name</pre></a>
+            </p>
+    }
+
+    </li>
+
+</ul>
+
+<h3>Matching posts:</h3>
+
+
+<ul class="flow">
+	@foreach (var post in Model.QueriedPosts)
+    {
+        <li>
+            <p>
+                Posted by: @Model.Users.Single(u => u.ID == post.UserID).Name
+            </p>
+            <p> @Model.Posts.Single(p => p.ID == post.ID).Description</p>
+            <p> @post.TimeSincePost()</p>
+            <p>Likes: @post.LikeCount</p>
+            <form method="post" asp-page-handler="like" asp-route-id="@post.ID">
+                <input hidden name="userId" value="@post.UserID">
+                <button type="submit">Like</button>
+            </form>
+
+            @*<p>Comments: </p>
+            <ul>
+                @foreach (var comment in Model.Comments.Where(x => x.PostID == post.ID).OrderBy(z => z.CreatedDate))
+                {
+
+                    <li>
+                        <p>@comment.Text </p>
+                        <a asp-page="Profile" asp-route-userId="@comment.UserID"><pre>  by: @Model.Users.Single(x => x.ID == comment.UserID).Name</pre></a>
+                    </li>
+                }
+            </ul>*@
+
+            @*<form method="post" asp-page-handler="comment" asp-route-id="@post.ID">
+                <input type="text" name="content">
+                <input hidden name="userId" value="@post.UserID">
+                <button type="submit">Comment</button>
+            </form>*@
+
+            @if (post.UserID == Model.LoggedIn.LoggedInAccountID)
+            {
+                <form method="post" asp-page-handler="delete" asp-route-id="@post.ID">
+                    <input hidden name="userId" value="@post.UserID">
+                    <button type="submit">Delete</button>
+                </form>
+            }
+        </li>
+    }
+</ul>
+
+
