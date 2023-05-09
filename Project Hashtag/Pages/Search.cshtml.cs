@@ -37,7 +37,7 @@ namespace Project_Hashtag.Pages
 
             if (string.IsNullOrEmpty(search))
             {
-                return RedirectToPage("/index");
+                return Page();
                 
             }
             this.QueriedPosts = database.Posts.Where(p => p.Description.ToLower().Contains(search)).ToList();
