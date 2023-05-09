@@ -26,5 +26,10 @@ namespace Project_Hashtag.Models
             database.SaveChanges();
         }
 
+        public static void DeleteComment(Comment comment, AppDbContext database)
+        {
+            database.Comments.Remove(comment);
+            database.SaveChanges();
+        }
     }
 }

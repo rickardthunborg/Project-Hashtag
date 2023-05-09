@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
+using NuGet.Protocol.Core.Types;
 using Project_Hashtag.Data;
 using Project_Hashtag.Models;
 using System.ComponentModel.Design;
@@ -9,12 +10,16 @@ namespace Project_Hashtag.Pages
 {
     public class IndexModel : PageModel
     {
-        private readonly AppDbContext database;
-        private readonly AccessControl LoggedIn;
+        public readonly AppDbContext database;
+        public readonly AccessControl LoggedIn;
+
+
         public List<Post> Posts = new List<Post>();
         public List<User> Users;
         public List<Comment> Comments;
         public List<Tag> Tags = new List<Tag>();
+        public List<Report> Reports = new List<Report>();
+        public List<Follow> PeopleYouFollow;
 
 
         public IndexModel(AppDbContext database, AccessControl accessControl)
@@ -27,14 +32,29 @@ namespace Project_Hashtag.Pages
 
         public void OnGet()
         {
-            this.Posts = database.Posts.OrderBy(p => p.CreatedDate).ToList();
+            this.Posts = database.Posts.OrderByDescending(x => x.CreatedDate).ToList();
             this.Users = database.Users.ToList();
             this.Tags = database.Tags.ToList();
             this.Comments = database.Comments.ToList();
-
+            this.Reports = database.Reports.ToList();
+            PeopleYouFollow = database.Follows.Where(f => f.FollowingId == LoggedIn.LoggedInAccountID).ToList();
         }
 
+        public IActionResult OnPostDeleteComment(int id)
+        {
+            try
+            {
+                Comment comment = database.Comments.Single(c => c.PostID == id);
+                Comment.DeleteComment(comment, database);
 
+                return RedirectToPage("/index");
+            }
+            catch
+            {
+                return RedirectToPage();
+            }
+        }
+        
         public IActionResult OnPostComment(int id, string content)
         {
             try
@@ -49,7 +69,45 @@ namespace Project_Hashtag.Pages
             }
         }
 
-        public IActionResult OnPostLike(int id)
+        public IActionResult OnPostReport(int id)
+        {
+            Post post = database.Posts.FirstOrDefault(x => x.ID == id);
+            Report report = database.Reports.FirstOrDefault(x => x.PostID == post.ID && x.UserID == LoggedIn.LoggedInAccountID);
+
+            if (report == null)
+            {
+                try
+                {
+                    report = new Report() { PostID = id, UserID = LoggedIn.LoggedInAccountID };
+                    database.Reports.Add(report);
+                    database.SaveChanges();
+
+                    return RedirectToPage();
+                }
+                catch
+                {
+                    return NotFound();
+                }
+
+            }
+            else
+            {
+                try
+                {
+                    database.Reports.Remove(report);
+                    database.SaveChanges();
+
+                    return RedirectToPage();
+                }
+                catch
+                {
+                    return NotFound();
+                }
+            }
+
+        }
+
+        public IActionResult OnPostLike(int id, string returnURL)
         {
 
 
@@ -65,7 +123,7 @@ namespace Project_Hashtag.Pages
                     post.LikeCount += 1;
                     database.SaveChanges();
 
-                    return RedirectToPage("/index");
+                    return RedirectToPage();
                 }
                 catch
                 {
@@ -81,7 +139,7 @@ namespace Project_Hashtag.Pages
                     post.LikeCount--;
                     database.SaveChanges();
 
-                    return RedirectToPage("/index");
+                    return RedirectToPage();
                 }
                 catch
                 {

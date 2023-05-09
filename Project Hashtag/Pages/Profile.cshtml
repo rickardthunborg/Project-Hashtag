@@ -6,6 +6,7 @@
 }
 
 <h2>@Model.User.Name</h2>
+<p>Following: @Model.amountFollowing Followers: @Model.amountOfFollowers</p>
 @if (Model.User.ID != @Model.LoggedIn.LoggedInAccountID)
 {
 <form method="post" asp-page-handler="follow"> 
@@ -16,7 +17,7 @@
 }
 
 <p> User posts: </p>
-<ul>
+<ul class="flow">
     @foreach (var post in Model.userPosts)
     {
         <li>
@@ -24,7 +25,7 @@
                 Posted by: @Model.User.Name
             </p>
             <p> @post.Description</p>
-            <p> Date: @post.CreatedDate</p>
+            <p> @post.TimeSincePost()</p>
             <p>Likes: @post.LikeCount</p>
             <form method="post" asp-page-handler="like" asp-route-id="@post.ID">
                 <input hidden name="userId" value="@Model.User.ID">

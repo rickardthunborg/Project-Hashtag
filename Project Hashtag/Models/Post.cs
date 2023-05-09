@@ -28,6 +28,26 @@
 
         public List<Report> Reports { get; set; }
 
-       
+        public string TimeSincePost()
+        {
+            var timeSince = DateTime.Now.Subtract(CreatedDate);
+
+            if (timeSince.Days > 0)
+            {
+                return $"{timeSince.Days} d ago";
+            }
+            else if (timeSince.Hours > 0) 
+            { 
+                return $"{timeSince.Hours} h ago";
+            }
+            else if (timeSince.Minutes > 0)
+            {
+                return $"{timeSince.Minutes} m ago";
+            }
+            else
+            {
+                return $"{timeSince.Seconds} s ago";
+            }
+        }
     }
 }

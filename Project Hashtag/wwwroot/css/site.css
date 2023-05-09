@@ -20,6 +20,10 @@ li {
     margin-bottom: 20px;
 }
 
+a {
+    color: aqua;
+}
+
 p {
     margin: 0;
 }
@@ -38,9 +42,9 @@ button[type="submit"] {
     cursor: pointer;
 }
 
-button[type="submit"]:hover {
-    background-color: #3e8e41;
-}
+    button[type="submit"]:hover {
+        background-color: #3e8e41;
+    }
 
 .parentNavBarContainer {
     display: grid;
@@ -69,4 +73,15 @@ button[type="submit"]:hover {
 #FaceGramNavBarLogo {
     max-width: 40%;
     max-height: 40%;
+}
+
+.flow {
+    width: clamp(200px, 100%, 500px);
+    margin: auto;
+    background-color: #2e3136;
+}
+
+.flow > li {
+    border-bottom: 3px solid grey;
+    padding: 1em;
 }

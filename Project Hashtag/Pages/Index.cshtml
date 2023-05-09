@@ -20,10 +20,14 @@
     <button type="submit">Post</button>
 </form> 
 
-<ul>
+<ul class="flow">
     @foreach (var post in Model.Posts)
     {
         var poster = Model.Users.Single(x => post.UserID == x.ID);
+        if (post.UserID == Model.LoggedIn.LoggedInAccountID)
+        {
+            continue;
+        }
         <li>
             <p>
                 <a asp-page="Profile" asp-route-userId="@poster.ID"> <pre> @poster.Name</pre></a>
@@ -33,9 +37,12 @@
             {
                 <p>Tag: @Model.Tags.Single(x => x.Id == post.TagID).Name</p>
             }
-            <p> Date: @post.CreatedDate</p>
+            <p>@post.TimeSincePost()</p>
             <p>Likes: @post.LikeCount</p>
             <form method="post" asp-page-handler="like" asp-route-id="@post.ID"><button type="submit">Like</button></form>
+            <p> @Model.database.Reports.Where(r => Model.PeopleYouFollow.Select(p => p.UserID).Contains(r.UserID) && r.PostID == post.ID).Count() people you follow have reported this post as untrustworthy.</p>
+            <form method="post" asp-page-handler="report" asp-route-id="@post.ID"><button type="submit">Report</button></form>
+
 
             <p>Comments: </p>
             <ul>
@@ -46,6 +53,11 @@
                     <li>
                         <p>@comment.Text </p>
                         <a asp-page="Profile" asp-route-userId="@user.ID"><pre>  by: @user.Name</pre></a>
+                        @if(comment.UserID == Model.LoggedIn.LoggedInAccountID)
+                        {
+                        <form method="post" asp-page-handler="deletecomment" asp-route-id="@post.ID"><button type="submit">Delete Comment</button></form>
+                        }
+
                     </li>
                 }
             </ul>
