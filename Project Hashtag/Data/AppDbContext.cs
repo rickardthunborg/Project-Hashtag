@@ -60,12 +60,12 @@ namespace Project_Hashtag.Data
                 .OnDelete(DeleteBehavior.NoAction);
 
             modelBuilder.Entity<Follow>()
-                .HasKey(f => new { f.FollowerId, f.FollowingId });
+                .HasKey(f => new { f.UserID , f.FollowingId });
 
             modelBuilder.Entity<Follow>()
                 .HasOne(f => f.Follower)
                 .WithMany(u => u.Followers)
-                .HasForeignKey(f => f.FollowerId)
+                .HasForeignKey(f => f.UserID)
                 .OnDelete(DeleteBehavior.NoAction);
 
 
