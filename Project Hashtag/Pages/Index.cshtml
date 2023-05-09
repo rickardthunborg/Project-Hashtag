@@ -36,6 +36,9 @@
             <p> Date: @post.CreatedDate</p>
             <p>Likes: @post.LikeCount</p>
             <form method="post" asp-page-handler="like" asp-route-id="@post.ID"><button type="submit">Like</button></form>
+            <p> @Model.amountOfReporters people you follow have reported this post as untrustworthy.</p>
+            <form method="post" asp-page-handler="report" asp-route-id="@post.ID"><button type="submit">Report</button></form>
+
 
             <p>Comments: </p>
             <ul>
