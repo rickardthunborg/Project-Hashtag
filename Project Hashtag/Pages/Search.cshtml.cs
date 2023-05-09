@@ -35,16 +35,14 @@ namespace Project_Hashtag.Pages
         {
             search = search?.ToLower();
 
-            if (!string.IsNullOrEmpty(search))
-            {
-                this.QueriedPosts = database.Posts.Where(p => p.Description.ToLower().Contains(search)).ToList();
-                this.QueriedUsers = database.Users.Where(u => u.Name.ToLower().Contains(search)).ToList();
-                return Page();
-            }
-            else
+            if (string.IsNullOrEmpty(search))
             {
                 return RedirectToPage("/index");
+                
             }
+            this.QueriedPosts = database.Posts.Where(p => p.Description.ToLower().Contains(search)).ToList();
+            this.QueriedUsers = database.Users.Where(u => u.Name.ToLower().Contains(search)).ToList();
+            return Page();
 
         }
     }
