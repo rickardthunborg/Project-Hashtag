@@ -120,7 +120,7 @@ namespace Project_Hashtag.Pages
             if (database.Users != null)
             {
                 User =  database.Users.Single(u => u.ID == userId);
-                userPosts = database.Posts.Where(x => x.UserID == userId).ToList();
+                userPosts = database.Posts.Where(x => x.UserID == userId).OrderByDescending(x => x.CreatedDate).ToList();
                 this.Comments = database.Comments.ToList();
                 this.Users = database.Users.ToList();
                 this.FollowText = Follow.GetFollowStatus(userId, LoggedIn.LoggedInAccountID, database);

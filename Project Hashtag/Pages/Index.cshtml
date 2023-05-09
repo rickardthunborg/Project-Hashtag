@@ -33,7 +33,7 @@
             {
                 <p>Tag: @Model.Tags.Single(x => x.Id == post.TagID).Name</p>
             }
-            <p> Date: @post.CreatedDate</p>
+            <p>@post.TimeSincePost()</p>
             <p>Likes: @post.LikeCount</p>
             <form method="post" asp-page-handler="like" asp-route-id="@post.ID"><button type="submit">Like</button></form>
             <p> @Model.amountOfReporters people you follow have reported this post as untrustworthy.</p>

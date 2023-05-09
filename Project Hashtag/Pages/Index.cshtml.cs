@@ -30,7 +30,7 @@ namespace Project_Hashtag.Pages
 
         public void OnGet()
         {
-            this.Posts = database.Posts.OrderBy(p => p.CreatedDate).ToList();
+            this.Posts = database.Posts.OrderByDescending(x => x.CreatedDate).ToList();
             this.Users = database.Users.ToList();
             this.Tags = database.Tags.ToList();
             this.Comments = database.Comments.ToList();

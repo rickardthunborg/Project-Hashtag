@@ -25,7 +25,7 @@
                 Posted by: @Model.User.Name
             </p>
             <p> @post.Description</p>
-            <p> Date: @post.CreatedDate</p>
+            <p> @post.TimeSincePost()</p>
             <p>Likes: @post.LikeCount</p>
             <form method="post" asp-page-handler="like" asp-route-id="@post.ID">
                 <input hidden name="userId" value="@Model.User.ID">
