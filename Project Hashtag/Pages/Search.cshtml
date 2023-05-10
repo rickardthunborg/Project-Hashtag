@@ -6,10 +6,6 @@
 
 <h2>Search results:</h2>
 
-<form method="get" action="/Search">
-    <input type="text" asp-for="@Model.search" placeholder="Search for profile or post...">
-    <button type="submit">Search</button>
-</form>
 
 <h3>Matching users:</h3>
 
@@ -23,7 +19,6 @@
                 <a asp-page="Profile" asp-route-userId="@user.ID"> <pre> @user.Name</pre></a>
             </p>
     }
-
     </li>
 
 </ul>
