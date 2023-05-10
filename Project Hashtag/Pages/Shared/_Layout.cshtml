@@ -12,20 +12,20 @@
     @await RenderSectionAsync("Scripts", required: false)
 </head>
 <body>
-    <div class="parentNavBarContainer"> 
+    <header class="parentNavBarContainer"> 
         <div class="div1NavBar"> </div> 
         <a class="div2NavBar" asp-page="./index">
         <img src="~/FaceGramLogo.svg" alt="FaceGram Logo Gold" class="svg-logo" type="image/svg+xml" id="FaceGramNavBarLogo">
         </a>
         <div class="div3NavBar">
-            <h1>@accessControl.LoggedInAccountName <img src="@accessControl.LoggedInAvatar" style="width: 40px"/></h1>
+            <a asp-page="Profile" asp-route-userId="@accessControl.LoggedInAccountID">@accessControl.LoggedInAccountName <img src="@accessControl.LoggedInAvatar" style="width: 40px" /></a>
         </div> 
-    </div>   
-    <header>
+    </header>   
+    <div id="fakeLogin">
         <environment names="Development">
             @await Component.InvokeAsync(nameof(FakeLoginMenu))
         </environment>
-    </header>
+    </div>
     <main>
         @RenderBody()
     </main>

@@ -3,6 +3,12 @@
     src: url('PoppinsTVG-SemiBold.woff2') format('woff2');
 }
 
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 html, body {
     font-family: 'PoppinsTVG-SemiBold', sans-serif;
     margin: 0;
@@ -48,6 +54,8 @@ button[type="submit"] {
 
 .parentNavBarContainer {
     display: grid;
+    position: fixed;
+    width: 100%;
     grid-template: "a b c" /1fr 1fr 1fr;
     height: 10vh; /* 10% of viewport height */
 }
@@ -67,13 +75,36 @@ button[type="submit"] {
 
 .div3NavBar {
     grid-area: c;
+    text-align: center;
     background-color: #2E3136; /* Add background color for visibility */
+}
+
+.div3NavBar > a {
+    position: relative;
+    top: 50%;
+    color: white;
+}
+
+.div3NavBar > a:hover {
+    opacity: 0.7;
+    cursor: pointer;
 }
 
 #FaceGramNavBarLogo {
     max-width: 40%;
     max-height: 40%;
 }
+
+#fakeLogin {
+    padding-top: 10vh;
+}
+
+
+/* ----------
+
+Below is flow styling
+
+-------------*/
 
 .flow {
     width: clamp(200px, 100%, 500px);
@@ -84,4 +115,20 @@ button[type="submit"] {
 .flow > li {
     border-bottom: 3px solid grey;
     padding: 1em;
+}
+
+.postProfile {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.4em;
+    padding-bottom: 1em;
+}
+
+.profilePic {
+    background-color: #1F2023;
+    width: 40px;
+    height: 40px;
+    background-image: url(~/standard-profile-pic.png);
+    border-radius: 20px;
 }
