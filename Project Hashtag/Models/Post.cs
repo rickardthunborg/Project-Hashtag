@@ -37,19 +37,19 @@ namespace Project_Hashtag.Models
 
             if (timeSince.Days > 0)
             {
-                return $"{timeSince.Days} d ago";
+                return $"{timeSince.Days} d";
             }
             else if (timeSince.Hours > 0) 
             { 
-                return $"{timeSince.Hours} h ago";
+                return $"{timeSince.Hours} h";
             }
             else if (timeSince.Minutes > 0)
             {
-                return $"{timeSince.Minutes} m ago";
+                return $"{timeSince.Minutes} m";
             }
             else
             {
-                return $"{timeSince.Seconds} s ago";
+                return $"{timeSince.Seconds} s";
             }
         }
 
