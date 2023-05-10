@@ -44,8 +44,10 @@
                 <span class="reportWarning"> <img src="~/information.png"></img> <p> @reports people you follow have reported this post as untrustworthy.</p></span>
             }
             <div class="postProfile">
-                <a asp-page="Profile" asp-route-userId="@poster.ID"> <div class="profilePic"> </div> </a>
-                <a asp-page="Profile" asp-route-userId="@poster.ID"> <pre>@poster.Name</pre></a>
+				<a asp-page="Profile" asp-route-userId="@poster.ID" class="postProfileBox">
+                    <div class="profilePic"> </div> 
+                    <pre>@poster.Name</pre>
+                </a>
                 <p>· @post.TimeSincePost()</p>
                 <form method="post" asp-page-handler="report" asp-route-id="@post.ID"> <label class="report"> <button type="submit"></button> </label></form>
             </div>

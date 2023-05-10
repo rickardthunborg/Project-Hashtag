@@ -78,9 +78,17 @@ button[type="submit"] {
 }
 
 .div3NavBar > a {
+    display:flex;
     position: relative;
     top: 50%;
     color: white;
+    align-content: center;
+    text-decoration:none;
+    justify-content:end;
+    padding: 0px 10px 10px 0px;
+}
+.div3NavBar img {
+    margin-left:7px;
 }
 
 .div3NavBar > a:hover {
@@ -139,6 +147,27 @@ Below is flow styling
 .postProfile p {
     font-size: 12px;
     opacity: 0.8;
+}
+
+.postProfile a {
+    text-decoration: none;
+}
+
+.postProfile .profilePic {
+    margin-right:10px;
+}
+
+.postProfileBox {
+    display: inherit;
+    align-items: center;
+    padding: 7px;
+    border-radius:7px;
+}
+
+
+.postProfileBox:hover {
+    background-color: #45464a;
+    transition: all 200ms ease;
 }
 
 /*
