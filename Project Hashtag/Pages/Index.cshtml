@@ -35,7 +35,11 @@
             continue;
         }
         <li>
-            @if (reports > 0)
+            @if (reports == 1)
+            {
+                <span class="reportWarning"> <img src="~/information.png"></img> <p> @reports person you follow have reported this post as untrustworthy.</p></span>
+            }
+            else if (reports > 0)
             {
                 <span class="reportWarning"> <img src="~/information.png"></img> <p> @reports people you follow have reported this post as untrustworthy.</p></span>
             }
