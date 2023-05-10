@@ -28,12 +28,17 @@
 <ul class="flow">
     @foreach (var post in Model.Posts)
     {
+        var reports = @Model.database.Reports.Where(r => Model.PeopleYouFollow.Select(p => p.UserID).Contains(r.UserID) && r.PostID == post.ID).Count();
         var poster = Model.Users.Single(x => post.UserID == x.ID);
         if (post.UserID == Model.LoggedIn.LoggedInAccountID)
         {
             continue;
         }
         <li>
+            @if (reports > 0)
+            {
+                <span class="reportWarning"> <img src="~/information.png"></img> <p> @reports people you follow have reported this post as untrustworthy.</p></span>
+            }
             <div class="postProfile">
                 <a asp-page="Profile" asp-route-userId="@poster.ID"> <div class="profilePic"> </div> </a>
                 <a asp-page="Profile" asp-route-userId="@poster.ID"> <pre>@poster.Name</pre></a>
@@ -47,7 +52,6 @@
             }
             <p>Likes: @post.LikeCount</p>
             <form method="post" asp-page-handler="like" asp-route-id="@post.ID"><button type="submit">Like</button></form>
-            <p> @Model.database.Reports.Where(r => Model.PeopleYouFollow.Select(p => p.UserID).Contains(r.UserID) && r.PostID == post.ID).Count() people you follow have reported this post as untrustworthy.</p>
 
 
             <p>Comments: </p>
