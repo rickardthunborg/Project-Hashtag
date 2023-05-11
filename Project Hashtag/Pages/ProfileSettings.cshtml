@@ -5,6 +5,10 @@
 
 <div id="ProfileSettingsDiv">
     <h1>Edit Profile</h1>
-    <p>@Model.User.Name</p>
-    <img src="@Model.User.Avatar"/>
+    <p>@Model.User.Name<img src="@Model.User.Avatar" width="40px"/></p>
+    <form>
+        
+        <label for="bio">Biography</label>
+        <input id="bio" type="text" value="@Model.User.Biography"></input>
+    </form>
 </div>
