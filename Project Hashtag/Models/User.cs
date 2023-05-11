@@ -9,7 +9,7 @@ namespace Project_Hashtag.Models
         public string OpenIDSubject { get; set; }
         public string Name { get; set; }
         public string? Avatar { get; set; }
-        public string? Description { get; set; }
+        public string? Biography { get; set; }
 
         public List<Like> Likes { get; set; }
         public List<Follow> Followers { get; set; }

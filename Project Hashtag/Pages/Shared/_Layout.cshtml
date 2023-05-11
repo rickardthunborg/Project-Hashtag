@@ -3,6 +3,7 @@
 
 <!DOCTYPE html>
 <html lang="en">
+<link rel="icon" type="image/png" href="~/Favicon.png">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,29 +13,31 @@
     @await RenderSectionAsync("Scripts", required: false)
 </head>
 <body>
-    <header class="parentNavBarContainer"> 
-        <div class="div1NavBar">
-           <form method="get" asp-page="/index" id="searchbar">
-                <input type="text" name="search" placeholder="Search for profile" autocomplete="off">
-           <label>
-               <button type="submit"></button>
-           </label>
-           </form>
-            </div> 
-        <a class="div2NavBar" asp-page="./index">
-        <img src="~/FaceGramLogo.svg" alt="FaceGram Logo Gold" class="svg-logo" type="image/svg+xml" id="FaceGramNavBarLogo">
-        </a>
-        <div class="div3NavBar">
-            <a asp-page="Profile" asp-route-userId="@accessControl.LoggedInAccountID"> <div class="profilePic"> </div> <p>@accessControl.LoggedInAccountName</p> </a>
-        </div> 
-    </header>   
-    <div id="fakeLogin">
-        <environment names="Development">
-            @await Component.InvokeAsync(nameof(FakeLoginMenu))
-        </environment>
+<header class="parentNavBarContainer">
+    <div class="div1NavBar">
+        <form method="get" asp-page="/index" id="searchbar">
+            <input type="text" name="search" placeholder="Search for profile" autocomplete="off">
+            <label>
+                <button type="submit"></button>
+            </label>
+        </form>
     </div>
-    <main>
-        @RenderBody()
-    </main>
+    <a class="div2NavBar" asp-page="./index">
+        <img src="~/FaceGramLogo.svg" alt="FaceGram Logo Gold" class="svg-logo" type="image/svg+xml" id="FaceGramNavBarLogo">
+    </a>
+    <div class="div3NavBar">
+        <a asp-page="Profile" asp-route-userId="@accessControl.LoggedInAccountID">
+            <div class="profilePic"> </div>
+            <p>@accessControl.LoggedInAccountName</p> </a>
+    </div>
+</header>
+<div id="fakeLogin">
+    <environment names="Development">
+        @await Component.InvokeAsync(nameof(FakeLoginMenu))
+    </environment>
+</div>
+<main>
+    @RenderBody()
+</main>
 </body>
 </html>

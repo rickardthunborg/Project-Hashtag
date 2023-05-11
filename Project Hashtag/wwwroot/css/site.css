@@ -396,3 +396,16 @@ Profile styling
 {
     width: 100px;
 }
+
+#ProfileSettingsDiv{
+    background-color: #2E3136;
+    width: 70vw;
+    height: 70vh;
+    margin: auto;
+    border-radius: 10px;
+}
+
+#ProfileSettingsDiv h1{
+    padding-top: 30px;
+    padding-left: 30px;
+}

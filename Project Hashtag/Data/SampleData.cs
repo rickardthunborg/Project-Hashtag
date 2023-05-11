@@ -15,19 +15,22 @@ namespace Project_Hashtag.Data
                 {
                     OpenIDIssuer = fakeIssuer,
                     OpenIDSubject = "1111111111",
-                    Name = "Brad"
+                    Name = "Brad",
+                    Biography = "I'm a pizza-loving astronaut who dreams of playing guitar on Mars."
                 });
                 database.Users.Add(new User
                 {
                     OpenIDIssuer = fakeIssuer,
                     OpenIDSubject = "2222222222",
-                    Name = "Angelina"
+                    Name = "Angelina",
+                    Biography = "I'm a ninja cat whisperer with a passion for knitting sweaters for trees."
                 });
                 database.Users.Add(new User
                 {
                     OpenIDIssuer = fakeIssuer,
                     OpenIDSubject = "3333333333",
-                    Name = "Will"
+                    Name = "Will",
+                    Biography = "I'm a time-traveling pirate who searches for buried treasure in alternate dimensions."
                 });
 
                 database.SaveChanges();
