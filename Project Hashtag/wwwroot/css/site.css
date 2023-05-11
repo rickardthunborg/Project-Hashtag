@@ -125,7 +125,8 @@ button[type="submit"] {
     background-color: transparent;
     border: none;
     color: #f9f5f3;
-    width: 90%
+    width: 90%;
+    padding-left: 10px;
 }
 
 #searchbar > input::placeholder {
