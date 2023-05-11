@@ -125,6 +125,7 @@ button[type="submit"] {
     background-color: transparent;
     border: none;
     color: #f9f5f3;
+    width: 90%
 }
 
 #searchbar > input::placeholder {
@@ -211,6 +212,52 @@ Below is flow styling
 .postProfileBox:hover {
     background-color: #45464a;
     transition: all 200ms ease;
+}
+
+.postText {
+    width: 80%;
+    margin: auto;
+}
+
+.interaction {
+    display: flex;
+    width: 80%;
+    margin: 1em auto 0 auto;
+}
+
+.interaction form {
+    display: flex;
+}
+
+.interaction form label {
+    background-image: url(..//like.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 50px;
+    display: flex;
+    align-items: center;
+}
+
+.interaction form p {
+    margin-left: 1.8em;
+    margin-top: 0.2em;
+    font-size: 14px;
+    color: #c2cdcd;
+}
+
+.interaction button {
+    display: none;
+}
+
+.interaction a {
+    display: flex;
+}
+
+.comments {
+    background-image: url(..//comment.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 50px;
 }
 
 /*
