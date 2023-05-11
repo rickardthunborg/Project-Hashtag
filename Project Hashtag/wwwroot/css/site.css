@@ -273,26 +273,42 @@ Below is flow styling
 .interaction form {
     display: flex;
     color: #c2cdcd;
+    min-width: 35px;
 }
 
 .interaction a {
     color: #c2cdcd;
     transition: all 200ms ease;
+    min-width: 35px;
+    margin-left: 0.4em;
+    padding: 0.3em;
+    border: 4px solid transparent;
+    border-radius: 12px;
 }
 
 .interaction form label {
     background-image: url(..//like.png);
-    background-size: contain;
+    background-size: 50%;
     background-repeat: no-repeat;
-    width: 50px;
+    background-size: 50%;
+    background-position: 20% 50%;
     display: flex;
+    border: 4px solid transparent;
+    padding: 0.3em;
+    border-radius: 12px;
     align-items: center;
     transition: all 200ms ease;
 }
 
 
-.interaction form p, .interaction a p {
+.interaction form p {
     margin-left: 1.8em;
+    margin-top: 0.2em;
+    font-size: 14px;
+}
+
+.interaction a p {
+    margin-left: 1.4em;
     margin-top: 0.2em;
     font-size: 14px;
 }
@@ -301,6 +317,15 @@ Below is flow styling
     cursor: pointer;
     color: #d91670;
     background-image: url(..//likehover.png);
+    background-color: rgba(217, 22, 113, 0.2);
+    border-color: rgba(217, 22, 113, 0.2);
+}
+.comments {
+    background-image: url(..//comment.png);
+    background-repeat: no-repeat;
+    background-size: contain;
+    display: flex;
+    width: 25px;
 }
 
 .interaction a:hover > div {
@@ -309,6 +334,8 @@ Below is flow styling
 
 .interaction a:hover {
     color: #1d9bf0;
+    background-color: rgba(29, 156, 240, 0.2);
+    border-color: rgba(29, 156, 240, 0.2);
 }
 
 
@@ -325,13 +352,6 @@ Below is flow styling
     text-decoration: none;
 }
 
-.comments {
-    margin-top: 2px;
-    background-image: url(..//comment.png);
-    background-size: contain;
-    background-repeat: no-repeat;
-    width: 20px;
-}
 
 /*
 
