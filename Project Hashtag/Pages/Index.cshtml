@@ -5,22 +5,25 @@
     ViewData["Title"] = "Home page";
 }
 
-<p>Add new post+</p>
-<link rel="stylesheet" href="~/css/site.css" />
-<form method="post">
-    <p>Text:</p>
-    <input type="text" name="desc">
-    <p>Choose a tag:</p>
-    <select name="tag">
-        @foreach (var tag in @Model.Tags)
-        {
-            <option value="@tag.Id"> @tag.Name</option>
-        }
-    </select>
-    <button type="submit">Post</button>
-</form> 
+ 
 
 <ul class="flow">
+    <li>
+    <p>Add new post+</p>
+    <link rel="stylesheet" href="~/css/site.css" />
+    <form method="post">
+        <p>Text:</p>
+        <input type="text" name="desc">
+        <p>Choose a tag:</p>
+        <select name="tag">
+            @foreach (var tag in @Model.Tags)
+            {
+                <option value="@tag.Id"> @tag.Name</option>
+            }
+        </select>
+        <button type="submit">Post</button>
+    </form>
+    </li>
     @foreach (var post in Model.Posts)
     {
         var reports = @Model.database.Reports.Where(r => Model.PeopleYouFollow.Select(p => p.UserID).Contains(r.UserID) && r.PostID == post.ID).Count();
