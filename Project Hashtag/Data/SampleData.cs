@@ -35,7 +35,8 @@ namespace Project_Hashtag.Data
 
                 database.SaveChanges();
             }
-
+            if (database.Posts.Count() > 0)
+            {
             // Add sample posts with tags
             User user1 = database.Users.First(u => u.Name == "Brad");
             User user2 = database.Users.First(u => u.Name == "Angelina");
@@ -64,6 +65,8 @@ namespace Project_Hashtag.Data
 
             database.Posts.AddRange(posts);
             database.SaveChanges();
+
+            }
         }
     }
 }
