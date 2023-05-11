@@ -35,6 +35,7 @@
                             <button type="submit"></button>
                             <p>@Model.Post.LikeCount</p>
                         </label>
+                        
                     </form>
                     <a asp-page="post" asp-route-postID="@Model.Post.ID">
                         <div class="comments">
@@ -43,7 +44,24 @@
                     </a>
                 </ul>
             </li>
-        </ul>
+        </ul
+
+        @foreach(var comment in Model.Comments)
+                        {
+                            <ul class="flow">
+                                <li>
+                                     <div class="postProfile">
+                                     <a asp-page="Profile" asp-route-userId="@comment.User.ID" class="postProfileBox">
+                                     <div class="profilePic"> </div>
+                                     <pre>@comment.User.Name</pre>
+                                     </a>
+                            </div>
+                            <p>@comment.Text </p>
+                            <p>@comment.TimeSinceComment()</p>
+                                </li>
+                            </ul>
+                        }
+
         <form method="post" asp-page-handler="comment" asp-route-id="@Model.Post.ID">
             <input type="text" name="content">
             <input hidden name="userId" value="@Model.User.ID">
