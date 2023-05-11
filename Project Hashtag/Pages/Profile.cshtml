@@ -5,8 +5,19 @@
     ViewData["Title"] = Model.User.Name;
 }
 
+<div class="profileDescription">
+    <h2>@Model.User.Name</h2>
+    <p>Following: <b>@Model.amountFollowing</b> Followers: <b>@Model.amountOfFollowers</b></p>
 
-<h2>@Model.User.Name</h2>
+	@if (Model.User.ID != @Model.LoggedIn.LoggedInAccountID)
+	{
+		<form method="post" asp-page-handler="follow">
+			<input hidden name="userId" value="@Model.User.ID">
+			<button type="submit">@Model.FollowText</button>
+		</form>
+
+	}
+</div>
 
 <p>Following: @Model.amountFollowing Followers: @Model.amountOfFollowers</p>
 @if (Model.User.ID != @Model.LoggedIn.LoggedInAccountID)
@@ -15,10 +26,8 @@
     <input hidden name="userId" value="@Model.User.ID">
     <button type="submit">@Model.FollowText</button>
 </form>
-    
 }
 
-<p> User posts: </p>
 <ul class="flow">
     @foreach (var post in Model.userPosts)
     {
