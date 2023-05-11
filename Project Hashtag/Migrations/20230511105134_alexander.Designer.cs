@@ -12,8 +12,8 @@ using Project_Hashtag.Data;
 namespace Project_Hashtag.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20230509125843_DB")]
-    partial class DB
+    [Migration("20230511105134_alexander")]
+    partial class alexander
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -113,15 +113,13 @@ namespace Project_Hashtag.Migrations
                     b.Property<string>("PictureUrl")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("TagID")
-                        .HasColumnType("int");
+                    b.Property<string>("Tag")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("UserID")
                         .HasColumnType("int");
 
                     b.HasKey("ID");
-
-                    b.HasIndex("TagID");
 
                     b.HasIndex("UserID");
 
@@ -151,23 +149,6 @@ namespace Project_Hashtag.Migrations
                     b.ToTable("Reports");
                 });
 
-            modelBuilder.Entity("Project_Hashtag.Models.Tag", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Tags");
-                });
-
             modelBuilder.Entity("Project_Hashtag.Models.User", b =>
                 {
                     b.Property<int>("ID")
@@ -177,6 +158,9 @@ namespace Project_Hashtag.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"), 1L, 1);
 
                     b.Property<string>("Avatar")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Biography")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
@@ -255,17 +239,11 @@ namespace Project_Hashtag.Migrations
 
             modelBuilder.Entity("Project_Hashtag.Models.Post", b =>
                 {
-                    b.HasOne("Project_Hashtag.Models.Tag", "Tag")
-                        .WithMany("Posts")
-                        .HasForeignKey("TagID");
-
                     b.HasOne("Project_Hashtag.Models.User", "User")
                         .WithMany()
                         .HasForeignKey("UserID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Tag");
 
                     b.Navigation("User");
                 });
@@ -296,11 +274,6 @@ namespace Project_Hashtag.Migrations
                     b.Navigation("Likes");
 
                     b.Navigation("Reports");
-                });
-
-            modelBuilder.Entity("Project_Hashtag.Models.Tag", b =>
-                {
-                    b.Navigation("Posts");
                 });
 
             modelBuilder.Entity("Project_Hashtag.Models.User", b =>
