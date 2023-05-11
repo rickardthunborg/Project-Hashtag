@@ -53,6 +53,23 @@ button[type="submit"]:hover {
     transform: scale(1.03); /* Added transform property */
 }
 
+.editProfileButton {
+    background-color: #D5AF34;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: transform 0.2s ease-in-out; /* Added transition */
+    text-decoration: none; /* Added to remove underline */
+    display: inline-block; /* Added to ensure inline layout */
+}
+
+.editProfileButton:hover {
+    background-color: #BA962F;
+    transform: scale(1.03); /* Added transform property */
+}
+
 
 
 .parentNavBarContainer {
