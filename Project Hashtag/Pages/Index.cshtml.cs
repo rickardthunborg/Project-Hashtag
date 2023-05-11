@@ -12,6 +12,7 @@ namespace Project_Hashtag.Pages
     {
         public readonly AppDbContext database;
         public readonly AccessControl LoggedIn;
+        private readonly FileRepository uploads;
 
 
         public List<Post> Posts = new List<Post>();
@@ -22,11 +23,13 @@ namespace Project_Hashtag.Pages
         public string search;
 
 
-        public IndexModel(AppDbContext database, AccessControl accessControl)
+        public IndexModel(AppDbContext database, AccessControl accessControl, FileRepository uploads)
         {
             this.database = database;
 
             this.LoggedIn = accessControl;
+
+            this.uploads = uploads;
 
         }
 
@@ -161,13 +164,27 @@ namespace Project_Hashtag.Pages
 
         }
         
-        public async Task<IActionResult> OnPost(string tag, string desc)
+        public async Task<IActionResult> OnPost(string tag, string desc, IFormFile? photo)
         {
             try
             {
-                var post = new Post { UserID = LoggedIn.LoggedInAccountID, Tag = tag, Description = desc };
-                database.Posts.Add(post);
-                await database.SaveChangesAsync();
+                if (photo == null)
+                {
+                    var post = new Post { UserID = LoggedIn.LoggedInAccountID, Tag = tag, Description = desc };
+                    database.Posts.Add(post);
+                    await database.SaveChangesAsync();
+                }
+                else
+                {
+                    string path = Path.Combine(
+                    Guid.NewGuid().ToString() + "-" + photo.FileName);
+                    await uploads.SaveFileAsync(photo, path);
+                    string asdf = uploads.FolderPath;
+                    var post = new Post { UserID = LoggedIn.LoggedInAccountID, Tag = tag, Description = desc , PictureUrl =  uploads.GetFileURL(path)};
+                    database.Posts.Add(post);
+
+                    await database.SaveChangesAsync();
+                }
 
                 return RedirectToPage("/index");
             }

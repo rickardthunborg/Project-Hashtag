@@ -58,8 +58,7 @@ namespace Project_Hashtag.Data
                 + "/"
                 + Path.GetRelativePath(FolderPath, path);
             string urlPath = fileSystemPath.Replace(Path.DirectorySeparatorChar, '/');
-            string encodedURLPath = HttpUtility.UrlPathEncode(urlPath);
-            return encodedURLPath;
+            return urlPath;
         }
     }
 }

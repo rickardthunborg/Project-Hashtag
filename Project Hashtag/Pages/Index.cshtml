@@ -5,14 +5,16 @@
     ViewData["Title"] = "Facegram";
 }
 
+<img src="../../../UploadedFiles/b09edca5-6f66-474c-b988-2481efd84b5d-icons8-comment-32 (1).png" />
  
 
 <ul class="flow">
     <li class="addNewPost">
-    <form method="post">
+    <form method="post" enctype="multipart/form-data">
         <div id="newPostTitle">
             <div class="profilePic"></div>
             <input type="text" name="desc" placeholder="What´s happening?">
+                <input type="file" name="photo">
         </div>
         <p>Choose a tag:</p>
         <input type="text" name="tag" />
@@ -30,11 +32,11 @@
         <li>
             @if (reports == 1)
             {
-                <span class="reportWarning"> <img src="~/information.png"></img> <p> @reports person you follow has reported this post as untrustworthy.</p></span>
+                <div class="reportWarning"> <img src="~/information.png" /> <p> @reports person you follow has reported this post as untrustworthy.</p></div>
             }
             else if (reports > 0)
             {
-                <span class="reportWarning"> <img src="~/information.png"></img> <p> @reports people you follow have reported this post as untrustworthy.</p></span>
+                <div class="reportWarning"> <img src="~/information.png" /> <p> @reports people you follow have reported this post as untrustworthy.</p></div>
             }
             <div class="postProfile">
 				<a asp-page="Profile" asp-route-userId="@poster.ID" class="postProfileBox">
