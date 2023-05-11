@@ -8,12 +8,12 @@
  
 
 <ul class="flow">
-    <li>
-    <p>Add new post+</p>
-    <link rel="stylesheet" href="~/css/site.css" />
+    <li class="addNewPost">
     <form method="post">
-        <p>Text:</p>
-        <input type="text" name="desc">
+        <div id="newPostTitle">
+            <div class="profilePic"></div>
+            <input type="text" name="desc" placeholder="What´s happening?">
+        </div>
         <p>Choose a tag:</p>
         <input type="text" name="tag" />
         <button type="submit">Post</button>
@@ -44,12 +44,23 @@
                 <p>· @post.TimeSincePost()</p>
                 <form method="post" asp-page-handler="report" asp-route-id="@post.ID"> <label class="report"> <button type="submit"></button> </label></form>
             </div>
-            <p> @post.Description</p>
-            <p>Likes: @post.LikeCount</p>
-            <form method="post" asp-page-handler="like" asp-route-id="@post.ID"><button type="submit">Like</button></form>
+            <p class="postText"> @post.Description</p>
+            <ul class="interaction">
+                <form method="post" asp-page-handler="like" asp-route-id="@post.ID">
+                    <label>
+                        <button type="submit"></button>
+                        <p>@post.LikeCount</p>
+                    </label>
+                </form>
+                <a>
+                    <div class="comments">
+                        
+                    </div>
+                    <p>@Model.Comments.Where(x => x.PostID == post.ID).Count()</p>
+                </a>
+            </ul>
 
-
-            <p>Comments: </p>
+            @*<p>Comments: </p>
             <ul>
                 @foreach (var comment in Model.Comments.Where(x => x.PostID == post.ID).OrderBy(z => z.CreatedDate))
                 {
@@ -70,7 +81,7 @@
             <form method="post" asp-page-handler="comment" asp-route-id="@post.ID">
                 <input type="text" name="content"> 
                 <button type="submit">Comment</button>
-                </form>
+                </form>*@
 
         </li>
     }
