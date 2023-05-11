@@ -14,16 +14,18 @@
 <body>
     <header class="parentNavBarContainer"> 
         <div class="div1NavBar">
-            <form method="get" asp-page="/index">
-           <input type="text" name="search" placeholder="Search for profile...">
-           <button type="submit">Search</button>
+           <form method="get" asp-page="/index" id="searchbar">
+           <input type="text" name="search" placeholder="  Search for profile">
+           <label>
+               <button type="submit"></button>
+           </label>
            </form>
             </div> 
         <a class="div2NavBar" asp-page="./index">
         <img src="~/FaceGramLogo.svg" alt="FaceGram Logo Gold" class="svg-logo" type="image/svg+xml" id="FaceGramNavBarLogo">
         </a>
         <div class="div3NavBar">
-            <a asp-page="Profile" asp-route-userId="@accessControl.LoggedInAccountID">@accessControl.LoggedInAccountName <img src="~/standard-profile-pic.png" alt="profile picture" style="width: 40px" /></a>
+            <a asp-page="Profile" asp-route-userId="@accessControl.LoggedInAccountID"> <div class="profilePic"> </div> <p>@accessControl.LoggedInAccountName</p> </a>
         </div> 
     </header>   
     <div id="fakeLogin">
