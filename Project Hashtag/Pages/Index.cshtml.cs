@@ -36,7 +36,7 @@ namespace Project_Hashtag.Pages
 
             if (!string.IsNullOrEmpty(searchQuery))
             {
-                return RedirectToPage("/search", new { query = searchQuery });
+                return RedirectToPage("/search", new { search = searchQuery });
             }
 
             this.Posts = database.Posts.OrderByDescending(x => x.CreatedDate).ToList();
