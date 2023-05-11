@@ -1,4 +1,5 @@
 ﻿@page "{userId:int}"
+@inject Project_Hashtag.Data.AccessControl accessControl
 @model Project_Hashtag.Pages.ProfileModel
 
 @{
@@ -21,7 +22,7 @@
 	}
 else
 {
-    <a asp-page="/ProfileSettings" class="editProfileButton">Edit Profile</a>
+    <a asp-page="/ProfileSettings" asp-route-userId="@accessControl.LoggedInAccountID" class="editProfileButton">Edit Profile</a>
 }
 
 
