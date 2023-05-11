@@ -41,31 +41,25 @@
                 <button type="submit">Like</button>
             </form>
 
-            @*<p>Comments: </p>
-            <ul>
-                @foreach (var comment in Model.Comments.Where(x => x.PostID == post.ID).OrderBy(z => z.CreatedDate))
-                {
-
-                    <li>
-                        <p>@comment.Text </p>
-                        <a asp-page="Profile" asp-route-userId="@comment.UserID"><pre>  by: @Model.Users.Single(x => x.ID == comment.UserID).Name</pre></a>
-                    </li>
-                }
-            </ul>*@
-
-            @*<form method="post" asp-page-handler="comment" asp-route-id="@post.ID">
-                <input type="text" name="content">
-                <input hidden name="userId" value="@post.UserID">
-                <button type="submit">Comment</button>
-            </form>*@
-
-            @if (post.UserID == Model.LoggedIn.LoggedInAccountID)
+            <p>Comments: </p>
+            @for (int i = 0; i < Math.Min(3, Model.Comments.Where(c => c.PostID == post.ID).Count()); i++)
             {
-                <form method="post" asp-page-handler="delete" asp-route-id="@post.ID">
-                    <input hidden name="userId" value="@post.UserID">
-                    <button type="submit">Delete</button>
-                </form>
+                var comment = @Model.Comments.Where(c => c.PostID == post.ID).OrderByDescending(c => c.CreatedDate).ToList()[i];
+                <div class="postProfile">
+                    <a asp-page="Profile" asp-route-userId="@comment.User.ID" class="postProfileBox">
+                        <div class="profilePic"> </div>
+                        <pre>@comment.User.Name</pre>
+                    </a>
+                </div>
+                <p>@comment.Text </p>
+                <p>@comment.TimeSinceComment()</p>
+
             }
+            <form method="post" asp-page-handler="comment" asp-route-postID="@post.ID">
+                <input type="text" name="content">
+                <input type="hidden" name="search" value="@Request.Query["search"]" />
+                <button type="submit">Comment</button>
+            </form>
         </li>
     }
 </ul>

@@ -28,6 +28,7 @@ namespace Project_Hashtag.Pages
             this.LoggedIn = accessControl;
             this.Posts = database.Posts.ToList();
             this.Users = database.Users.ToList();
+            this.Comments = database.Comments.ToList();
 
         }
 
@@ -40,10 +41,27 @@ namespace Project_Hashtag.Pages
                 return Page();
                 
             }
+
             this.QueriedPosts = database.Posts.Where(p => p.Description.ToLower().Contains(search)).ToList();
             this.QueriedUsers = database.Users.Where(u => u.Name.ToLower().Contains(search)).ToList();
             return Page();
 
+        }
+
+        public IActionResult OnPostComment(int postID, string content, string search)
+        {
+            try
+            {
+                Comment.AddComment(LoggedIn.LoggedInAccountID, postID, content, database);
+
+
+                return RedirectToPage("/Search", new { search });
+
+            }
+            catch
+            {
+                return RedirectToPage();
+            }
         }
     }
 }
