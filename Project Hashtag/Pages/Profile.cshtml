@@ -48,7 +48,7 @@ else
 
             <p>Comments: </p>
             <ul>
-                @foreach (var comment in Model.Comments.Where(x => x.PostID == post.ID).OrderBy(z => z.CreatedDate))
+                @foreach (var comment in Model.Comments.Where(x => x.PostID == post.ID))
                 {
 
                     <li>

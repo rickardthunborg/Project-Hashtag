@@ -147,7 +147,7 @@ namespace Project_Hashtag.Pages
             {
                 User =  database.Users.Find(userId);
                 userPosts = database.Posts.Where(x => x.UserID == userId).OrderByDescending(x => x.CreatedDate).ToList();
-                this.Comments = database.Comments.ToList();
+                this.Comments = database.Comments.OrderByDescending(x => x.CreatedDate).ToList();
                 this.Users = database.Users.ToList();
                 this.FollowText = Follow.GetFollowStatus(userId, LoggedIn.LoggedInAccountID, database);
                 this.amountOfFollowers = database.Follows.Where(f => f.UserID == User.ID).Count();
