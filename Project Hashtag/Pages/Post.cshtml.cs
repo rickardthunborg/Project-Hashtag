@@ -15,10 +15,12 @@ namespace Project_Hashtag.Pages
 		public List<User> Users { get; set; } = new List<User>();
 		public User User;
 		public List<Comment> Comments;
+        public List<Report> Reports = new List<Report>();
 
 
 
-		public PostModel(Project_Hashtag.Data.AppDbContext context, AccessControl accessControl)
+
+        public PostModel(Project_Hashtag.Data.AppDbContext context, AccessControl accessControl)
 		{
 			database = context;
 			this.LoggedIn = accessControl;
@@ -32,6 +34,8 @@ namespace Project_Hashtag.Pages
 				return NotFound();
 			}
 			User = database.Users.Single(u => u.ID == Post.UserID);
+			Comments = database.Comments.Where(c => c.PostID == Post.ID).OrderByDescending(c => c.CreatedDate).ToList();
+			Reports = database.Reports.Where(r => r.PostID == Post.ID).ToList();
 
 			return Page();
         }

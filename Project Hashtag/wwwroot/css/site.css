@@ -129,7 +129,8 @@ button[type="submit"]:hover {
     background-color: transparent;
     border: none;
     color: #f9f5f3;
-    width: 90%
+    width: 90%;
+    padding-left: 10px;
 }
 
 #searchbar > input::placeholder {
@@ -254,6 +255,7 @@ Below is flow styling
 
 .interaction form {
     display: flex;
+    color: #c2cdcd;
 }
 
 .interaction form label {
@@ -263,14 +265,25 @@ Below is flow styling
     width: 50px;
     display: flex;
     align-items: center;
+    transition: all 100ms ease;
 }
 
 .interaction form p, .interaction a p {
     margin-left: 1.8em;
     margin-top: 0.2em;
     font-size: 14px;
-    color: #c2cdcd;
 }
+
+.interaction label:hover {
+    cursor: pointer;
+    color: #d91670;
+    background-image: url(..//likehover.png);
+}
+
+.interaction a:hover {
+    color: #1d9bf0;
+}
+
 
 .interaction a p{
     margin-left: 0.5em;
@@ -282,6 +295,7 @@ Below is flow styling
 
 .interaction a {
     display: flex;
+    text-decoration: none;
 }
 
 .comments {
