@@ -275,6 +275,11 @@ Below is flow styling
     color: #c2cdcd;
 }
 
+.interaction a {
+    color: #c2cdcd;
+    transition: all 200ms ease;
+}
+
 .interaction form label {
     background-image: url(..//like.png);
     background-size: contain;
@@ -282,8 +287,9 @@ Below is flow styling
     width: 50px;
     display: flex;
     align-items: center;
-    transition: all 100ms ease;
+    transition: all 200ms ease;
 }
+
 
 .interaction form p, .interaction a p {
     margin-left: 1.8em;
@@ -299,6 +305,9 @@ Below is flow styling
 
 .interaction a:hover > div {
     background-image: url(..//commenthover.png);
+}
+
+.interaction a:hover {
     color: #1d9bf0;
 }
 
