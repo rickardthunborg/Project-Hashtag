@@ -64,7 +64,7 @@ button[type="submit"] {
     grid-area: a;
     background-color: #2E3136;
     display: flex;
-    justify-content: end;
+    justify-content: center;
     align-items: center;
 }
 
@@ -79,7 +79,7 @@ button[type="submit"] {
 .div3NavBar {
     grid-area: c;
     display: flex;
-    justify-content: start;
+    justify-content: center;
     align-items: center;
     text-align: center;
     background-color: #2E3136; /* Add background color for visibility */
