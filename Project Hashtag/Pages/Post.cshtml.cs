@@ -24,6 +24,7 @@ namespace Project_Hashtag.Pages
 		{
 			database = context;
 			this.LoggedIn = accessControl;
+            Users = database.Users.ToList();
 		}
 
         public IActionResult OnGet(int postID)
@@ -38,6 +39,19 @@ namespace Project_Hashtag.Pages
 			Reports = database.Reports.Where(r => r.PostID == Post.ID).ToList();
 
 			return Page();
+        }
+
+        public IActionResult OnPostComment(int postID, string content)
+        {
+            try
+            {
+                Comment.AddComment(LoggedIn.LoggedInAccountID, postID, content, database);
+                return RedirectToPage("Post", new { postID = postID });
+            }
+            catch
+            {
+                return NotFound();
+            }
         }
     }
 }
