@@ -29,28 +29,6 @@ namespace Project_Hashtag.Data
                     Name = "Will"
                 });
             }
-
-            if (!database.Tags.Any())
-            {
-                database.Tags.Add(new Tag { Name = "No tag" });
-
-                database.Tags.Add(new Tag { Name = "Food" });
-
-                database.Tags.Add(new Tag { Name = "Travel" });
-
-                database.Tags.Add(new Tag { Name = "Fitness" });
-
-                database.Tags.Add(new Tag { Name = "Music" });
-
-                database.Tags.Add(new Tag { Name = "Fashion" });
-
-                database.Tags.Add(new Tag { Name = "Gaming" });
-
-                database.Tags.Add(new Tag { Name = "Art" });
-
-                database.Tags.Add(new Tag { Name = "Sports" });
-            }
-
             database.SaveChanges();
         }
     }
