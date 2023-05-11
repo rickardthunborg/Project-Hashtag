@@ -15,15 +15,13 @@ namespace Project_Hashtag.Models
 
         public int UserID { get; set; }
 
-        public int? TagID { get; set; }
+        public string? Tag { get; set; }
 
         public DateTime CreatedDate { get; set; } = DateTime.Now;
 
         public Post() { }
 
         public User User { get; set; }
-
-        public Tag? Tag { get; set; }
 
         public List<Comment> Comments { get; set; } =  new List<Comment>();
 

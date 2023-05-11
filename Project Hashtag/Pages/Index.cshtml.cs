@@ -17,7 +17,6 @@ namespace Project_Hashtag.Pages
         public List<Post> Posts = new List<Post>();
         public List<User> Users;
         public List<Comment> Comments;
-        public List<Tag> Tags = new List<Tag>();
         public List<Report> Reports = new List<Report>();
         public List<Follow> PeopleYouFollow;
         public string search;
@@ -42,7 +41,6 @@ namespace Project_Hashtag.Pages
 
             this.Posts = database.Posts.OrderByDescending(x => x.CreatedDate).ToList();
             this.Users = database.Users.ToList();
-            this.Tags = database.Tags.ToList();
             this.Comments = database.Comments.ToList();
             this.Reports = database.Reports.ToList();
             PeopleYouFollow = database.Follows.Where(f => f.FollowingId == LoggedIn.LoggedInAccountID).ToList();
@@ -163,11 +161,11 @@ namespace Project_Hashtag.Pages
 
         }
         
-        public async Task<IActionResult> OnPost(int tag, string desc)
+        public async Task<IActionResult> OnPost(string tag, string desc)
         {
             try
             {
-                var post = new Post { UserID = LoggedIn.LoggedInAccountID, TagID = tag, Description = desc };
+                var post = new Post { UserID = LoggedIn.LoggedInAccountID, Tag = tag, Description = desc };
                 database.Posts.Add(post);
                 await database.SaveChangesAsync();
 

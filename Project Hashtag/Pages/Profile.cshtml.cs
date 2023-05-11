@@ -28,7 +28,6 @@ namespace Project_Hashtag.Pages
         public User User { get;set; } = default!;
         public List<Post> userPosts;
         public List<Comment> Comments;
-        public List<Tag> Tags = new List<Tag>();
         public string FollowText;
         public int amountOfFollowers;
         public int amountFollowing;
@@ -139,18 +138,18 @@ namespace Project_Hashtag.Pages
             return RedirectToPage("Profile", new { id = userId });
         }
 
+
         public void OnGetAsync(int userId)
         {
             if (database.Users != null)
             {
-                User =  database.Users.Single(u => u.ID == userId);
+                User =  database.Users.Find(userId);
                 userPosts = database.Posts.Where(x => x.UserID == userId).OrderByDescending(x => x.CreatedDate).ToList();
                 this.Comments = database.Comments.ToList();
                 this.Users = database.Users.ToList();
                 this.FollowText = Follow.GetFollowStatus(userId, LoggedIn.LoggedInAccountID, database);
                 this.amountOfFollowers = database.Follows.Where(f => f.UserID == User.ID).Count();
                 this.amountFollowing = database.Follows.Where(f => f.FollowingId == User.ID).Count();
-                this.Tags = database.Tags.ToList();
             }
         }
     }

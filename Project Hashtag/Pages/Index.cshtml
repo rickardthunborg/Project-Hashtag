@@ -2,7 +2,7 @@
 @model IndexModel
 @inject Project_Hashtag.Data.AccessControl accessControl
 @{
-    ViewData["Title"] = "Home page";
+    ViewData["Title"] = "Facegram";
 }
 
  
@@ -15,12 +15,7 @@
         <p>Text:</p>
         <input type="text" name="desc">
         <p>Choose a tag:</p>
-        <select name="tag">
-            @foreach (var tag in @Model.Tags)
-            {
-                <option value="@tag.Id"> @tag.Name</option>
-            }
-        </select>
+        <input type="text" name="tag" />
         <button type="submit">Post</button>
     </form>
     </li>
@@ -50,10 +45,6 @@
                 <form method="post" asp-page-handler="report" asp-route-id="@post.ID"> <label class="report"> <button type="submit"></button> </label></form>
             </div>
             <p> @post.Description</p>
-            @if (@Model.Tags.Single(x => x.Id == post.TagID).Id != 1)
-            {
-                <p>Tag: @Model.Tags.Single(x => x.Id == post.TagID).Name</p>
-            }
             <p>Likes: @post.LikeCount</p>
             <form method="post" asp-page-handler="like" asp-route-id="@post.ID"><button type="submit">Like</button></form>
 

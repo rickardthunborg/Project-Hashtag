@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Project_Hashtag.Data;
+using Project_Hashtag.Models;
 
 namespace Project_Hashtag.Controllers
 {
@@ -14,6 +15,21 @@ namespace Project_Hashtag.Controllers
         public APIController(AppDbContext database)
         {
             this.database = database;
+        }
+
+        [HttpGet("/posts")]
+        public ActionResult<IEnumerable<Post>> GetPost(string tag)
+        {
+            var posts = database.Posts.Where(p => p.Tag == tag).ToList();
+
+            Post? post = posts.OrderByDescending(p => p.LikeCount).FirstOrDefault();
+
+            if (post != null)
+            {
+                return NotFound(new { message = "No relatable posts were found." });
+            }
+
+            return Ok(post);
         }
     }
 }
