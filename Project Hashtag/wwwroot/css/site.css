@@ -284,3 +284,21 @@ Report button styling
 .reportWarning img {
     width: 20px;
 }
+
+/*
+
+Profile styling
+
+*/
+
+.profileDescription {
+    display: flex;
+    align-content: center;
+    flex-direction: column;
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.profileDescription p {
+    margin-bottom: 10px;
+}
