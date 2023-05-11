@@ -33,6 +33,7 @@ namespace Project_Hashtag.Pages
         public int amountFollowing;
         public string search;
         public string biography;
+        public string avatar;
 
 
 
@@ -152,6 +153,7 @@ namespace Project_Hashtag.Pages
                 this.amountOfFollowers = database.Follows.Where(f => f.UserID == User.ID).Count();
                 this.amountFollowing = database.Follows.Where(f => f.FollowingId == User.ID).Count();
                 this.biography = User.Biography;
+                this.avatar = User.Avatar;
             }
         }
     }
