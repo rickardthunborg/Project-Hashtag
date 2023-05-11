@@ -11,4 +11,10 @@
         <label for="bio">Biography</label>
         <input id="bio" type="text" value="@Model.User.Biography"></input>
     </form>
+    
+    <h3>Choose a new profile picture: </h3>
+    <form method="post" enctype="multipart/form-data">
+        <input type="file" name="photo">
+        <button type="submit">Update picture</button>
+    </form>
 </div>

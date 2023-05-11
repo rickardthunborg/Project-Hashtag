@@ -9,12 +9,14 @@ namespace Project_Hashtag.Pages
     {
         readonly Project_Hashtag.Data.AppDbContext database;
         public AccessControl LoggedIn;
+        private readonly FileRepository uploads;
 
 
-        public ProfileSettingsModel(Project_Hashtag.Data.AppDbContext context, AccessControl accessControl)
+        public ProfileSettingsModel(Project_Hashtag.Data.AppDbContext context, AccessControl accessControl, FileRepository uploads)
         {
             database = context;
             this.LoggedIn = accessControl;
+            this.uploads = uploads;
         }
 
 
@@ -54,5 +56,36 @@ namespace Project_Hashtag.Pages
 
             return NotFound();
         }
+
+
+        public async Task<IActionResult> OnPost( IFormFile? photo)
+        {
+            try
+            {
+                if (photo == null)
+                {
+                    return Page();
+                }
+                else
+                {
+                    string path = Path.Combine(
+                    Guid.NewGuid().ToString() + "-" + photo.FileName);
+                    await uploads.SaveFileAsync(photo, path);
+
+                    User user = database.Users.Find(LoggedIn.LoggedInAccountID);
+
+                    user.Avatar = "/uploads/" + path;
+
+                    await database.SaveChangesAsync();
+                }
+
+                return RedirectToPage("/index");
+            }
+            catch
+            {
+                return NotFound();
+            }
+        }
+
     }
 }

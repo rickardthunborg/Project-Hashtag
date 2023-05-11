@@ -1,5 +1,6 @@
 ﻿@using Project_Hashtag.Pages.Shared.Components.LoginMenu;
 @inject Project_Hashtag.Data.AccessControl accessControl
+@inject Project_Hashtag.Data.AppDbContext database
 
 <!DOCTYPE html>
 <html lang="en">
@@ -27,8 +28,8 @@
     </a>
     <div class="div3NavBar">
         <a asp-page="Profile" asp-route-userId="@accessControl.LoggedInAccountID">
-            <div class="profilePic"> </div>
-            <p>@accessControl.LoggedInAccountName</p> </a>
+            <img class="pic-top" src="@database.Users.Find(accessControl.LoggedInAccountID).Avatar" alt="error">
+        <p>@accessControl.LoggedInAccountName</p> </a>
     </div>
 </header>
 <div id="fakeLogin">
