@@ -8,12 +8,12 @@
  
 
 <ul class="flow">
-    <li>
-    <p>Add new post+</p>
-    <link rel="stylesheet" href="~/css/site.css" />
+    <li class="addNewPost">
     <form method="post">
-        <p>Text:</p>
-        <input type="text" name="desc">
+        <div id="newPostTitle">
+            <div class="profilePic"></div>
+            <input type="text" name="desc" placeholder="What´s happening?">
+        </div>
         <p>Choose a tag:</p>
         <select name="tag">
             @foreach (var tag in @Model.Tags)

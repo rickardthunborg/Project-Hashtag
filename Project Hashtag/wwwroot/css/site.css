@@ -149,6 +149,29 @@ button[type="submit"] {
     visibility: hidden;
 }
 
+/* ----------
+
+Add new post styling
+
+-------------*/
+
+
+.addNewPost input[type=text] {
+    height: 40px;
+    margin: 0px 0px 0px 10px;
+    border: none;
+    background-color: transparent;
+    color:white;
+}
+
+.addNewPost input[type=text]:focus {
+    outline: none;
+}
+
+.addNewPost #newPostTitle {
+    display: flex;
+    margin-left: 7px;
+}
 
 /* ----------
 
