@@ -39,17 +39,21 @@ input[type="text"], select {
 }
 
 button[type="submit"] {
-    background-color: #4CAF50;
+    background-color: #D5AF34;
     color: white;
     border: none;
     padding: 8px 16px;
     border-radius: 4px;
     cursor: pointer;
+    transition: transform 0.2s ease-in-out; /* Added transition */
 }
 
-    button[type="submit"]:hover {
-        background-color: #3e8e41;
-    }
+button[type="submit"]:hover {
+    background-color: #BA962F;
+    transform: scale(1.03); /* Added transform property */
+}
+
+
 
 .parentNavBarContainer {
     display: grid;
@@ -349,8 +353,14 @@ Profile styling
     flex-direction: column;
     text-align: center;
     margin-bottom: 15px;
+    align-items: center;
 }
 
 .profileDescription p {
     margin-bottom: 10px;
+}
+
+#editProfileButton
+{
+    width: 100px;
 }
