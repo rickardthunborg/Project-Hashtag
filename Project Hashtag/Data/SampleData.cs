@@ -35,7 +35,7 @@ namespace Project_Hashtag.Data
 
                 database.SaveChanges();
             }
-            if (database.Posts.Count() > 0)
+            if (database.Posts.Count() == 0)
             {
             // Add sample posts with tags
             User user1 = database.Users.First(u => u.Name == "Brad");
