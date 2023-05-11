@@ -280,7 +280,8 @@ Below is flow styling
     background-image: url(..//likehover.png);
 }
 
-.interaction a:hover {
+.interaction a:hover > div {
+    background-image: url(..//commenthover.png);
     color: #1d9bf0;
 }
 
