@@ -6,6 +6,7 @@ using Microsoft.IdentityModel.Protocols.OpenIdConnect;
 using Project_Hashtag.Data;
 using Project_Hashtag.Models;
 using System.Security.Claims;
+using Microsoft.Extensions.FileProviders;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -93,6 +94,7 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddScoped<AccessControl>();
+builder.Services.AddSingleton<FileRepository>();
 
 var app = builder.Build();
 
@@ -107,6 +109,15 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+Directory.CreateDirectory(builder.Configuration["Uploads:FolderPath"]);
+app.UseStaticFiles(new StaticFileOptions
+{
+    FileProvider = new PhysicalFileProvider(
+        Path.Combine(builder.Environment.ContentRootPath, builder.Configuration["Uploads:FolderPath"])
+    ),
+    RequestPath = builder.Configuration["Uploads:URLPath"]
+});
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
