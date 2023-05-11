@@ -30,21 +30,29 @@ namespace Project_Hashtag.Pages
         public string avatar;
 
 
-        public void OnGetAsync(int userId)
+        public IActionResult OnGetAsync(int userId)
         {
+            if (LoggedIn.LoggedInAccountID != userId)
+            {
+                return Forbid();
+            }
+
             if (database.Users != null)
             {
-                User = database.Users.Find(userId);
                 try
                 {
+                    User = database.Users.Find(userId);
                     this.biography = User.Biography;
+                    this.avatar = User.Avatar;
+                    return Page();
                 }
                 catch
                 {
                     this.biography = "";
                 }
-                this.avatar = User.Avatar;
             }
+
+            return NotFound();
         }
     }
 }
