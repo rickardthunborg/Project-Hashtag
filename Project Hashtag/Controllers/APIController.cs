@@ -29,7 +29,9 @@ namespace Project_Hashtag.Controllers
                 return NotFound(new { message = "No relatable posts were found." });
             }
 
-            return Ok(post);
+            var returnURL = "https://facegram.azurewebsites.net/Post/" + post.ID;
+
+            return Ok( new { postContent = post.Description, postImageURL = post.PictureUrl, postURL = returnURL });
         }
     }
 }

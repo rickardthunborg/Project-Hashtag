@@ -59,6 +59,25 @@
                     <p class="commentCount">@Model.Comments.Where(x => x.PostID == post.ID).Count()</p>
                 </a>
             </div>
+            <p>Comments: </p>
+            @for (int i = 0; i < Math.Min(3, Model.Comments.Where(c => c.PostID == post.ID).Count()); i++)
+            {
+                var comment = @Model.Comments.Where(c => c.PostID == post.ID).OrderByDescending(c => c.CreatedDate).ToList()[i];
+                <div class="postProfile">
+                    <a asp-page="Profile" asp-route-userId="@comment.User.ID" class="postProfileBox">
+                        <div class="profilePic"> </div>
+                        <pre>@comment.User.Name</pre>
+                    </a>
+                </div>
+                <p>@comment.Text </p>
+                <p>@comment.TimeSinceComment()</p>
+
+            }
+            <form method="post" asp-page-handler="comment" asp-route-id="@post.ID">
+                <input type="text" name="content">
+                <input hidden name="userId" value="@post.UserID">
+                <button type="submit">Comment</button>
+            </form>
             </li>
     }
 </ul>
