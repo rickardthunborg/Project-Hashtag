@@ -179,8 +179,7 @@ namespace Project_Hashtag.Pages
                     string path = Path.Combine(
                     Guid.NewGuid().ToString() + "-" + photo.FileName);
                     await uploads.SaveFileAsync(photo, path);
-                    string asdf = uploads.FolderPath;
-                    var post = new Post { UserID = LoggedIn.LoggedInAccountID, Tag = tag, Description = desc , PictureUrl =  uploads.GetFileURL(path)};
+                    var post = new Post { UserID = LoggedIn.LoggedInAccountID, Tag = tag, Description = desc , PictureUrl =  "/uploads/" + path};
                     database.Posts.Add(post);
 
                     await database.SaveChangesAsync();

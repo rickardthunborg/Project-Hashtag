@@ -5,8 +5,6 @@
     ViewData["Title"] = "Facegram";
 }
 
-<img src="../../../UploadedFiles/b09edca5-6f66-474c-b988-2481efd84b5d-icons8-comment-32 (1).png" />
- 
 
 <ul class="flow">
     <li class="addNewPost">
@@ -47,6 +45,12 @@
                 <form method="post" asp-page-handler="report" asp-route-id="@post.ID"> <label class="report"> <button type="submit"></button> </label></form>
             </div>
             <p class="postText"> @post.Description</p>
+            @if (post.PictureUrl != null)
+            {
+                <div class="image">
+                      <img src="@post.PictureUrl" alt="Error loading picture" />       
+                </div>
+            }
             <div class="interaction">
                 <form method="post" asp-page-handler="like" asp-route-id="@post.ID">
                     <label>
