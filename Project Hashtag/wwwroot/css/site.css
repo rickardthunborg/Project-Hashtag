@@ -116,7 +116,7 @@ button[type="submit"] {
     display: flex;
     height: 32px;
     justify-content: center;
-    border: 1px solid #d5af34;
+    border: 2px solid #d5af34;
     border-radius: 1.5em;
 }
 
@@ -261,11 +261,15 @@ Below is flow styling
     align-items: center;
 }
 
-.interaction form p {
+.interaction form p, .interaction a p {
     margin-left: 1.8em;
     margin-top: 0.2em;
     font-size: 14px;
     color: #c2cdcd;
+}
+
+.interaction a p{
+    margin-left: 0.5em;
 }
 
 .interaction button {
@@ -277,10 +281,11 @@ Below is flow styling
 }
 
 .comments {
+    margin-top: 2px;
     background-image: url(..//comment.png);
     background-size: contain;
     background-repeat: no-repeat;
-    width: 50px;
+    width: 20px;
 }
 
 /*
