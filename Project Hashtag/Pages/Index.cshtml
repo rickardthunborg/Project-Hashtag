@@ -45,25 +45,21 @@
                 <form method="post" asp-page-handler="report" asp-route-id="@post.ID"> <label class="report"> <button type="submit"></button> </label></form>
             </div>
             <p class="postText"> @post.Description</p>
-            </li>
-            <ul class="interaction">
-                <li>
+            <div class="interaction">
                 <form method="post" asp-page-handler="like" asp-route-id="@post.ID">
                     <label>
                         <button type="submit"></button>
                         <p>@post.LikeCount</p>
                     </label>
                 </form>
-                </li>
-                <li>
                 <a asp-page="post" asp-route-postID="@post.ID">
                     <div class="comments">
                         
                     </div>
                     <p>@Model.Comments.Where(x => x.PostID == post.ID).Count()</p>
                 </a>
-                </li>
-              </ul>
+            </div>
+            </li>
     }
 </ul>
             @*<p>Comments: </p>
