@@ -28,11 +28,8 @@
     </a>
     <div class="div3NavBar">
         <a asp-page="Profile" asp-route-userId="@accessControl.LoggedInAccountID">
-            <div class="image-cropper">
-                <img class="pic-top" src="@database.Users.Find(accessControl.LoggedInAccountID).Avatar" alt="error">
-            </div>
-            <p>@accessControl.LoggedInAccountName</p> 
-        </a>
+            <img class="pic-top" src="@database.Users.Find(accessControl.LoggedInAccountID).Avatar" alt="error">
+        <p>@accessControl.LoggedInAccountName</p> </a>
     </div>
 </header>
 <div id="fakeLogin">
