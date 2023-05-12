@@ -34,27 +34,73 @@ else
 <ul class="flow">
     @foreach (var post in Model.userPosts)
     {
+        var reports = @Model.database.Reports.Where(r => Model.PeopleYouFollow.Select(p => p.UserID).Contains(r.UserID) && r.PostID == post.ID).Count();
+        var poster = Model.Users.Single(x => post.UserID == x.ID);
+        if (post.UserID == Model.LoggedIn.LoggedInAccountID)
+        {
+            continue;
+        }
         <li>
-            <p>
-                Posted by: @Model.User.Name
-            </p>
-            <p> @post.Description</p>
-            <p> @post.TimeSincePost()</p>
-            <p>Likes: @post.LikeCount</p>
-            <form method="post" asp-page-handler="like" asp-route-id="@post.ID">
-                <input hidden name="userId" value="@Model.User.ID">
-                <button type="submit">Like</button>
-            </form>
+            @if (reports == 1)
+            {
+                <div class="reportWarning"> <img src="~/information.png" /> <p> @reports person you follow has reported this post as untrustworthy.</p></div>
+            }
+            else if (reports > 0)
+            {
+                <div class="reportWarning"> <img src="~/information.png" /> <p> @reports people you follow have reported this post as untrustworthy.</p></div>
+            }
+            <div class="postProfile">
+                <a asp-page="Profile" asp-route-userId="@poster.ID" class="postProfileBox">
+                    <img class="pic-top" src="@poster.Avatar" alt="error">
+                    <pre>@poster.Name</pre>
+                </a>
+                <p>· @post.TimeSincePost()</p>
+                <form method="post" asp-page-handler="report" asp-route-id="@post.ID"> <label class="report"> <button type="submit"></button> </label></form>
+            </div>
+            <p class="postText"> @post.Description</p>
+            @if (post.PictureUrl != null)
+            {
+                <div class="image">
+                    <img src="@post.PictureUrl" alt="Error loading picture" />
+                </div>
+            }
+            <div class="interaction">
+                <form method="post" asp-page-handler="like" asp-route-id="@post.ID">
+                    <label>
+                        <button type="submit"></button>
+                        <p>@post.LikeCount</p>
+                    </label>
+                </form>
+                <a asp-page="post" asp-route-postID="@post.ID">
+                    <div class="comments">
+                    </div>
+                    <p class="commentCount">@Model.Comments.Where(x => x.PostID == post.ID).Count()</p>
+                </a>
+            </div>
 
             <p>Comments: </p>
             <ul>
                 @foreach (var comment in Model.Comments.Where(x => x.PostID == post.ID))
                 {
 
-                    <li>
-                        <p>@comment.Text </p>
-                        <a asp-page="Profile" asp-route-userId="@comment.UserID"><pre>  by: @Model.Users.Single(x => x.ID == comment.UserID).Name</pre></a>
-                    </li>
+                    <ul class="flow">
+                        <li>
+                            <div class="postProfile">
+                                <a asp-page="Profile" asp-route-userId="@comment.User.ID" class="postProfileBox">
+                                    <div class="profilePic"> </div>
+                                    <pre>@comment.User.Name</pre>
+                                </a>
+                            </div>
+                            <p>@comment.Text </p>
+                            <p>@comment.TimeSinceComment()</p>
+                            @if (comment.UserID == Model.LoggedIn.LoggedInAccountID)
+                            {
+                                <form method="post" asp-page-handler="DeleteComment" asp-route-commentId="@comment.Id">
+                                    <button type="submit">Delete</button>
+                                </form>
+                            }
+                        </li>
+                    </ul>
                 }
             </ul>
 

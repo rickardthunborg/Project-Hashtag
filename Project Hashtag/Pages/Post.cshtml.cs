@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore.Storage;
 using Project_Hashtag.Data;
 using Project_Hashtag.Models;
+using System.ComponentModel.Design;
 
 namespace Project_Hashtag.Pages
 {
@@ -53,5 +54,24 @@ namespace Project_Hashtag.Pages
                 return NotFound();
             }
         }
-    }
+
+		public IActionResult OnPostDeleteComment(int commentId)
+		{
+			try
+			{
+				Comment comment = database.Comments.Find(commentId);
+				if (comment.UserID != LoggedIn.LoggedInAccountID)
+				{
+					return Forbid();
+				}
+				Comment.DeleteComment(comment, database);
+
+				return RedirectToPage();
+			}
+			catch
+			{
+				return RedirectToPage();
+			}
+		}
+	}
 }

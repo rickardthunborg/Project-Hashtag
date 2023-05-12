@@ -7,9 +7,6 @@
 <ul class="flow">
 
 	<li>
-		@*<p>@Model.Post.Description</p>
-		<p> @Model.Post.TimeSincePost()</p>
-		<p>Likes: @Model.Post.LikeCount</p>*@
         <ul>
             <li>
                 @if (Model.Reports.Count == 1)
@@ -58,6 +55,12 @@
                             </div>
                             <p>@comment.Text </p>
                             <p>@comment.TimeSinceComment()</p>
+                            @if (comment.UserID == Model.LoggedIn.LoggedInAccountID)
+                            {
+                             <form method="post" asp-page-handler="DeleteComment" asp-route-commentId="@comment.Id">
+                               <button type="submit">Delete</button>
+                             </form>
+                             }
                                 </li>
                             </ul>
                         }

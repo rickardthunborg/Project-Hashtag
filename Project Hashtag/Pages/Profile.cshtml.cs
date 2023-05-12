@@ -13,7 +13,7 @@ namespace Project_Hashtag.Pages
 {
     public class ProfileModel : PageModel
     {
-        readonly Project_Hashtag.Data.AppDbContext database;
+        public Project_Hashtag.Data.AppDbContext database;
         public AccessControl LoggedIn;
 
 
@@ -21,6 +21,9 @@ namespace Project_Hashtag.Pages
         {
             database = context;
             this.LoggedIn = accessControl;
+            PeopleYouFollow = database.Follows.Where(f => f.FollowingId == LoggedIn.LoggedInAccountID).ToList();
+            this.Reports = database.Reports.ToList();
+
         }
 
 
@@ -28,12 +31,15 @@ namespace Project_Hashtag.Pages
         public User User { get;set; } = default!;
         public List<Post> userPosts;
         public List<Comment> Comments;
+        public List<Report> Reports = new List<Report>();
         public string FollowText;
         public int amountOfFollowers;
         public int amountFollowing;
         public string search;
         public string biography;
         public string avatar;
+        public List<Follow> PeopleYouFollow;
+
 
 
 
@@ -58,6 +64,44 @@ namespace Project_Hashtag.Pages
 
         }
 
+        public IActionResult OnPostReport(int id)
+        {
+            Post post = database.Posts.FirstOrDefault(x => x.ID == id);
+            Report report = database.Reports.FirstOrDefault(x => x.PostID == post.ID && x.UserID == LoggedIn.LoggedInAccountID);
+
+            if (report == null)
+            {
+                try
+                {
+                    report = new Report() { PostID = id, UserID = LoggedIn.LoggedInAccountID };
+                    database.Reports.Add(report);
+                    database.SaveChanges();
+
+                    return RedirectToPage();
+                }
+                catch
+                {
+                    return NotFound();
+                }
+
+            }
+            else
+            {
+                try
+                {
+                    database.Reports.Remove(report);
+                    database.SaveChanges();
+
+                    return RedirectToPage();
+                }
+                catch
+                {
+                    return NotFound();
+                }
+            }
+
+        }
+
 
         public IActionResult OnPostComment(int id, string content, int userId)
         {
@@ -66,6 +110,25 @@ namespace Project_Hashtag.Pages
                 Comment.AddComment(LoggedIn.LoggedInAccountID, id, content, database);
 
                 return RedirectToPage("Profile", new { id = userId });
+            }
+            catch
+            {
+                return RedirectToPage();
+            }
+        }
+
+        public IActionResult OnPostDeleteComment(int commentId)
+        {
+            try
+            {
+                Comment comment = database.Comments.Find(commentId);
+                if (comment.UserID != LoggedIn.LoggedInAccountID)
+                {
+                    return Forbid();
+                }
+                Comment.DeleteComment(comment, database);
+
+                return RedirectToPage();
             }
             catch
             {
