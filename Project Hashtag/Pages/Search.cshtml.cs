@@ -18,6 +18,8 @@ namespace Project_Hashtag.Pages
         public List<Comment> Comments;
         public List<Post> QueriedPosts = new List<Post>();
         public List<User> QueriedUsers = new List<User>();
+        public List<Report> Reports = new List<Report>();
+        public List<Follow> PeopleYouFollow;
         public string search;
 
 
@@ -29,6 +31,10 @@ namespace Project_Hashtag.Pages
             this.Posts = database.Posts.ToList();
             this.Users = database.Users.ToList();
             this.Comments = database.Comments.ToList();
+            this.Reports = database.Reports.ToList();
+            this.PeopleYouFollow = database.Follows.Where(f => f.FollowingId == LoggedIn.LoggedInAccountID).ToList();
+
+
 
         }
 
@@ -82,6 +88,86 @@ namespace Project_Hashtag.Pages
             {
                 return RedirectToPage();
             }
+        }
+
+        public IActionResult OnPostLike(int id, string returnURL, string search)
+        {
+
+
+            Post post = database.Posts.FirstOrDefault(x => x.ID == id);
+            Like like = database.Likes.FirstOrDefault(x => x.PostID == post.ID && x.UserID == LoggedIn.LoggedInAccountID);
+
+            if (like == null)
+            {
+                try
+                {
+                    like = new Like() { PostID = id, UserID = LoggedIn.LoggedInAccountID };
+                    database.Likes.Add(like);
+                    post.LikeCount += 1;
+                    database.SaveChanges();
+
+                    return RedirectToPage("/Search", new { search });
+                }
+                catch
+                {
+                    return NotFound();
+                }
+
+            }
+            else
+            {
+                try
+                {
+                    database.Likes.Remove(like);
+                    post.LikeCount--;
+                    database.SaveChanges();
+
+                    return RedirectToPage("/Search", new { search });
+                }
+                catch
+                {
+                    return NotFound();
+                }
+            }
+
+        }
+
+        public IActionResult OnPostReport(int id, string search)
+        {
+            Post post = database.Posts.FirstOrDefault(x => x.ID == id);
+            Report report = database.Reports.FirstOrDefault(x => x.PostID == post.ID && x.UserID == LoggedIn.LoggedInAccountID);
+
+            if (report == null)
+            {
+                try
+                {
+                    report = new Report() { PostID = id, UserID = LoggedIn.LoggedInAccountID };
+                    database.Reports.Add(report);
+                    database.SaveChanges();
+
+                    return RedirectToPage("/Search", new { search });
+                }
+                catch
+                {
+                    return NotFound();
+                }
+
+            }
+            else
+            {
+                try
+                {
+                    database.Reports.Remove(report);
+                    database.SaveChanges();
+
+                    return RedirectToPage("/Search", new { search });
+                }
+                catch
+                {
+                    return NotFound();
+                }
+            }
+
         }
     }
 }
