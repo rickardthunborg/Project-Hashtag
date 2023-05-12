@@ -177,6 +177,33 @@ Add new post styling
 
 -------------*/
 
+#addPostBottom {
+    display: flex;
+    padding-top: 0.5em;
+    border-top: grey solid 1px;
+    margin-left: 4.5em;
+}
+
+#addPic {
+    width: 30px;
+    height: 30px;
+    background-color: #1F2023;
+    border-radius: 50%;
+    background-image: url("..//imgicon.png");
+    background-size: 60%;
+    background-position: center;
+    background-repeat: no-repeat;
+    transition: all 200ms ease;
+}
+
+#addPic:hover {
+    cursor: pointer;
+    background-color: rgba(0, 178, 119, 0.314);
+}
+
+#addPic input {
+    display: none;
+}
 
 .addNewPost textarea {
     resize: none;
@@ -189,6 +216,31 @@ Add new post styling
 
 .addNewPost textarea:focus {
     outline: none;
+}
+
+#addTag {
+    display: flex;
+}
+
+#addTag input {
+    margin: 0;
+    background-color: transparent;
+    border: none;
+    color: #c2cdcd;
+    border-bottom:1px solid #d5af34;
+    width: 6em;
+    height: 22px;
+}
+
+#addTag p {
+    font-size: 14px;
+    margin-top: 2px;
+    height: 16px;
+    color: #c2cdcd;
+}
+
+#addTag img {
+    height: 20px;
 }
 
 .addNewPost input[type=text]:focus {

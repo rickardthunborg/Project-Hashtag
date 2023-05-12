@@ -8,17 +8,24 @@
 
 <ul class="flow">
     <li class="addNewPost">
-    <form method="post" enctype="multipart/form-data">
-        <div id="newPostTitle">
+        <form method="post" enctype="multipart/form-data">
+            <div id="newPostTitle">
                 <img class="pic-top" src="@Model.database.Users.Single(x => x.ID == @Model.LoggedIn.LoggedInAccountID).Avatar" alt="error">
-                <textarea name="desc" placeholder="What's happening?" rows="1" oninput="autoExpand(this)"></textarea>
+                <textarea required name="desc" placeholder="What's happening?" rows="1" oninput="autoExpand(this)"></textarea>
                 <span asp-validation-for="desc" class="text-danger"></span>
-        </div>
-        <input type="file" name="photo">
-        <p>Choose a tag:</p>
-        <input type="text" name="tag" />
-        <button type="submit">Post</button>
-    </form>
+            </div>
+            <div id="addPostBottom">
+                <div id="addTag">
+                    <p>Tag </p>
+                    <img src="~/hashtag.png" />
+                    <input type="text" name="tag" />
+                </div>
+                <label id="addPic">
+                    <input type="file" name="photo">
+                </label>
+                <button type="submit">Post</button>
+            </div>
+        </form>
     </li>
     @foreach (var post in Model.Posts)
     {
@@ -38,7 +45,7 @@
                 <div class="reportWarning"> <img src="~/information.png" /> <p> @reports people you follow have reported this post as untrustworthy.</p></div>
             }
             <div class="postProfile">
-				<a asp-page="Profile" asp-route-userId="@poster.ID" class="postProfileBox">
+                <a asp-page="Profile" asp-route-userId="@poster.ID" class="postProfileBox">
                     <img class="pic-top" src="@poster.Avatar" alt="error">
                     <pre>@poster.Name</pre>
                 </a>
@@ -49,7 +56,7 @@
             @if (post.PictureUrl != null)
             {
                 <div class="image">
-                      <img src="@post.PictureUrl" alt="Error loading picture" />       
+                    <img src="@post.PictureUrl" alt="Error loading picture" />
                 </div>
             }
             <div class="interaction">
@@ -61,7 +68,6 @@
                 </form>
                 <a asp-page="post" asp-route-postID="@post.ID">
                     <div class="comments">
-                        
                     </div>
                     <p class="commentCount">@Model.Comments.Where(x => x.PostID == post.ID).Count()</p>
                 </a>
@@ -85,10 +91,10 @@
                 <input hidden name="userId" value="@post.UserID">
                 <button type="submit">Comment</button>
             </form>
-            </li>
+        </li>
     }
 </ul>
-            @*<p>Comments: </p>
+@*<p>Comments: </p>
             <ul>
                 @foreach (var comment in Model.Comments.Where(x => x.PostID == post.ID).OrderBy(z => z.CreatedDate))
                 {
@@ -107,6 +113,6 @@
             </ul>
 
             <form method="post" asp-page-handler="comment" asp-route-id="@post.ID">
-                <input type="text" name="content"> 
+                <input type="text" name="content">
                 <button type="submit">Comment</button>
                 </form>*@
