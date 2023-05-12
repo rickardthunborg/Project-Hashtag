@@ -65,6 +65,13 @@ namespace Project_Hashtag.Data
                     Description = "Yummy food!",
                     UserID = user1.ID,
                     Tag = "food"
+                },
+                new Post
+                {
+                    Description = "My first selfie:)!",
+                    UserID = user1.ID,
+                    Tag = "Selfie",
+                    PictureUrl = "/uploads/standard-profile-pic.png"
                 }
             };
 

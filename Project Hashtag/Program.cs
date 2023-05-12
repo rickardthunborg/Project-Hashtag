@@ -37,6 +37,7 @@ builder.Services.AddAuthentication(options =>
                 OpenIDIssuer = issuer,
                 OpenIDSubject = subject,
                 Name = name,
+                Avatar = "/uploads/standard-profile-pic.png"
             };
             db.Users.Add(account);
         }
