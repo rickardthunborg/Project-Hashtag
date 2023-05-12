@@ -87,5 +87,14 @@ namespace Project_Hashtag.Pages
             }
         }
 
+        public IActionResult OnPostBiography(int userId, string content)
+        {
+
+                User = database.Users.Find(userId);
+
+                User.Biography = content;
+                database.SaveChanges();
+                return RedirectToPage("/index");
+        }
     }
 }
