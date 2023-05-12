@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using NuGet.Protocol.Core.Types;
 using Project_Hashtag.Data;
 using Project_Hashtag.Models;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.Design;
 
 namespace Project_Hashtag.Pages
@@ -163,9 +164,20 @@ namespace Project_Hashtag.Pages
             }
 
         }
-        
-        public async Task<IActionResult> OnPost(string tag, string desc, IFormFile? photo)
+
+        [BindProperty]
+        [Required(ErrorMessage = "Description is required. Please provide a description for the post.")]
+        [MaxLength(500, ErrorMessage = "Description is to long, maximum is 500 characters")]
+        public string desc { get; set; }
+
+
+        public async Task<IActionResult> OnPost(string tag,  IFormFile? photo)
         {
+            if (!ModelState.IsValid)
+            {
+                return Page();
+            }
+
             try
             {
                 if (photo == null)
@@ -176,6 +188,11 @@ namespace Project_Hashtag.Pages
                 }
                 else
                 {
+                    if (photo.ContentType != "image/jpeg" && photo.ContentType != "image/png")
+                    {
+                        return BadRequest("Invalid file type. Please upload a JPEG or PNG image.");
+                    }
+
                     string path = Path.Combine(
                     Guid.NewGuid().ToString() + "-" + photo.FileName);
                     await uploads.SaveFileAsync(photo, path);

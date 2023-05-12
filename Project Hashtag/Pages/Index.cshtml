@@ -12,8 +12,9 @@
         <div id="newPostTitle">
             <div class="profilePic"></div>
             <input type="text" name="desc" placeholder="What´s happening?">
-                <input type="file" name="photo">
+            <span asp-validation-for="desc" class="text-danger"></span>
         </div>
+        <input type="file" name="photo">
         <p>Choose a tag:</p>
         <input type="text" name="tag" />
         <button type="submit">Post</button>
