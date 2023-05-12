@@ -171,7 +171,7 @@ namespace Project_Hashtag.Pages
         public string desc { get; set; }
 
 
-        public async Task<IActionResult> OnPost(string tag,  IFormFile? photo)
+        public async Task<IActionResult> OnPost(string? tag,  IFormFile? photo)
         {
             if (!ModelState.IsValid)
             {

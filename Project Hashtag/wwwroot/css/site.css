@@ -178,12 +178,17 @@ Add new post styling
 -------------*/
 
 
-.addNewPost input[type=text] {
-    height: 40px;
-    margin: 0px 0px 0px 10px;
+.addNewPost textarea {
+    resize: none;
+    margin: 10px auto 10px auto ;
+    width: 80%;
     border: none;
     background-color: transparent;
     color:white;
+}
+
+.addNewPost textarea:focus {
+    outline: none;
 }
 
 .addNewPost input[type=text]:focus {
@@ -223,21 +228,17 @@ Below is flow styling
     z-index: 0;
 }
 
-.profilePic {
-    background-color: #1F2023;
-    width: 40px;
-    height: 40px;
-    background-image: url(../standard-profile-pic.png);
-    background-position: 50% 40%;
-    background-size: 35px;
-    border-radius: 20px;
-}
+
 
 .pic-top {
     width: 40px;
     height: 40px;
     border-radius: 50%;
     object-fit: cover;
+}
+
+.postProfile .pic-top {
+    margin-right: 0.8em;
 }
 
 .postProfile p {

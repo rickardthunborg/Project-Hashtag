@@ -10,9 +10,9 @@
     <li class="addNewPost">
     <form method="post" enctype="multipart/form-data">
         <div id="newPostTitle">
-            <div class="profilePic"></div>
-            <input type="text" name="desc" placeholder="What´s happening?">
-            <span asp-validation-for="desc" class="text-danger"></span>
+                <img class="pic-top" src="@Model.database.Users.Single(x => x.ID == @Model.LoggedIn.LoggedInAccountID).Avatar" alt="error">
+                <textarea name="desc" placeholder="What's happening?" rows="1" oninput="autoExpand(this)"></textarea>
+                <span asp-validation-for="desc" class="text-danger"></span>
         </div>
         <input type="file" name="photo">
         <p>Choose a tag:</p>
@@ -39,7 +39,7 @@
             }
             <div class="postProfile">
 				<a asp-page="Profile" asp-route-userId="@poster.ID" class="postProfileBox">
-                    <div class="profilePic"> </div> 
+                    <img class="pic-top" src="@poster.Avatar" alt="error">
                     <pre>@poster.Name</pre>
                 </a>
                 <p>· @post.TimeSincePost()</p>
