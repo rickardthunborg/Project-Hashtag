@@ -152,7 +152,7 @@ namespace Project_Hashtag.Pages
                     post.LikeCount += 1;
                     database.SaveChanges();
 
-                    return RedirectToPage("Profile", new { id = userId });
+                    return RedirectToPage("Profile", new { userId = userId });
                 }
                 catch
                 {
@@ -168,7 +168,7 @@ namespace Project_Hashtag.Pages
                     post.LikeCount--;
                     database.SaveChanges();
 
-                    return RedirectToPage("Profile", new { id = userId });
+                    return RedirectToPage("Profile", new { userId = userId });
                 }
                 catch
                 {

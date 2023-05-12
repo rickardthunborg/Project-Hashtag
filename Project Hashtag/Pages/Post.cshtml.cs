@@ -89,7 +89,7 @@ namespace Project_Hashtag.Pages
                     post.LikeCount += 1;
                     database.SaveChanges();
 
-                    return RedirectToPage("Post", new { id = postID });
+                    return RedirectToPage("Post", new { postID = postID });
                 }
                 catch
                 {
@@ -105,7 +105,7 @@ namespace Project_Hashtag.Pages
                     post.LikeCount--;
                     database.SaveChanges();
 
-                    return RedirectToPage("Post", new { id = postID });
+                    return RedirectToPage("Post", new { postID = postID });
                 }
                 catch
                 {
