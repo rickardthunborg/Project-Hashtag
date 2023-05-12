@@ -184,6 +184,13 @@ Add new post styling
     margin-left: 4.5em;
 }
 
+#addPostBottom .imageText {
+    font-size: 14px;
+    color: #c2cdcd;
+    margin: 6px 0.4em 0 1.5em
+    
+}
+
 #addPic {
     width: 30px;
     height: 30px;
@@ -194,11 +201,28 @@ Add new post styling
     background-position: center;
     background-repeat: no-repeat;
     transition: all 200ms ease;
+    position: relative;
+
 }
 
 #addPic:hover {
     cursor: pointer;
+    background-image: url("..//imgiconhover.png");
     background-color: rgba(0, 178, 119, 0.314);
+}
+
+#addPic:hover::after {
+    content: "Select Image";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #1f2023;
+    color: #fff;
+    padding: 5px;
+    font-size: 12px;
+    border-radius: 5px;
+    white-space: nowrap;
 }
 
 #addPic input {
@@ -229,7 +253,7 @@ Add new post styling
     color: #c2cdcd;
     border-bottom:1px solid #d5af34;
     width: 6em;
-    height: 22px;
+    height: 22px
 }
 
 #addTag p {
