@@ -1,7 +1,7 @@
 ﻿@page "{postID:int}"
 @model Project_Hashtag.Pages.PostModel
 @{
-	ViewData["Title"] = Model.User.Name;
+	ViewData["Title"] = Model.Post.User.Name;
 }
 
 <ul class="flow">

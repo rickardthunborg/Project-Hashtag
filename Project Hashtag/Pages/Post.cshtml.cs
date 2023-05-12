@@ -73,5 +73,46 @@ namespace Project_Hashtag.Pages
 				return RedirectToPage();
 			}
 		}
-	}
+
+        public IActionResult OnPostLike(int postID)
+        {
+
+            Post post = database.Posts.FirstOrDefault(x => x.ID == postID);
+            Like like = database.Likes.FirstOrDefault(x => x.PostID == post.ID && x.UserID == LoggedIn.LoggedInAccountID);
+
+            if (like == null)
+            {
+                try
+                {
+                    like = new Like() { PostID = postID, UserID = LoggedIn.LoggedInAccountID };
+                    database.Likes.Add(like);
+                    post.LikeCount += 1;
+                    database.SaveChanges();
+
+                    return RedirectToPage("Post", new { id = postID });
+                }
+                catch
+                {
+                    return NotFound();
+                }
+
+            }
+            else
+            {
+                try
+                {
+                    database.Likes.Remove(like);
+                    post.LikeCount--;
+                    database.SaveChanges();
+
+                    return RedirectToPage("Post", new { id = postID });
+                }
+                catch
+                {
+                    return NotFound();
+                }
+            }
+
+        }
+    }
 }
