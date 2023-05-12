@@ -63,5 +63,25 @@ namespace Project_Hashtag.Pages
                 return RedirectToPage();
             }
         }
+
+        public IActionResult OnPostDeleteComment(int commentId, string search)
+        {
+            try
+            {
+                Comment comment = database.Comments.Find(commentId);
+                if (comment.UserID != LoggedIn.LoggedInAccountID)
+                {
+                    return Forbid();
+                }
+                Comment.DeleteComment(comment, database);
+
+                return RedirectToPage("/Search", new { search });
+
+            }
+            catch
+            {
+                return RedirectToPage();
+            }
+        }
     }
 }
