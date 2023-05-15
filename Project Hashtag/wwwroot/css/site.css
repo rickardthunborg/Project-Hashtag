@@ -496,6 +496,42 @@ Below is flow styling
     text-decoration: none;
 }
 
+#postComment {
+    display: flex;
+    gap: 0.4em;
+    width: 95%;
+    margin: 0 0 0 auto;
+}
+
+#postComment .pic-top {
+    width: 25px;
+    height: 25px;
+    margin-top: 10px;   
+}
+
+#postComment button {
+    width: 6.5em;
+    height: 2em;
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#postComment textarea {
+    resize: none;
+    margin: 10px 0 10px 0 ;
+    width: 70%;
+    border: none;
+    background-color: #45464a;
+    color:white;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+#postComment textarea:focus {
+    outline: none;
+}
 
 /*
 
