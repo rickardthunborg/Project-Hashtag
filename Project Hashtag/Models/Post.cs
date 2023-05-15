@@ -67,5 +67,10 @@ namespace Project_Hashtag.Models
             }
             return false;
         }
+
+        public static string FormatTag(string tag)
+        {
+            return tag.ToLower().Trim().Replace(" ", "");   
+        }
     }
 }

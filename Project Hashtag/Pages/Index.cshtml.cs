@@ -172,7 +172,7 @@ namespace Project_Hashtag.Pages
 
         [BindProperty]
         [MaxLength(20, ErrorMessage = "Tag cannot be over 20 characters")]
-        public string? tag { get; set; }
+        public string? Tag { get; set; }
 
 
         public async Task<IActionResult> OnPost(IFormFile? photo)
@@ -186,7 +186,7 @@ namespace Project_Hashtag.Pages
             {
                 if (photo == null)
                 {
-                    var post = new Post { UserID = LoggedIn.LoggedInAccountID, Tag = tag, Description = desc };
+                    var post = new Post { UserID = LoggedIn.LoggedInAccountID, Tag = Post.FormatTag(this.Tag), Description = desc };
                     database.Posts.Add(post);
                     await database.SaveChangesAsync();
                 }
@@ -200,7 +200,7 @@ namespace Project_Hashtag.Pages
                     string path = Path.Combine(
                     Guid.NewGuid().ToString() + "-" + photo.FileName);
                     await uploads.SaveFileAsync(photo, path);
-                    var post = new Post { UserID = LoggedIn.LoggedInAccountID, Tag = tag, Description = desc , PictureUrl =  "/uploads/" + path};
+                    var post = new Post { UserID = LoggedIn.LoggedInAccountID, Tag = Post.FormatTag(this.Tag), Description = desc , PictureUrl =  "/uploads/" + path};
                     database.Posts.Add(post);
 
                     await database.SaveChangesAsync();
