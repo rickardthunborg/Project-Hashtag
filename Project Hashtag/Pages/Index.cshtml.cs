@@ -170,8 +170,12 @@ namespace Project_Hashtag.Pages
         [MaxLength(500, ErrorMessage = "Description is to long, maximum is 500 characters")]
         public string desc { get; set; }
 
+        [BindProperty]
+        [MaxLength(20, ErrorMessage = "Tag cannot be over 20 characters")]
+        public string? tag { get; set; }
 
-        public async Task<IActionResult> OnPost(string? tag,  IFormFile? photo)
+
+        public async Task<IActionResult> OnPost(IFormFile? photo)
         {
             if (!ModelState.IsValid)
             {

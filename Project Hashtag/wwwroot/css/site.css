@@ -453,7 +453,7 @@ Below is flow styling
     width: 25px;
 }
 
-.interaction a:hover > div {
+.interaction .commentContainer:hover > div {
     background-image: url(..//commenthover.png);
 }
 
@@ -463,9 +463,28 @@ Below is flow styling
     border-color: rgba(29, 156, 240, 0.2);
 }
 
+.interaction a .tags{
+    background-image: url(..//hashtag.png);
+    background-size: 25px;
+    width: 25px;
+    background-repeat: no-repeat;
+    background-position: center;
+    overflow:visible;
+    display: flex;
+    border: 4px solid transparent;
+    border-radius: 12px;
+    align-items: center;
+    transition: all 200ms ease;
+}
+
+.interaction .tagContainer:hover {
+    color: #c2cdcd;
+    background-color: rgb(213,175,52, 0.2);
+    border-color: rgb(213,175,52, 0.2);
+}
 
 .interaction a p{
-    margin-left: 0.5em;
+    margin-left: 0em;
 }
 
 .interaction button {

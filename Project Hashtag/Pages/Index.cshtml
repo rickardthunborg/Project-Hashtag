@@ -18,7 +18,7 @@
                 <div id="addTag">
                     <p>Tag </p>
                     <img src="~/hashtag.png" />
-                    <input type="text" name="tag" autocomplete="off"/>
+                    <input type="text" name="tag" autocomplete="off" maxlength="20"/>
                 </div>
                 <p class="imageText">Picture: </p>
                 <label id="addPic">
@@ -78,11 +78,18 @@
                         </label>
                     }
                 </form>
-                <a asp-page="post" asp-route-postID="@post.ID">
+                <a asp-page="post" asp-route-postID="@post.ID" class="commentContainer">
                     <div class="comments">
                     </div>
                     <p class="commentCount">@Model.Comments.Where(x => x.PostID == post.ID).Count()</p>
                 </a>
+                @if (post.Tag != null)
+                {
+                    <a asp-page="Search" class="tagContainer"> 
+                        <div class="tags"></div>
+                        <p>@post.Tag </p>
+                    </a>
+                }
             </div>
             <p>Comments: </p>
             @for (int i = 0; i < Math.Min(3, Model.Comments.Where(c => c.PostID == post.ID).Count()); i++)
