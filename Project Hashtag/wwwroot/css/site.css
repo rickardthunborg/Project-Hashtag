@@ -15,7 +15,7 @@
 html, body {
     margin: 0;
     padding: 0;
-    background-color: #1F2023;
+    background-color: #121212;
     color: #F0F7EE;
 }
 
@@ -83,7 +83,7 @@ button[type="submit"]:hover {
 
 .div1NavBar {
     grid-area: a;
-    background-color: #2E3136;
+    background-color: #1f1f1f;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -91,7 +91,7 @@ button[type="submit"]:hover {
 
 .div2NavBar {
     grid-area: b;
-    background-color: #2E3136; /* Add background color for visibility */
+    background-color: #1f1f1f; /* Add background color for visibility */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -103,7 +103,7 @@ button[type="submit"]:hover {
     justify-content: center;
     align-items: center;
     text-align: center;
-    background-color: #2E3136; /* Add background color for visibility */
+    background-color: #1f1f1f; /* Add background color for visibility */
 }
 
 .div3NavBar > a {
@@ -303,13 +303,14 @@ Below is flow styling
 .flow {
     width: clamp(200px, 100%, 500px);
     margin: auto;
-    border-radius: 7px;
-    background-color: #2e3136;
 }
 
 .flow > li {
-    border-bottom: 3px solid grey;
+    margin-top: 1.5em;
+    border: 1px solid rgba(128, 128, 128, 0.8);
+    border-radius: 7px;
     padding: 1em;
+    background-color: #1f1f1f;
 }
 
 .popupForm {
@@ -392,6 +393,7 @@ Below is flow styling
 
 .postProfile a {
     text-decoration: none;
+    color: #e1c065;
 }
 
 .postProfile .profilePic {
@@ -583,6 +585,12 @@ Below is flow styling
 
 #comment .commentText a {
     text-decoration: none;
+    color: #e1c065;
+    transition: all 100ms ease;
+}
+
+#comment .commentText a:hover {
+    color: #d5af34;
 }
 
 .commentTime {
@@ -611,6 +619,7 @@ Below is flow styling
     display: flex;
     align-items: center;
     justify-content: center;
+    background-color: #dbb84e;
 }
 
 #postComment textarea {
