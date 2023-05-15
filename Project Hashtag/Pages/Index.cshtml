@@ -31,6 +31,7 @@
     </li>
     @foreach (var post in Model.Posts)
     {
+        var reportedByUser = @Model.database.Reports.Any(x => x.UserID == Model.LoggedIn.LoggedInAccountID && x.PostID == post.ID);
         var reports = @Model.database.Reports.Where(r => Model.PeopleYouFollow.Select(p => p.UserID).Contains(r.UserID) && r.PostID == post.ID).Count();
         var poster = Model.Users.Single(x => post.UserID == x.ID);
         if (post.UserID == Model.LoggedIn.LoggedInAccountID)
@@ -51,9 +52,38 @@
                     <img class="pic-top" src="@poster.Avatar" alt="error">
                     <pre>@poster.Name</pre>
                 </a>
+
+                @if (reportedByUser)
+                {
+                    <label class="report reported"> <button class="popupButton"></button> </label>
+                }
+                else
+                {
+                    <label class="report"> <button class="popupButton"></button> </label>
+                }
+
                 <p>· @post.TimeSincePost()</p>
-                <form method="post" asp-page-handler="report" asp-route-id="@post.ID"> <label class="report"> <button type="submit"></button> </label></form>
             </div>
+            
+@*  
+    
+            Below is the report popup
+
+*@
+            <div class="popupForm" style="display: none;">
+                @if (reportedByUser)
+                {
+                    <p>Do you want to remove your report on this post?</p>
+                }
+                else 
+                {
+                    <p>Do you want to report this post?</p>
+                }
+                <form method="post" asp-page-handler="report" asp-route-id="@post.ID"> <button type="submit">Yes</button> </form>
+                <button id="closeButton">No</button>
+            </div>
+
+
             <p class="postText"> @post.Description</p>
             @if (post.PictureUrl != null)
             {

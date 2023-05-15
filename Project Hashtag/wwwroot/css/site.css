@@ -312,6 +312,56 @@ Below is flow styling
     padding: 1em;
 }
 
+.popupForm {
+    width: 70%;
+    padding: 1em;
+    border-radius: 5px;
+    margin: 0 auto 1em auto;
+    background-color: rgba(251, 38, 38, 0.508);
+    display: grid;
+    grid-template: "a a" "b c" /1fr 1fr;
+    border: 1px solid rgba(251, 38, 38, 0.908);
+}
+
+.popupForm p {
+    text-align: center;
+    grid-area: a;
+    margin-bottom: 0.4em;
+}
+
+.popupForm form {
+    grid-area: b;
+    position: relative;
+}
+
+.popupForm form button {
+    position: absolute;
+    right: 0;
+}
+
+.popupForm > button {
+    grid-area: c;
+}
+
+
+.popupForm button {
+    width: 4em;
+    height: 2em;
+    background-color: #F0F7EE;
+    border: none;
+    color: black;
+    margin: 0 1em 0 1em;
+    padding: 0;
+    border-radius: 4px;
+    transition: all 200ms ease;
+}
+
+.popupForm button:hover {
+    transform: translateY(-0.2em);
+    background-color: #F0F7EE;
+}
+
+
 .postProfile {
     display: flex;
     flex-direction: row;
@@ -380,13 +430,13 @@ Below is flow styling
 }
 
 .postText {
-    width: 80%;
+    width: 74%;
     margin: auto;
 }
 
 .interaction {
     display: flex;
-    width: 80%;
+    width: 77%;
     margin: 1em auto 0 auto;
 }
 
@@ -600,6 +650,10 @@ Report button styling
     top: 0;
     right: 0;
     transition: all 200ms ease;
+}
+
+.reported {
+    background-image: url(../report-flag-red.png);
 }
 
 .report:hover {
