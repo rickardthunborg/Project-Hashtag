@@ -18,7 +18,7 @@
                 <div id="addTag">
                     <p>Tag </p>
                     <img src="~/hashtag.png" />
-                    <input type="text" name="tag" autocomplete="off" maxlength="20"/>
+                    <input type="text" name="tag" autocomplete="off" maxlength="20" />
                 </div>
                 <p class="imageText">Picture: </p>
                 <label id="addPic">
@@ -85,25 +85,32 @@
                 </a>
                 @if (post.Tag != null)
                 {
-                    <a asp-page="Search" class="tagContainer"> 
+                    <a asp-page="Search" class="tagContainer">
                         <div class="tags"></div>
                         <p>@post.Tag </p>
                     </a>
                 }
             </div>
-            <p>Comments: </p>
-            @for (int i = 0; i < Math.Min(3, Model.Comments.Where(c => c.PostID == post.ID).Count()); i++)
+            @if (@Model.Comments.Where(x => x.PostID == post.ID).Count() > 0)
             {
-                var comment = @Model.Comments.Where(c => c.PostID == post.ID).OrderByDescending(c => c.CreatedDate).ToList()[i];
-                <div class="postProfile">
-                    <a asp-page="Profile" asp-route-userId="@comment.User.ID" class="postProfileBox">
-                        <div class="profilePic"> </div>
-                        <pre>@comment.User.Name</pre>
-                    </a>
-                </div>
-                <p>@comment.Text </p>
-                <p>@comment.TimeSinceComment()</p>
+                <p class="commentSectionText">Comments: <a asp-page="post" asp-route-postID="@post.ID"> View all</a> </p>
+                @for (int i = 0; i < Math.Min(3, Model.Comments.Where(c => c.PostID == post.ID).Count()); i++)
+                {
+                    var comment = @Model.Comments.Where(c => c.PostID == post.ID).OrderByDescending(c => c.CreatedDate).ToList()[i];
+                    <div id="comment">
+                        <div class="commentProfilePic">
+                            <a asp-page="Profile" asp-route-userId="@comment.User.ID">
+                                <img src="@comment.User.Avatar" class="pic-top" />
+                            </a>
+                        </div>
+                        <div class="commentText">
+                            <a asp-page="Profile" asp-route-userId="@comment.User.ID"> @comment.User.Name</a>
+                            <p>@comment.Text </p>
+                        </div>
+                    </div>
+                    <p class="commentTime">@comment.TimeSinceComment()</p>
 
+                }
             }
             <form method="post" asp-page-handler="comment" asp-route-id="@post.ID" id="postComment">
                 <img class="pic-top" src="@Model.database.Users.Single(x => x.ID == @Model.LoggedIn.LoggedInAccountID).Avatar" alt="error">

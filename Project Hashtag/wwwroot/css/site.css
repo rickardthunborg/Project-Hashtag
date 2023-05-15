@@ -496,6 +496,51 @@ Below is flow styling
     text-decoration: none;
 }
 
+.commentSectionText {
+    width: 90%;
+    color: #c2cdcd;
+    font-size: 14px;
+    margin: 2em auto 0.5em auto;
+    border-bottom: 1px solid grey;
+    position: relative;
+}
+
+.commentSectionText a {
+    text-decoration: none;
+    font-style: italic;
+    position: absolute;
+    right: 0;
+    color: #1d9bf0;
+}
+
+#comment {
+    display: flex;
+    gap: 1em;
+    width: 90%;
+    margin: auto;
+}
+
+#comment .commentText {
+    background-color: #45464a;
+    margin-top: 5px;
+    padding: 0.5em;
+    border-radius: 8px;
+    min-width: 8em;
+    font-size: 14px;
+    max-width: 18em;
+    word-wrap: break-word;
+}
+
+#comment .commentText a {
+    text-decoration: none;
+}
+
+.commentTime {
+    font-size: 12px;
+    color: #c2cdcd;
+    margin: 0.3em 0 0.3em 5.6em;
+}
+
 #postComment {
     display: flex;
     gap: 0.4em;
@@ -503,7 +548,7 @@ Below is flow styling
     margin: 0 0 0 auto;
 }
 
-#postComment .pic-top {
+#postComment .pic-top, .commentProfilePic img {
     width: 25px;
     height: 25px;
     margin-top: 10px;   
