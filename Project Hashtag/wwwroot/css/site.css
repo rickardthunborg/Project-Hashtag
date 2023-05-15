@@ -440,6 +440,11 @@ Below is flow styling
     background-color: rgba(217, 22, 113, 0.2);
     border-color: rgba(217, 22, 113, 0.2);
 }
+
+.interaction form .liked {
+    background-image: url(..//likeliked.png);
+}
+
 .comments {
     background-image: url(..//comment.png);
     background-repeat: no-repeat;

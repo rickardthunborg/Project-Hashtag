@@ -58,5 +58,14 @@ namespace Project_Hashtag.Models
             database.Posts.Remove(post);
             database.SaveChanges();
         }
+
+        public bool IsLiked( int userId, AppDbContext database)
+        {
+            if (database.Likes.Any(x => x.PostID == this.ID && x.UserID == userId))
+            {
+                return true;
+            }
+            return false;
+        }
     }
 }

@@ -1,4 +1,6 @@
-﻿namespace Project_Hashtag.Models
+﻿using Project_Hashtag.Data;
+
+namespace Project_Hashtag.Models
 {
     public class Like
     {
@@ -11,5 +13,7 @@
         public User User { get; set; }
 
         public Post Post { get; set; }
+
+       
     }
 }
