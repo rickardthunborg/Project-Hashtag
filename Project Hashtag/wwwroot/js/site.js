@@ -38,3 +38,16 @@ closeButtons.forEach(function (button) {
         popupForm.style.display = 'none'; // Hide the parent popup form
     });
 });
+
+
+window.onscroll = function () { stickBanderoll() };
+var header = document.getElementById("banderoll1");
+var sticky = header.offsetTop;
+
+function stickBanderoll() {
+    if (window.pageYOffset > (sticky - (window.innerHeight * 0.1 - 4))) {
+        header.classList.add("stuck");
+    } else {
+        header.classList.remove("stuck");
+    }
+}

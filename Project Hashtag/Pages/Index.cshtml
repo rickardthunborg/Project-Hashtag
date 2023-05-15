@@ -29,6 +29,10 @@
             </div>
         </form>
     </li>
+    <div id="banderoll1">
+        <h3># Posts</h3>
+    </div>
+    <div class="spacer"></div>
     @foreach (var post in Model.Posts)
     {
         var reportedByUser = @Model.database.Reports.Any(x => x.UserID == Model.LoggedIn.LoggedInAccountID && x.PostID == post.ID);
