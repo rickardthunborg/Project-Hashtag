@@ -117,7 +117,7 @@
                     </div>
                     <p class="commentCount">@Model.Comments.Where(x => x.PostID == post.ID).Count()</p>
                 </a>
-                @if (post.Tag != null)
+                @if (post.Tag != "")
                 {
                     <a asp-page="Search" class="tagContainer">
                         <div class="tags"></div>

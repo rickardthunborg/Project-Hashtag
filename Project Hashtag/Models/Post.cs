@@ -70,6 +70,10 @@ namespace Project_Hashtag.Models
 
         public static string FormatTag(string tag)
         {
+            if (tag == null)
+            {
+                return "";
+            }
             return tag.ToLower().Trim().Replace(" ", "");   
         }
     }
