@@ -4,19 +4,31 @@
 }
 
 <div id="ProfileSettingsDiv">
-    <h1>Edit Profile</h1>
-    <p>@Model.User.Name<img src="@Model.User.Avatar" width="40px"/></p>
-    <form method="post" asp-page-handler="biography">
-        
-        <label for="bio">Biography</label>
-        <input hidden name="userId" value="@Model.User.ID">
-        <textarea name="content" id="bio" type="text">@Model.User.Biography</textarea>
-        <button type="submit">Update bio</button>
-    </form>
-    
-    <h3>Choose a new profile picture: </h3>
-    <form method="post" enctype="multipart/form-data">
-        <input type="file" name="photo">
-        <button type="submit">Update picture</button>
-    </form>
+	<h1>Edit Profile</h1>
+	<p>@Model.User.Name</p>
+	<div class="editBio">
+		<aside class="leftBio">
+			<label for="bio">Biography</label>
+		</aside>
+		<div class="rightBio">
+			<form method="post" asp-page-handler="biography">
+
+				<input hidden name="userId" value="@Model.User.ID">
+				<textarea name="content" id="bio" type="text" oninput="autoExpand(this)">@Model.User.Biography</textarea>
+				<button type="submit">Update bio</button>
+			</form>
+		</div>
+	</div>
+	<h3>Choose a new profile picture: </h3>
+	<div class="editBio">
+		<aside class="leftBio">
+			<img src="@Model.User.Avatar" />
+		</aside>
+		<div class="rightBio">
+			<form method="post" enctype="multipart/form-data">
+				<input type="file" name="photo">
+				<button type="submit">Update picture</button>
+			</form>
+		</div>
+	</div>
 </div>

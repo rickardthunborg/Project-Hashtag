@@ -551,15 +551,64 @@ Profile styling
     width: 100px;
 }
 
-#ProfileSettingsDiv{
-    background-color: #2E3136;
-    width: 70vw;
-    height: 70vh;
-    margin: auto;
-    border-radius: 10px;
+
+
+
+#ProfileSettingsDiv {
+  background-color: #2E3136;
+  width: 55vw;
+  height: 70vh;
+  margin: auto;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
 }
 
-#ProfileSettingsDiv h1{
-    padding-top: 30px;
-    padding-left: 30px;
+#ProfileSettingsDiv h1 {
+  color: #F0F7EE;
+  margin-bottom: 10px;
+  font-size: 24px;
 }
+
+#ProfileSettingsDiv p {
+  color: #F0F7EE;
+  margin-bottom: 10px;
+  font-size: 14px;
+}
+
+#ProfileSettingsDiv .editBio {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+#ProfileSettingsDiv .leftBio {
+  margin-right: 10px;
+  flex: 0 0 150px;
+}
+
+#ProfileSettingsDiv .rightBio {
+  flex: 1;
+}
+
+#ProfileSettingsDiv .editBio label {
+  color: #F0F7EE;
+  font-size: 20px;
+}
+
+#ProfileSettingsDiv .editBio textarea {
+  width: 100%;
+  resize: vertical;
+  font-size: 14px;
+}
+
+#ProfileSettingsDiv .editBio img {
+  margin-right: 10px;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
