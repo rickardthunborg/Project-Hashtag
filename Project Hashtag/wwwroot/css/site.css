@@ -15,7 +15,7 @@
 html, body {
     margin: 0;
     padding: 0;
-    background-color: #1F2023;
+    background-color: #121212;
     color: #F0F7EE;
 }
 
@@ -75,7 +75,7 @@ button[type="submit"]:hover {
 .parentNavBarContainer {
     display: grid;
     position: fixed;
-    z-index: 1;
+    z-index: 2;
     width: 100%;
     grid-template: "a b c" /1fr 1fr 1fr;
     height: 10vh; /* 10% of viewport height */
@@ -83,7 +83,7 @@ button[type="submit"]:hover {
 
 .div1NavBar {
     grid-area: a;
-    background-color: #2E3136;
+    background-color: #1f1f1f;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -91,7 +91,7 @@ button[type="submit"]:hover {
 
 .div2NavBar {
     grid-area: b;
-    background-color: #2E3136; /* Add background color for visibility */
+    background-color: #1f1f1f; /* Add background color for visibility */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -103,7 +103,7 @@ button[type="submit"]:hover {
     justify-content: center;
     align-items: center;
     text-align: center;
-    background-color: #2E3136; /* Add background color for visibility */
+    background-color: #1f1f1f; /* Add background color for visibility */
 }
 
 .div3NavBar > a {
@@ -294,6 +294,7 @@ Add new post styling
     margin-left: 7px;
 }
 
+
 /* ----------
 
 Below is flow styling
@@ -303,14 +304,100 @@ Below is flow styling
 .flow {
     width: clamp(200px, 100%, 500px);
     margin: auto;
-    border-radius: 7px;
-    background-color: #2e3136;
 }
 
 .flow > li {
-    border-bottom: 3px solid grey;
+    margin-bottom: 1.5em;
+    border: 1px solid rgba(128, 128, 128, 0.8);
+    border-radius: 7px;
     padding: 1em;
+    background-color: #1f1f1f;
 }
+
+.addNewPost {
+    margin-bottom: 1em !important;
+}
+
+#banderoll1 {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.397);
+    backdrop-filter: blur(15px);
+    height: 50px;
+    width: 500px;
+    z-index: 1;
+    border-radius: 5px;
+    border-left: 1px solid transparent;
+    border-right: 1px solid transparent;
+}
+
+#banderoll1 h3 {
+    margin-left: 1em;
+}
+
+.spacer {
+    width: 1px;
+    height: 10vh;
+}
+
+.stuck {
+    border-radius: 0 !important;
+    position: fixed !important;
+    top: 10vh;
+    border-right: 1px solid rgba(128, 128, 128, 0.8) !important;
+    border-left: 1px solid rgba(128, 128, 128, 0.8) !important;
+}
+
+.popupForm {
+    width: 70%;
+    padding: 1em;
+    border-radius: 5px;
+    margin: 0 auto 1em auto;
+    background-color: rgba(251, 38, 38, 0.508);
+    display: grid;
+    grid-template: "a a" "b c" /1fr 1fr;
+    border: 1px solid rgba(251, 38, 38, 0.908);
+}
+
+.popupForm p {
+    text-align: center;
+    grid-area: a;
+    margin-bottom: 0.4em;
+}
+
+.popupForm form {
+    grid-area: b;
+    position: relative;
+}
+
+.popupForm form button {
+    position: absolute;
+    right: 0;
+}
+
+.popupForm > button {
+    grid-area: c;
+}
+
+
+.popupForm button {
+    width: 4em;
+    height: 2em;
+    background-color: #F0F7EE;
+    border: none;
+    color: black;
+    margin: 0 1em 0 1em;
+    padding: 0;
+    border-radius: 4px;
+    transition: all 200ms ease;
+}
+
+.popupForm button:hover {
+    transform: translateY(-0.2em);
+    background-color: #F0F7EE;
+}
+
 
 .postProfile {
     display: flex;
@@ -342,6 +429,7 @@ Below is flow styling
 
 .postProfile a {
     text-decoration: none;
+    color: #f1dba7;
 }
 
 .postProfile .profilePic {
@@ -359,6 +447,7 @@ Below is flow styling
 .postProfileBox:hover {
     background-color: #45464a;
     transition: all 200ms ease;
+    color: #dbb84e;
 }
 
 .image {
@@ -380,13 +469,13 @@ Below is flow styling
 }
 
 .postText {
-    width: 80%;
+    width: 74%;
     margin: auto;
 }
 
 .interaction {
     display: flex;
-    width: 80%;
+    width: 77%;
     margin: 1em auto 0 auto;
 }
 
@@ -453,7 +542,7 @@ Below is flow styling
     width: 25px;
 }
 
-.interaction a:hover > div {
+.interaction .commentContainer:hover > div {
     background-image: url(..//commenthover.png);
 }
 
@@ -463,9 +552,28 @@ Below is flow styling
     border-color: rgba(29, 156, 240, 0.2);
 }
 
+.interaction a .tags{
+    background-image: url(..//hashtag.png);
+    background-size: 25px;
+    width: 25px;
+    background-repeat: no-repeat;
+    background-position: center;
+    overflow:visible;
+    display: flex;
+    border: 4px solid transparent;
+    border-radius: 12px;
+    align-items: center;
+    transition: all 200ms ease;
+}
+
+.interaction .tagContainer:hover {
+    color: #c2cdcd;
+    background-color: rgb(213,175,52, 0.2);
+    border-color: rgb(213,175,52, 0.2);
+}
 
 .interaction a p{
-    margin-left: 0.5em;
+    margin-left: 0em;
 }
 
 .interaction button {
@@ -477,6 +585,94 @@ Below is flow styling
     text-decoration: none;
 }
 
+.commentSectionText {
+    width: 90%;
+    color: #c2cdcd;
+    font-size: 14px;
+    margin: 2em auto 0.5em auto;
+    border-bottom: 1px solid grey;
+    position: relative;
+}
+
+.commentSectionText a {
+    text-decoration: none;
+    font-style: italic;
+    position: absolute;
+    right: 0;
+    color: #1d9bf0;
+}
+
+#comment {
+    display: flex;
+    gap: 1em;
+    width: 90%;
+    margin: auto;
+}
+
+#comment .commentText {
+    background-color: #45464a;
+    margin-top: 5px;
+    padding: 0.5em;
+    border-radius: 8px;
+    min-width: 8em;
+    font-size: 14px;
+    max-width: 18em;
+    word-wrap: break-word;
+}
+
+#comment .commentText a {
+    text-decoration: none;
+    color: #f1dba7;
+    transition: all 100ms ease;
+}
+
+#comment .commentText a:hover {
+    color: #d5af34;
+}
+
+.commentTime {
+    font-size: 12px;
+    color: #c2cdcd;
+    margin: 0.3em 0 0.3em 5.6em;
+}
+
+#postComment {
+    display: flex;
+    gap: 0.4em;
+    width: 95%;
+    margin: 0 0 0 auto;
+}
+
+#postComment .pic-top, .commentProfilePic img {
+    width: 25px;
+    height: 25px;
+    margin-top: 10px;   
+}
+
+#postComment button {
+    width: 6.5em;
+    height: 2em;
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #dbb84e;
+}
+
+#postComment textarea {
+    resize: none;
+    margin: 10px 0 10px 0 ;
+    width: 70%;
+    border: none;
+    background-color: #45464a;
+    color:white;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+#postComment textarea:focus {
+    outline: none;
+}
 
 /*
 
@@ -500,6 +696,10 @@ Report button styling
     top: 0;
     right: 0;
     transition: all 200ms ease;
+}
+
+.reported {
+    background-image: url(../report-flag-red.png);
 }
 
 .report:hover {
