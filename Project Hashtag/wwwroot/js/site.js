@@ -44,10 +44,21 @@ window.onscroll = function () { stickBanderoll() };
 var header = document.getElementById("banderoll1");
 var sticky = header.offsetTop;
 
+var banderoll2 = document.getElementById("banderoll2")
+var sticky2 = banderoll2.offsetTop
+
 function stickBanderoll() {
-    if (window.pageYOffset > (sticky - (window.innerHeight * 0.1 - 4))) {
+    if (window.pageYOffset > (sticky - (window.innerHeight * 0.1 ))) {
         header.classList.add("stuck");
     } else {
         header.classList.remove("stuck");
     }
+
+    if (window.pageYOffset >= sticky2 - (window.innerHeight * 0.1) ) {
+        banderoll2.classList.add("stuck");
+        header.classList.add("hidden");
+      } else {
+        banderoll2.classList.remove("stuck");
+        header.classList.remove("hidden")
+      }
 }

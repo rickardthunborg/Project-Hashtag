@@ -318,7 +318,7 @@ Below is flow styling
     margin-bottom: 1em !important;
 }
 
-#banderoll1 {
+#banderoll1, #banderoll2 {
     position: absolute;
     display: flex;
     align-items: center;
@@ -345,8 +345,10 @@ Below is flow styling
     border-radius: 0 !important;
     position: fixed !important;
     top: 10vh;
-    border-right: 1px solid rgba(128, 128, 128, 0.8) !important;
-    border-left: 1px solid rgba(128, 128, 128, 0.8) !important;
+}
+
+.hidden {
+    visibility: hidden;
 }
 
 .popupForm {

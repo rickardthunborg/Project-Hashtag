@@ -30,13 +30,31 @@
         </form>
     </li>
     <div id="banderoll1">
-        <h3># Posts</h3>
+        <h3># Following</h3>
     </div>
     <div class="spacer"></div>
-    @foreach (var post in Model.Posts)
+    @for (int i = 0; i < Model.FollowingPosts.Count() + Model.OtherPosts.Count(); i++)
     {
+        var post = Model.Post;
+
+        if (i < Model.FollowingPosts.Count())
+        {
+            post = Model.FollowingPosts[i];
+        }
+        else
+        {
+            post = Model.OtherPosts[i - Model.FollowingPosts.Count()];
+        }
+        if (i == Model.FollowingPosts.Count())
+        {
+            <div id="banderoll2">
+                <h3># Explore</h3>
+            </div>
+            <div class="spacer"></div>
+        }
+
         var reportedByUser = @Model.database.Reports.Any(x => x.UserID == Model.LoggedIn.LoggedInAccountID && x.PostID == post.ID);
-        var reports = @Model.database.Reports.Where(r => Model.PeopleYouFollow.Select(p => p.UserID).Contains(r.UserID) && r.PostID == post.ID).Count();
+        var reports = @Model.database.Reports.Where(r => Model.FollowingIds.Contains(r.UserID) && r.PostID == post.ID).Count();
         var poster = Model.Users.Single(x => post.UserID == x.ID);
         if (post.UserID == Model.LoggedIn.LoggedInAccountID)
         {
@@ -117,7 +135,7 @@
                     </div>
                     <p class="commentCount">@Model.Comments.Where(x => x.PostID == post.ID).Count()</p>
                 </a>
-                @if (post.Tag != "")
+                @if (post.Tag != "" && post.Tag != null)
                 {
                     <a asp-page="Search" class="tagContainer">
                         <div class="tags"></div>
@@ -128,9 +146,9 @@
             @if (@Model.Comments.Where(x => x.PostID == post.ID).Count() > 0)
             {
                 <p class="commentSectionText">Comments: <a asp-page="post" asp-route-postID="@post.ID"> View all</a> </p>
-                @for (int i = 0; i < Math.Min(3, Model.Comments.Where(c => c.PostID == post.ID).Count()); i++)
+                @for (int j = 0; j < Math.Min(3, Model.Comments.Where(c => c.PostID == post.ID).Count()); j++)
                 {
-                    var comment = @Model.Comments.Where(c => c.PostID == post.ID).OrderByDescending(c => c.CreatedDate).ToList()[i];
+                    var comment = @Model.Comments.Where(c => c.PostID == post.ID).OrderByDescending(c => c.CreatedDate).ToList()[j];
                     <div id="comment">
                         <div class="commentProfilePic">
                             <a asp-page="Profile" asp-route-userId="@comment.User.ID">

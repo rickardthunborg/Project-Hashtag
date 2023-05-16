@@ -16,11 +16,14 @@ namespace Project_Hashtag.Pages
         private readonly FileRepository uploads;
 
 
-        public List<Post> Posts = new List<Post>();
+        public List<Post> FollowingPosts = new List<Post>();
+        public List<Post> OtherPosts = new List<Post>();
+
+        public Post Post;
         public List<User> Users;
         public List<Comment> Comments;
         public List<Report> Reports = new List<Report>();
-        public List<Follow> PeopleYouFollow;
+        public List<int> FollowingIds;
         public string search;
 
 
@@ -43,11 +46,28 @@ namespace Project_Hashtag.Pages
                 return RedirectToPage("/search", new { search = searchQuery });
             }
 
-            this.Posts = database.Posts.OrderByDescending(x => x.CreatedDate).ToList();
+            FollowingIds = database.Follows
+                .Where(f => f.FollowingId == LoggedIn.LoggedInAccountID)
+                .Select(f => f.UserID)
+                .ToList();
+
+            this.FollowingPosts = database.Posts
+                 .Where(p => p.UserID != LoggedIn.LoggedInAccountID) 
+                 .Where(p => FollowingIds.Contains(p.UserID)) 
+                 .Where(p => p.CreatedDate >= DateTime.Now.AddDays(-1))
+                 .OrderByDescending(x => x.CreatedDate)
+                 .ToList();
+
+            OtherPosts = database.Posts
+                .Where(p => p.UserID != LoggedIn.LoggedInAccountID) 
+                .OrderByDescending(x => x.CreatedDate)
+                .ToList()
+                .Except(this.FollowingPosts)
+                .ToList();
+
             this.Users = database.Users.ToList();
             this.Comments = database.Comments.ToList();
             this.Reports = database.Reports.ToList();
-            PeopleYouFollow = database.Follows.Where(f => f.FollowingId == LoggedIn.LoggedInAccountID).ToList();
             return Page();
 
         }
@@ -57,7 +77,7 @@ namespace Project_Hashtag.Pages
             try
             {
                 Comment comment = database.Comments.Single(c => c.PostID == id);
-                if(comment.UserID != LoggedIn.LoggedInAccountID)
+                if (comment.UserID != LoggedIn.LoggedInAccountID)
                 {
                     return Forbid();
                 }
@@ -70,7 +90,7 @@ namespace Project_Hashtag.Pages
                 return RedirectToPage();
             }
         }
-        
+
         public IActionResult OnPostComment(int id, string content)
         {
             try
@@ -131,7 +151,7 @@ namespace Project_Hashtag.Pages
             Like like = database.Likes.FirstOrDefault(x => x.PostID == post.ID && x.UserID == LoggedIn.LoggedInAccountID);
 
             if (like == null)
-            {   
+            {
                 try
                 {
                     like = new Like() { PostID = id, UserID = LoggedIn.LoggedInAccountID };
@@ -200,7 +220,7 @@ namespace Project_Hashtag.Pages
                     string path = Path.Combine(
                     Guid.NewGuid().ToString() + "-" + photo.FileName);
                     await uploads.SaveFileAsync(photo, path);
-                    var post = new Post { UserID = LoggedIn.LoggedInAccountID, Tag = Post.FormatTag(this.Tag), Description = desc , PictureUrl =  "/uploads/" + path};
+                    var post = new Post { UserID = LoggedIn.LoggedInAccountID, Tag = Post.FormatTag(this.Tag), Description = desc, PictureUrl = "/uploads/" + path };
                     database.Posts.Add(post);
 
                     await database.SaveChangesAsync();
