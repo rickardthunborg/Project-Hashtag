@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Project_Hashtag.Data;
 using Project_Hashtag.Models;
+using static System.Net.WebRequestMethods;
 
 namespace Project_Hashtag.Controllers
 {
@@ -34,7 +35,9 @@ namespace Project_Hashtag.Controllers
 
             var returnURL = "https://facegram.azurewebsites.net/Post/" + post.ID;
 
-            return Ok( new { postContent = post.Description, postImageURL = post.PictureUrl, postURL = returnURL });
+            var imageURL = "https://facegram.azurewebsites.net" + post.PictureUrl; 
+
+            return Ok( new { postContent = post.Description, imageURL, postURL = returnURL, poster = post.User.Name});
         }
     }
 }
