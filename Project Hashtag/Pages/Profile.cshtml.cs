@@ -15,14 +15,15 @@ namespace Project_Hashtag.Pages
     {
         public Project_Hashtag.Data.AppDbContext database;
         public AccessControl LoggedIn;
+        public List<int> FollowingIds;
 
 
         public ProfileModel(Project_Hashtag.Data.AppDbContext context, AccessControl accessControl)
         {
             database = context;
             this.LoggedIn = accessControl;
-            PeopleYouFollow = database.Follows.Where(f => f.FollowingId == LoggedIn.LoggedInAccountID).ToList();
-            this.Reports = database.Reports.ToList();
+
+            
 
         }
 
@@ -217,6 +218,13 @@ namespace Project_Hashtag.Pages
                 this.amountFollowing = database.Follows.Where(f => f.FollowingId == User.ID).Count();
                 this.biography = User.Biography;
                 this.avatar = User.Avatar;
+
+                FollowingIds = database.Follows
+                     .Where(f => f.FollowingId == LoggedIn.LoggedInAccountID)
+                     .Select(f => f.UserID)
+                     .ToList();
+
+                this.Reports = database.Reports.ToList();
             }
         }
     }

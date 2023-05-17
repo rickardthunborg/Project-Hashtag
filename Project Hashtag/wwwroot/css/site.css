@@ -76,7 +76,7 @@ button[type="submit"]:hover {
     display: grid;
     position: fixed;
     z-index: 2;
-    width: 100%;
+    width: 100vw;
     grid-template: "a b c" /1fr 1fr 1fr;
     height: 10vh; /* 10% of viewport height */
 }
@@ -104,11 +104,11 @@ button[type="submit"]:hover {
     align-items: center;
     text-align: center;
     background-color: #1f1f1f; /* Add background color for visibility */
+    padding: 0px 20px
 }
 
 .div3NavBar > a {
     display:flex;
-    margin-left: 4em;
     gap: 0.5em;
     color: white;
     align-items: center;
@@ -835,3 +835,16 @@ Profile styling
   object-fit: cover;
 }
 
+
+/*
+
+Mobile optimization
+
+*/
+
+@media only screen and (max-width: 700px) {
+
+    .div3NavBar img {
+        display: none;
+    }
+}
