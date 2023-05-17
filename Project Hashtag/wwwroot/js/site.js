@@ -5,17 +5,49 @@
 
 const fileInput = document.getElementById('photo-input');
 const fileLabel = document.getElementById('file-label');
+let liCounter = 0;
 
-fileInput.addEventListener('change', function () {
-    if (fileInput.files.length > 0) {
-        const checkmark = document.createElement('img');
-        checkmark.src = '../done.png';
-        checkmark.alt = 'Done';
 
-        // Append the checkmark image
-        fileLabel.appendChild(checkmark);
-    }
-});
+//function GetAd(tag)
+//{
+//    let post = document.querySelectorAll("ul.flow > li:nth-child(" + liCounter + ")");
+
+//    let url = `https://laboutique.azurewebsites.net/api/Product/GetByName?name=${tag}`
+
+//    let response = await fetch(url);
+//    let json = await response.json();   
+
+//    let URL = json.URL;
+
+//    if (json == null)
+//    {
+//        liCounter++;
+//        return;
+//    }
+
+//    let adSpace = post.createElement('div');
+//    adSpace.setAttribute("id", "adDiv");
+
+//    adSpace.appendChild()
+
+//    liCounter++;
+
+//}
+
+
+if (fileInput != null) {
+    fileInput.addEventListener('change', function () {
+        if (fileInput.files.length > 0) {
+            const checkmark = document.createElement('img');
+            checkmark.src = '../done.png';
+            checkmark.alt = 'Done';
+    
+            // Append the checkmark image
+            fileLabel.appendChild(checkmark);
+        }
+    });
+}
+
 
 
 //Below is code for popup on report button
@@ -62,3 +94,5 @@ function stickBanderoll() {
         header.classList.remove("hidden")
       }
 }
+
+
