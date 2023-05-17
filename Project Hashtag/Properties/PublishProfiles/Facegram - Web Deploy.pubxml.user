@@ -7,12 +7,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
   <PropertyGroup>
     <TimeStampOfAssociatedLegacyPublishXmlFile />
     <EncryptedPassword>AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAA0MEhGB1VhkKBMuJ8ru8b8gAAAAACAAAAAAAQZgAAAAEAACAAAAD6VjuZd/loKDCjU8LgNMGPDFPU8vfHAE0h8mapQbdUjAAAAAAOgAAAAAIAACAAAACmmwxjzgMAuYN3PbBcyeZ+Es8v39XEMRazfAiPtFv/wYAAAABhVApZ8Vc+8aTlpAUYeLG/iY7SilXMcPL+SW4K4pqebVrsUtntVB9DLHPINckOn4hJxf4cm/ZwUKlQZMD3LWsKuNWsklXi4XqD+HTrUNEl7BMiNZHqsd2MdwsjfD7Lkp/3klaR7QKbqyLSt9rKEkYR7WCmJb4gsCJnGt9znx9qVkAAAAAjeylv/ql4WbqxlrzmDcFTPScGu9Fh6Y0xWmaFJqLDTuvsvKHObnIhHc99159K8NOSlOVc3eFEgdtlnBa1ieJI</EncryptedPassword>
-    <History>True|2023-05-11T12:10:02.4980257Z;False|2023-05-11T14:08:43.8692080+02:00;True|2023-05-11T14:07:45.4104274+02:00;True|2023-05-09T13:11:31.0019279+02:00;</History>
+    <History>True|2023-05-09T11:11:31.0019279Z;</History>
     <LastFailureDetails />
   </PropertyGroup>
-  <ItemGroup>
-    <EFMigrations Include="Project_Hashtag.Data.AppDbContext">
-      <Value>Data Source=tcp:instabook.database.windows.net,1433%3bInitial Catalog=InstaBookdb%3bUser Id=insterbooklet%40instabook%3bPassword=Backend23booklet</Value>
-    </EFMigrations>
-  </ItemGroup>
 </Project>
