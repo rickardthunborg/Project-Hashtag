@@ -126,6 +126,7 @@ button[type="submit"]:hover {
 
 #FaceGramNavBarLogo {
     max-width: 40%;
+    min-width: 100px;
     max-height: 40%;
 }
 
@@ -842,9 +843,19 @@ Mobile optimization
 
 */
 
-@media only screen and (max-width: 700px) {
+.banderollContainer {
+    padding: 50px 0 0 0;
+}
 
-    .div3NavBar img {
+@media only screen and (max-width: 535px) {
+
+    .div3NavBar p {
         display: none;
+    }
+}
+@media only screen and (max-width: 500px) {
+
+    #banderoll1, #banderoll2 {
+        width: 100%
     }
 }
