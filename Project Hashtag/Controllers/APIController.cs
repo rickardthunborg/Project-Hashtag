@@ -27,7 +27,7 @@ namespace Project_Hashtag.Controllers
 
             Post? post = posts.OrderByDescending(p => p.LikeCount).FirstOrDefault();
 
-            if (post != null)
+            if (post == null)
             {
                 return NotFound(new { message = "No relatable posts were found." });
             }

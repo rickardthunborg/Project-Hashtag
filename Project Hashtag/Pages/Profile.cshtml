@@ -36,10 +36,6 @@ else
     {
         var reports = @Model.database.Reports.Where(r => Model.PeopleYouFollow.Select(p => p.UserID).Contains(r.UserID) && r.PostID == post.ID).Count();
         var poster = Model.Users.Single(x => post.UserID == x.ID);
-        if (post.UserID == Model.LoggedIn.LoggedInAccountID)
-        {
-            continue;
-        }
         <li>
             @if (reports == 1)
             {
