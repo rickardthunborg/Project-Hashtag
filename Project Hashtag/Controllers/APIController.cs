@@ -33,11 +33,11 @@ namespace Project_Hashtag.Controllers
                 return NotFound(new { message = "No relatable posts were found." });
             }
 
-            var returnURL = "https://facegram.azurewebsites.net/Post/" + post.ID;
+            var postURL = "https://facegram.azurewebsites.net/Post/" + post.ID;
 
             var imageURL = "https://facegram.azurewebsites.net" + post.PictureUrl; 
 
-            return Ok( new { postContent = post.Description, imageURL, postURL = returnURL, poster = post.User.Name});
+            return Ok( new { postContent = post.Description, imageURL, postURL, poster = post.User.Name, datePosted = post.CreatedDate});
         }
     }
 }
