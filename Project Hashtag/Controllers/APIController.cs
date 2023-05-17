@@ -25,19 +25,21 @@ namespace Project_Hashtag.Controllers
         public ActionResult<IEnumerable<Post>> GetPost(string tag)
         {
             var posts = database.Posts.Where(p => p.Tag.ToLower() == tag.ToLower()).ToList();
+            var users = database.Users.ToList();
 
             Post? post = posts.OrderByDescending(p => p.LikeCount).FirstOrDefault();
+            User user = users.FirstOrDefault(u => u.ID == post.UserID);
 
-            if (post == null)
+            if (post == null || user == null)
             {
                 return NotFound(new { message = "No relatable posts were found." });
             }
 
             var postURL = "https://facegram.azurewebsites.net/Post/" + post.ID;
 
-            var imageURL = "https://facegram.azurewebsites.net" + post.PictureUrl; 
+            var imageURL = "https://facegram.azurewebsites.net" + post.PictureUrl;
 
-            return Ok( new { postContent = post.Description, imageURL, postURL, poster = post.User.Name, datePosted = post.CreatedDate});
+            return Ok( new { postContent = post.Description, imageURL, postURL, poster = user.Name, datePosted = post.CreatedDate});
         }
     }
 }
