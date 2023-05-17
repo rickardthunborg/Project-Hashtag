@@ -36,7 +36,7 @@ namespace Project_Hashtag.Controllers
 
             var pictureURL = "https://facegram.azurewebsites.net" + post.PictureUrl;
 
-            return Ok(new { postContent = post.Description, pictureURL, postURL = returnURL });
+            return Ok(new { postContent = post.Description, pictureURL, postURL = returnURL, postedDate = post.CreatedDate});
         }
     }
 }
