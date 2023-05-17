@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Project_Hashtag.Data;
@@ -8,6 +9,8 @@ namespace Project_Hashtag.Controllers
 {
     [Route("/api")]
     [ApiController]
+
+    [AllowAnonymous]
     public class APIController : ControllerBase
     {
         private readonly AppDbContext database;
@@ -20,7 +23,7 @@ namespace Project_Hashtag.Controllers
         [HttpGet("/posts")]
         public ActionResult<IEnumerable<Post>> GetPost(string tag)
         {
-            var posts = database.Posts.Where(p => p.Tag == tag).ToList();
+            var posts = database.Posts.Where(p => p.Tag.ToLower() == tag.ToLower()).ToList();
 
             Post? post = posts.OrderByDescending(p => p.LikeCount).FirstOrDefault();
 
