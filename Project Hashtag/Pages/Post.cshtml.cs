@@ -10,13 +10,15 @@ namespace Project_Hashtag.Pages
     public class PostModel : PageModel
     {
 
-		readonly Project_Hashtag.Data.AppDbContext database;
+		public Project_Hashtag.Data.AppDbContext database;
 		public AccessControl LoggedIn;
 		public Post Post { get; set; }
 		public List<User> Users { get; set; } = new List<User>();
 		public User User;
 		public List<Comment> Comments;
         public List<Report> Reports = new List<Report>();
+        public List<int> FollowingIds;
+
 
 
 
@@ -38,8 +40,12 @@ namespace Project_Hashtag.Pages
 			User = database.Users.Single(u => u.ID == Post.UserID);
 			Comments = database.Comments.Where(c => c.PostID == Post.ID).OrderByDescending(c => c.CreatedDate).ToList();
 			Reports = database.Reports.Where(r => r.PostID == Post.ID).ToList();
+            FollowingIds = database.Follows
+                     .Where(f => f.FollowingId == LoggedIn.LoggedInAccountID)
+                     .Select(f => f.UserID)
+                     .ToList();
 
-			return Page();
+            return Page();
         }
 
         public IActionResult OnPostComment(int postID, string content)
@@ -106,6 +112,44 @@ namespace Project_Hashtag.Pages
                     database.SaveChanges();
 
                     return RedirectToPage("Post", new { postID = postID });
+                }
+                catch
+                {
+                    return NotFound();
+                }
+            }
+
+        }
+
+        public IActionResult OnPostReport(int id)
+        {
+            Post post = database.Posts.FirstOrDefault(x => x.ID == id);
+            Report report = database.Reports.FirstOrDefault(x => x.PostID == post.ID && x.UserID == LoggedIn.LoggedInAccountID);
+
+            if (report == null)
+            {
+                try
+                {
+                    report = new Report() { PostID = id, UserID = LoggedIn.LoggedInAccountID };
+                    database.Reports.Add(report);
+                    database.SaveChanges();
+
+                    return RedirectToPage();
+                }
+                catch
+                {
+                    return NotFound();
+                }
+
+            }
+            else
+            {
+                try
+                {
+                    database.Reports.Remove(report);
+                    database.SaveChanges();
+
+                    return RedirectToPage();
                 }
                 catch
                 {

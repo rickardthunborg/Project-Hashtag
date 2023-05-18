@@ -36,13 +36,17 @@
         var poster = Model.User;
 
         <li>
-            @if (reports == 1)
+
+            @if (poster.ID != Model.LoggedIn.LoggedInAccountID)
             {
+                @if (reports == 1)
+                {
                 <div class="reportWarning"> <img src="~/information.png" /> <p> @reports person you follow has reported this post as untrustworthy.</p></div>
-            }
-            else if (reports > 0)
-            {
+                }
+                else if (reports > 0)
+                {
                 <div class="reportWarning"> <img src="~/information.png" /> <p> @reports people you follow have reported this post as untrustworthy.</p></div>
+                }
             }
             <div class="postProfile">
                 <a asp-page="Profile" asp-route-userId="@poster.ID" class="postProfileBox">
