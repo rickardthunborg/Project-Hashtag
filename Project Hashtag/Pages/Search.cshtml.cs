@@ -20,6 +20,7 @@ namespace Project_Hashtag.Pages
         public List<User> QueriedUsers = new List<User>();
         public List<Report> Reports = new List<Report>();
         public List<Follow> PeopleYouFollow;
+        public List<int> FollowingIds;
         public string search;
 
 
@@ -50,6 +51,10 @@ namespace Project_Hashtag.Pages
 
             this.QueriedPosts = database.Posts.Where(p => p.Description.ToLower().Contains(search)).ToList();
             this.QueriedUsers = database.Users.Where(u => u.Name.ToLower().Contains(search)).ToList();
+            FollowingIds = database.Follows
+                     .Where(f => f.FollowingId == LoggedIn.LoggedInAccountID)
+                     .Select(f => f.UserID)
+                     .ToList();
             return Page();
 
         }
