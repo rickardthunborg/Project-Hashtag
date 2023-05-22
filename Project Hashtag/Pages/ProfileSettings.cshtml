@@ -1,5 +1,7 @@
 ﻿@page
 @model Project_Hashtag.Pages.ProfileSettingsModel
+@inject Project_Hashtag.Data.AccessControl accessControl
+@inject Project_Hashtag.Data.AppDbContext database
 @{
 }
 
@@ -30,5 +32,10 @@
 				<button type="submit">Update picture</button>
 			</form>
 		</div>
+		
 	</div>
+	<a asp-page="Profile" asp-route-userId="@accessControl.LoggedInAccountID">
+		<button id="backToProfileButton">Back To Profile</button>
+	</a>
+	
 </div>

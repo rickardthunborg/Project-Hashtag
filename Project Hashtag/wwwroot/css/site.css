@@ -895,6 +895,25 @@ Profile styling
   object-fit: cover;
 }
 
+#backToProfileButton {
+    background-color: #D5AF34;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: transform 0.2s ease-in-out;
+    text-decoration: none;
+    display: inline-block;
+    width: 30%;
+    margin-right: 10px;
+}
+
+#backToProfileButton:hover {
+    background-color: #BA962F;
+    transform: scale(1.02);
+}
+
 
 /*
 
@@ -918,3 +937,4 @@ Mobile optimization
         width: 100%
     }
 }
+
