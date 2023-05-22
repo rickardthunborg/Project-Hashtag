@@ -825,7 +825,19 @@ Profile styling
     width: 100%;
 }
 
+.clickable {
+    cursor: pointer;
+}
 
+.profileCounter.clickable a {
+    color: #F0F7EE;
+    text-decoration: none;
+    transition: transform 0.3s ease;
+}
+
+.profileCounter.clickable a:hover {
+    transform: scale(1.03);
+}
 
 
 
@@ -936,5 +948,47 @@ Mobile optimization
     #banderoll1, #banderoll2 {
         width: 100%
     }
+}
+
+/*
+
+Followers and Following page css
+
+ */
+
+.disable-click {
+    pointer-events: none; /* Disable click events */
+    cursor: default; /* Remove hover cursor */
+}
+
+.disable-click {
+    pointer-events: none; /* Disable click events */
+    cursor: default; /* Remove hover cursor */
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Dark background color with 0.5 opacity */
+    
+}
+
+.FollowersBox {
+    background-color: #2E3136;
+    width: 35vw;
+    height: 42vh;
+    margin: auto;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 9999;
 }
 

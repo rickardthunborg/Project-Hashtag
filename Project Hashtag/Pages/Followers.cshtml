@@ -1,0 +1,48 @@
+@page
+@model Project_Hashtag.Pages.FollowersModel
+@inject Project_Hashtag.Data.AccessControl accessControl
+@inject Project_Hashtag.Data.AppDbContext database
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>@Model.User.Name - Followers</title>
+</head>
+<body>
+<div class="FollowersBox"></div>
+<div class="overlay"></div>
+<div class="profilePageBox">
+    <h2>@Model.User.Name</h2>
+    <img src="@Model.User.Avatar"/>
+    
+    <div id="postsCount" class="profileCounter">
+        <p><b>@Model.userPosts.Count()</b></p>
+        <p>Posts</p>
+    </div>
+
+    <div id="followerCount" class="profileCounter">
+        <p><b>@Model.amountOfFollowers</b></p>
+        <p>Followers</p>
+    </div>
+
+    <div id="followingCount" class="profileCounter">
+        <p><b>@Model.amountFollowing</b></p>
+        <p>Following</p>
+    </div>
+
+    <p id="bio">@Model.User.Biography</p>
+
+    @if (Model.User.ID != accessControl.LoggedInAccountID)
+    {
+        <form method="post" asp-page-handler="follow">
+            <input hidden name="userId" value="@Model.User.ID">
+            <button type="submit">@Model.FollowText</button>
+        </form>
+    }
+    else
+    {
+        <a asp-page="/ProfileSettings" asp-route-userId="@accessControl.LoggedInAccountID" class="editProfileButton disable-click">Edit Profile</a>
+    }
+</div>
+</body>
+</html>

@@ -22,9 +22,7 @@ namespace Project_Hashtag.Pages
         {
             database = context;
             this.LoggedIn = accessControl;
-
             
-
         }
 
 
