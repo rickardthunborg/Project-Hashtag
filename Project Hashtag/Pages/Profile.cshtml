@@ -6,11 +6,15 @@
     ViewData["Title"] = Model.User.Name;
 }
 
-<div class="profileDescription">
+<div class="profilePageBox">
     <h2>@Model.User.Name</h2>
-    <p>Following: <b>@Model.amountFollowing</b> Followers: <b>@Model.amountOfFollowers</b></p>
+    <img src="@Model.User.Avatar" />
 
-    <p>@Model.User.Biography</p>
+    <div id="postsCount" class="profileCounter"> <p> <b> @Model.userPosts.Count()</b></p> <p>Posts</p></div>
+    <div id="followerCount"class="profileCounter"> <p> <b> @Model.amountOfFollowers</b></p> <p>Followers</p></div>
+    <div id="followingCount"class="profileCounter"> <p> <b> @Model.amountFollowing</b></p> <p>Following</p></div>
+
+    <p id="bio">@Model.User.Biography</p>
 
     @if (Model.User.ID != @Model.LoggedIn.LoggedInAccountID)
     {
@@ -29,6 +33,10 @@
 
 
 <ul class="flow">
+    <div id="banderoll1">
+        <h3>@@ @Model.User.Name  </h3>
+    </div>
+    <div class="spacer"></div>
     @foreach (var post in Model.userPosts)
     {
         var reportedByUser = @Model.database.Reports.Any(x => x.UserID == Model.LoggedIn.LoggedInAccountID && x.PostID == post.ID);

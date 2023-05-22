@@ -761,18 +761,73 @@ Profile styling
 
 */
 
-.profileDescription {
-    display: flex;
-    align-content: center;
-    flex-direction: column;
-    text-align: center;
-    margin-bottom: 15px;
-    align-items: center;
+.profilePageBox {
+    width: clamp(200px, 100%, 500px);
+    padding: 1em;
+    margin: 3em auto 3em;
+    background-color: #1f1f1f;
+    margin-bottom: 1.5em;
+    border: 1px solid rgba(128, 128, 128, 0.8);
+    border-radius: 7px;
+    display: grid;
+    grid-template: "a a a a a" "b c d e ." "f f f f f" "g g g g g"/1fr 1fr 1fr 1fr 1fr;
+    row-gap: 1em;
 }
 
-.profileDescription p {
-    margin-bottom: 10px;
+.profilePageBox h2 {
+    grid-area: a;
+    text-align: center;
 }
+
+.profilePageBox img {
+    grid-area: b;
+    width: 80px;
+    margin-left: 1em;
+    height: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.profilePageBox #postsCount {
+    grid-area: c;
+    margin-left: 1.5em;
+}
+
+.profileCounter {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.profilePageBox #followerCount {
+    grid-area: d;
+}
+
+.profilePageBox #followingCount {
+    grid-area: e;
+}
+
+.profilePageBox > p {
+    grid-area: f;
+    margin-left: 1em;
+    word-wrap: break-word;
+}
+
+.profilePageBox form, .profilePageBox a {
+    grid-area: g;
+    width: 95%;
+    text-align: center;
+    margin: auto;
+}
+
+.profilePageBox form button {
+    width: 100%;
+}
+
+
+
+
 
 #editProfileButton
 {
