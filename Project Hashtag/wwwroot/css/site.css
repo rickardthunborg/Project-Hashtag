@@ -136,31 +136,35 @@ button[type="submit"]:hover {
 
 #searchbar {
     display: flex;
-    height: 32px;
+    height: 28px;
     justify-content: center;
-    border: 2px solid #d5af34;
-    border-radius: 1.5em;
 }
 
 #searchbar > input {
+    width: 4.9em;
     margin: 0 !important;
     background-color: transparent;
     border: none;
+    padding: 0.3em;
     color: #f9f5f3;
-    width: 90%;
-    padding-left: 10px;
+    transition: all 150ms ease-in-out;
+    border-bottom: 2px solid #d5af34;
 }
 
 #searchbar > input::placeholder {
-    color: #f9f5f3;
+    color: #c2c2c2;
 }
 
 #searchbar > input:focus {
     outline: none;
+    width: 100%;
 }
 
 #searchbar > label {
-    border-radius: 1.5em;
+    margin-left: 0.4em;
+    border-radius: 50%;
+    height: 25px;
+    width: 25px;
     background-color: #d5af34;
     background-image: url(../search.png);
     background-size: 70%;
