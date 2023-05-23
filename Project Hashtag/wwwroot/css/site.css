@@ -67,7 +67,7 @@ button[type="submit"]:hover {
 
 .editProfileButton:hover {
     background-color: #BA962F;
-    transform: scale(1.03); /* Added transform property */
+    transform: scale(1.02); /* Added transform property */
 }
 
 
@@ -982,7 +982,7 @@ Followers and Following page css
 }
 
 .FollowersBox {
-    background-color: #2E3136;
+    background-color: #1f1f1f;
     width: 35vw;
     height: 42vh;
     margin: auto;
@@ -999,7 +999,7 @@ Followers and Following page css
 
 #Xbutton {
     position: absolute;
-    top: 6%;
+    top: 6.5%;
     right: 5%;
     background-color: #BA962F;
     font-size: 20px;
@@ -1007,10 +1007,55 @@ Followers and Following page css
     border: none;
     width: 25px;
     border-radius: 2px;
+    transition: transform 0.3s ease;
 }
 
 #Xbutton:hover {
-    transform: scale(1.03);
+    transform: scale(1.04);
     cursor: pointer;
 }
 
+#FollowersBoxDivider{
+    margin-top: 15px;
+    height: 4px;
+    background-color: #BA962F;
+    padding-left: 0;
+    padding-right: 0;
+    width: 100%;
+}
+
+#FollowersScrollableBox {
+    height: 100%;
+    width: 100%;
+    background-color: #1f1f1f;
+    overflow: scroll;
+}
+
+/* Hide the scrollbar for webkit-based browsers */
+#FollowersScrollableBox::-webkit-scrollbar {
+    display: none;
+}
+
+.FollowerItem {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    border: 1px solid #BA962F;
+    border-radius: 10px;
+    margin-top: 10px;
+    height: 50px;
+    text-decoration: none;
+    color: white;
+}
+
+.FollowerItem:hover{ border;
+    border: 1px solid gray;
+}
+
+
+.FollowerItem img {
+    height: 30px;
+    width: 30px;
+    object-fit: cover;
+    margin-right: 10px;
+}
