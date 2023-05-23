@@ -9,7 +9,12 @@
     <title>@Model.User.Name - Followers</title>
 </head>
 <body>
-<div class="FollowersBox"></div>
+<div class="FollowersBox">
+    <h2>Following</h2>
+    <a asp-page="Profile" asp-route-userId="@accessControl.LoggedInAccountID">
+        <button id="Xbutton">X</button>
+    </a>
+</div>
 <div class="overlay"></div>
 <div class="profilePageBox">
     <h2>@Model.User.Name</h2>
