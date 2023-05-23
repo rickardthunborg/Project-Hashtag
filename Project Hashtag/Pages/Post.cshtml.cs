@@ -18,6 +18,8 @@ namespace Project_Hashtag.Pages
 		public List<Comment> Comments;
         public List<Report> Reports = new List<Report>();
         public List<int> FollowingIds;
+        private readonly string baseDirectoryPath;
+
 
 
 
@@ -28,7 +30,12 @@ namespace Project_Hashtag.Pages
 			database = context;
 			this.LoggedIn = accessControl;
             Users = database.Users.ToList();
-		}
+
+            string currentDirectory = Directory.GetCurrentDirectory();
+            string parentDirectory = Directory.GetParent(currentDirectory)?.FullName;
+            string grandparentDirectory = Directory.GetParent(parentDirectory)?.FullName;
+            baseDirectoryPath = Path.Combine(grandparentDirectory, "UploadedFiles");
+        }
 
         public IActionResult OnGet(int postID)
         {
@@ -157,6 +164,43 @@ namespace Project_Hashtag.Pages
                 }
             }
 
+        }
+
+        public async Task<IActionResult> OnPostDelete(int postID, int userID)
+        {
+
+            try
+            {
+                Post post = database.Posts.Find(postID);
+                if (post.UserID != userID)
+                {
+                    return Forbid();
+                }
+
+                string relativePath = post.PictureUrl.Replace("/uploads/", string.Empty);
+                string imagePath = baseDirectoryPath + "\\" + relativePath;
+
+
+                if (System.IO.File.Exists(imagePath))
+                {
+                    // Delete the file
+                    System.IO.File.Delete(imagePath);
+                    Console.WriteLine("Image deleted successfully.");
+                }
+                else
+                {
+                    Console.WriteLine("Image file not found.");
+                }
+
+                database.Posts.Remove(post);
+                database.SaveChanges();
+
+                return RedirectToPage("Profile", new { userID = userID});
+            }
+            catch
+            {
+                return NotFound();
+            }
         }
     }
 }

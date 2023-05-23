@@ -4,29 +4,16 @@
     ViewData["Title"] = "Facegram";
 }
 
-<h2>Search results:</h2>
-
-
-<h3>Matching users:</h3>
 
 <ul class="flow">
+
+    <div class="spacerTop"></div>
 
     <li>
+        <h3>Posts containing "@Model.Search"</h3>
 
-    @foreach(var user in Model.QueriedUsers)
-    {
-            <p>
-                <a asp-page="Profile" asp-route-userId="@user.ID"> <pre> @user.Name</pre></a>
-            </p>
-    }
     </li>
 
-</ul>
-
-<h3>Matching posts:</h3>
-
-
-<ul class="flow">
 	@foreach (var post in Model.QueriedPosts)
     {
         var reportedByUser = @Model.database.Reports.Any(x => x.UserID == Model.LoggedIn.LoggedInAccountID && x.PostID == post.ID);
@@ -105,14 +92,14 @@
                     <input type="hidden" name="search" value="@Request.Query["search"]" />
                     @if (post.IsLiked(Model.LoggedIn.LoggedInAccountID, Model.database))
                     {
-                        <label class="liked">
+                        <label id="like" class="liked">
                             <button type="submit"></button>
                             <p>@post.LikeCount</p>
                         </label>
                     }
                     else
                     {
-                        <label>
+                        <label id="like">
                             <button type="submit"></button>
                             <p>@post.LikeCount</p>
                         </label>
@@ -130,10 +117,13 @@
             *@
                 @if (post.Tag != "" && post.Tag != null)
                 {
-                    <a asp-page="Search" class="tagContainer">
-                        <div class="tags"></div>
-                        <p>@post.Tag </p>
-                    </a>
+                    <form method="get" asp-page="Search" class="tagContainer">
+                        <input type="hidden" name="search" value="@post.Tag">
+                        <label class="tags">
+                            <button type="submit"></button>
+                            <p>@post.Tag</p>
+                        </label>
+                    </form>
                 }
             </div>
             @if (@Model.Comments.Where(x => x.PostID == post.ID).Count() > 0)
@@ -157,7 +147,7 @@
 
                 }
             }
-            <form method="post" asp-page-handler="comment" asp-route-id="@post.ID" id="postComment">
+            <form method="post" asp-page-handler="comment" asp-route-postID="@post.ID" id="postComment">
                 <img class="pic-top" src="@Model.database.Users.Single(x => x.ID == @Model.LoggedIn.LoggedInAccountID).Avatar" alt="error">
                 <textarea required name="content" placeholder="Add a comment..." rows="1" oninput="autoExpand(this)"></textarea>
                 <input hidden name="userId" value="@post.UserID">
@@ -179,4 +169,23 @@
     }
 </ul>
 
+
+@if (Model.QueriedUsers.Count() != 0)
+{
+<ul class="flow">
+
+    <li class="queryUser">
+        <h3>Matching users</h3>
+
+    @foreach(var user in Model.QueriedUsers)
+    {
+            <p class="listedUser">
+                <a asp-page="Profile" asp-route-userId="@user.ID" class="postProfileBox"> <img src="@user.Avatar" class="pic-top"/> <span> @user.Name</span></a>
+            </p>
+    }
+    </li>
+
+</ul>
+    
+}
 
