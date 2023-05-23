@@ -5,13 +5,13 @@
     ViewData["Title"] = "Facegram";
 }
 
-
+<img src="~/standard-profile-pic.png"></img>
 <ul class="flow">
     <div class="spacerTop"></div>
     <li class="addNewPost">
         <form method="post" enctype="multipart/form-data">
             <div id="newPostTitle">
-                <img class="pic-top" src="@Model.database.Users.Single(x => x.ID == @Model.LoggedIn.LoggedInAccountID).Avatar" alt="error">
+                <img class="pic-top" src="@Model.database.Users.Single(x => x.ID == @Model.LoggedIn.LoggedInAccountID).Avatar" alt="Error">
                 <textarea required name="desc" placeholder="What's happening?" rows="1" oninput="autoExpand(this)"></textarea>
                 <span asp-validation-for="desc" class="text-danger"></span>
             </div>

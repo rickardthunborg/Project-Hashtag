@@ -17,7 +17,7 @@ namespace Project_Hashtag.Data
                     OpenIDSubject = "1111111111",
                     Name = "Brad",
                     Biography = "I'm a pizza-loving astronaut who dreams of playing guitar on Mars.",
-                    Avatar = "/uploads/standard-profile-pic.png"
+                    Avatar = "/standard-profile-pic.png"
                 });
                 database.Users.Add(new User
                 {
@@ -25,7 +25,7 @@ namespace Project_Hashtag.Data
                     OpenIDSubject = "2222222222",
                     Name = "Angelina",
                     Biography = "I'm a ninja cat whisperer with a passion for knitting sweaters for trees.",
-                    Avatar = "/uploads/standard-profile-pic.png"
+                    Avatar = "/standard-profile-pic.png"
 
                 });
                 database.Users.Add(new User
@@ -34,8 +34,7 @@ namespace Project_Hashtag.Data
                     OpenIDSubject = "3333333333",
                     Name = "Will",
                     Biography = "I'm a time-traveling pirate who searches for buried treasure in alternate dimensions.",
-                    Avatar = "/uploads/standard-profile-pic.png"
-
+                    Avatar = "/standard-profile-pic.png"
                 });
 
                 database.SaveChanges();

@@ -12,8 +12,8 @@ using Project_Hashtag.Data;
 namespace Project_Hashtag.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20230511105247_1")]
-    partial class _1
+    [Migration("20230523093201_inint")]
+    partial class inint
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
