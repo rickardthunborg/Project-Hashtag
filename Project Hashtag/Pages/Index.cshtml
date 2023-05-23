@@ -5,8 +5,20 @@
     ViewData["Title"] = "Facegram";
 }
 
+@if (Model.TimeLineMode)
+{
+    <link rel="stylesheet" href="~/css/test.css" asp-append-version="true">
+}
+
+<form method="get">
+    <input type="hidden" name="timeline" value="true"/>
+    <button type="submit">Try timeline mode</button>
+</form>
+<div class="spacerTop"></div>
 <ul class="flow">
-    <div class="spacerTop"></div>
+    <label id="scrollButtonContainer">
+        <button id="scrollButton"></button>
+    </label>
     <li class="addNewPost">
         <form method="post" enctype="multipart/form-data">
             <div id="newPostTitle">
@@ -29,6 +41,7 @@
             </div>
         </form>
     </li>
+
     <div id="banderoll1">
         <h3># Following</h3>
     </div>
@@ -70,14 +83,18 @@
             <div class="spacer"></div>
         }
 
+        string classType = "item-type-" + (i % 6 + 1);
+
         var reportedByUser = @Model.database.Reports.Any(x => x.UserID == Model.LoggedIn.LoggedInAccountID && x.PostID == post.ID);
         var reports = @Model.database.Reports.Where(r => Model.FollowingIds.Contains(r.UserID) && r.PostID == post.ID).Count();
         var poster = Model.Users.Single(x => post.UserID == x.ID);
+
         if (post.UserID == Model.LoggedIn.LoggedInAccountID)
         {
             continue;
         }
-        <li id="@post.ID">
+
+        <li id="@post.ID" class="@classType">
             @if (reports == 1)
             {
                 <div class="reportWarning"> <img src="~/information.png" /> <p> @reports person you follow has reported this post as untrustworthy.</p></div>
@@ -134,14 +151,14 @@
                 <form method="post" asp-page-handler="like" asp-route-id="@post.ID">
                     @if (post.IsLiked(Model.LoggedIn.LoggedInAccountID, Model.database))
                     {
-                        <label class="liked">
+                        <label id="like"class="liked">
                             <button type="submit"></button>
                             <p>@post.LikeCount</p>
                         </label>
                     }
                     else
                     {
-                        <label>
+                        <label id="like">
                             <button type="submit"></button>
                             <p>@post.LikeCount</p>
                         </label>
@@ -154,10 +171,13 @@
                 </a>
                 @if (post.Tag != "" && post.Tag != null)
                 {
-                    <a asp-page="Search" class="tagContainer">
-                        <div class="tags"></div>
-                        <p>@post.Tag </p>
-                    </a>
+                    <form method="get" asp-page="Search" class="tagContainer">
+                        <input type="hidden" name="search" value="@post.Tag" >
+                        <label class="tags">
+                            <button type="submit"></button>
+                            <p>@post.Tag</p>
+                        </label>
+                    </form>
                 }
             </div>
             @if (@Model.Comments.Where(x => x.PostID == post.ID).Count() > 0)
@@ -190,25 +210,4 @@
         </li>
     }
 </ul>
-@*<p>Comments: </p>
-            <ul>
-                @foreach (var comment in Model.Comments.Where(x => x.PostID == post.ID).OrderBy(z => z.CreatedDate))
-                {
-                    var user = Model.Users.Single(x => x.ID == comment.UserID);
 
-                    <li>
-                        <p>@comment.Text </p>
-                        <a asp-page="Profile" asp-route-userId="@user.ID"><pre>  by: @user.Name</pre></a>
-                        @if(comment.UserID == Model.LoggedIn.LoggedInAccountID)
-                        {
-                        <form method="post" asp-page-handler="deletecomment" asp-route-id="@post.ID"><button type="submit">Delete Comment</button></form>
-                        }
-
-                    </li>
-                }
-            </ul>
-
-            <form method="post" asp-page-handler="comment" asp-route-id="@post.ID">
-                <input type="text" name="content">
-                <button type="submit">Comment</button>
-                </form>*@

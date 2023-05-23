@@ -25,6 +25,7 @@ namespace Project_Hashtag.Pages
         public List<Report> Reports = new List<Report>();
         public List<int> FollowingIds;
         public string search;
+        public bool TimeLineMode;
 
 
         public IndexModel(AppDbContext database, AccessControl accessControl, FileRepository uploads)
@@ -37,8 +38,10 @@ namespace Project_Hashtag.Pages
 
         }
 
-        public IActionResult OnGet()
+        public IActionResult OnGet(bool timeline)
         {
+
+            TimeLineMode = timeline;
 
             FollowingIds = database.Follows
                 .Where(f => f.FollowingId == LoggedIn.LoggedInAccountID)
@@ -78,7 +81,7 @@ namespace Project_Hashtag.Pages
                 Comment.DeleteComment(comment, database);
 
                 string returnUrl = Url.Page("/index") + "#" + id;
-                return Redirect(returnUrl);
+                return Redirect(returnUrl);      
             }
             catch
             {

@@ -22,7 +22,7 @@ public class FollowingModel : PageModel
         this.accessControl = accessControl;
     }
 
-    public List<User> Users { get; set; } = new List<User>();
+
     public User User { get; set; } = default!;
     public List<Post> userPosts;
     public List<Comment> Comments;
@@ -32,7 +32,11 @@ public class FollowingModel : PageModel
     public int amountFollowing;
     public string biography;
     public string avatar;
-    public List<Follow> PeopleYouFollow;
+
+    
+    public List<int> Following;
+
+    public List<User> Users;
 
     public void OnGet()
     {
@@ -41,22 +45,24 @@ public class FollowingModel : PageModel
         if (database.Users != null)
         {
             User = database.Users.Find(userId);
-            userPosts = database.Posts.Where(x => x.UserID == userId).OrderByDescending(x => x.CreatedDate).ToList();
+            userPosts = database.Posts.Where(x => x.UserID == userId).OrderByDescending(x => x.CreatedDate)
+                .ToList();
             Comments = database.Comments.OrderByDescending(x => x.CreatedDate).ToList();
             Users = database.Users.ToList();
             FollowText = Follow.GetFollowStatus(userId, accessControl.LoggedInAccountID, database);
-                
+            
+            
+            
             amountOfFollowers = database.Follows.Where(f => f.UserID == userId).Count();
+
             amountFollowing = database.Follows.Where(f => f.FollowingId == userId).Count();
-            biography = User.Biography;
-            avatar = User.Avatar;
 
-            var followingIds = database.Follows
-                .Where(f => f.FollowingId == userId)
-                .Select(f => f.UserID)
-                .ToList();
+            
+            this.Following = database.Follows.Where(f => f.FollowingId == userId).Select(x => x.UserID).ToList();
 
-            Reports = database.Reports.ToList();
+            
+            Users = database.Users.Where(x => Following.Contains(x.ID)).ToList();
+
         }
     }
 }

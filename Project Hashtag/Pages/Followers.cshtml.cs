@@ -17,13 +17,13 @@ namespace Project_Hashtag.Pages
         private readonly AppDbContext database;
         private readonly AccessControl accessControl;
 
+
         public FollowersModel(AppDbContext database, AccessControl accessControl)
         {
             this.database = database;
             this.accessControl = accessControl;
         }
 
-        public List<User> Users { get; set; } = new List<User>();
         public User User { get; set; } = default!;
         public List<Post> userPosts;
         public List<Comment> Comments;
@@ -33,7 +33,12 @@ namespace Project_Hashtag.Pages
         public int amountFollowing;
         public string biography;
         public string avatar;
+
         public List<Follow> PeopleYouFollow;
+
+        public List<int> Followers;
+
+        public List<User> Users;
 
         public void OnGet()
         {
@@ -42,22 +47,20 @@ namespace Project_Hashtag.Pages
             if (database.Users != null)
             {
                 User = database.Users.Find(userId);
-                userPosts = database.Posts.Where(x => x.UserID == userId).OrderByDescending(x => x.CreatedDate).ToList();
+                userPosts = database.Posts.Where(x => x.UserID == userId).OrderByDescending(x => x.CreatedDate)
+                    .ToList();
                 Comments = database.Comments.OrderByDescending(x => x.CreatedDate).ToList();
                 Users = database.Users.ToList();
                 FollowText = Follow.GetFollowStatus(userId, accessControl.LoggedInAccountID, database);
-                
+
                 amountOfFollowers = database.Follows.Where(f => f.UserID == userId).Count();
                 amountFollowing = database.Follows.Where(f => f.FollowingId == userId).Count();
                 biography = User.Biography;
                 avatar = User.Avatar;
 
-                var followingIds = database.Follows
-                    .Where(f => f.FollowingId == userId)
-                    .Select(f => f.UserID)
-                    .ToList();
+                this.Followers = database.Follows.Where(f => User.ID == f.UserID).Where(f => User.ID != f.FollowingId).Select(x => x.FollowingId).ToList();
 
-                Reports = database.Reports.ToList();
+                Users = database.Users.Where(x => Followers.Contains(x.ID)).ToList();
             }
         }
     }

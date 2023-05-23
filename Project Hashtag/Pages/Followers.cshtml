@@ -1,4 +1,5 @@
 @page
+@using Project_Hashtag.Models
 @model Project_Hashtag.Pages.FollowersModel
 @inject Project_Hashtag.Data.AccessControl accessControl
 @inject Project_Hashtag.Data.AppDbContext database
@@ -14,6 +15,19 @@
     <a asp-page="Profile" asp-route-userId="@accessControl.LoggedInAccountID">
         <button id="Xbutton">X</button>
     </a>
+    <div id="FollowersBoxDivider"></div>
+<div id="FollowersScrollableBox">
+<div id="FollowersScrollableBox">
+    @foreach (var X in Model.Users)
+    {
+        <a asp-page="Profile" asp-route-userId="@X.ID" class="FollowerItem">
+            <IMG src="@X.Avatar">
+                <span class="FollowerUsername">@X.Name</span>
+        </a>
+    }
+</div>
+
+</div>
 </div>
 <div class="overlay"></div>
 <div class="profilePageBox">
