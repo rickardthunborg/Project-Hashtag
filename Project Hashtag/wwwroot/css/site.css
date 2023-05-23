@@ -992,3 +992,20 @@ Followers and Following page css
     z-index: 9999;
 }
 
+#Xbutton {
+    position: absolute;
+    top: 6%;
+    right: 5%;
+    background-color: #BA962F;
+    font-size: 20px;
+    color: white;
+    border: none;
+    width: 25px;
+    border-radius: 2px;
+}
+
+#Xbutton:hover {
+    transform: scale(1.03);
+    cursor: pointer;
+}
+
