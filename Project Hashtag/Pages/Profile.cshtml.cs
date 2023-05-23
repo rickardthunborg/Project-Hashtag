@@ -100,7 +100,7 @@ namespace Project_Hashtag.Pages
             {
                 Comment.AddComment(LoggedIn.LoggedInAccountID, id, content, database);
 
-                return RedirectToPage("Profile", new { id = userId });
+                return RedirectToPage("Profile", new { userID = userId });
             }
             catch
             {
@@ -177,7 +177,7 @@ namespace Project_Hashtag.Pages
                 database.Follows.Add(new Follow { FollowingId = LoggedIn.LoggedInAccountID, UserID = userId });
                 database.SaveChanges();
 
-                return RedirectToPage("Profile", new { id = userId });
+                return RedirectToPage("Profile", new { userID = userId });
             }
             else if (followStatus == "Unfollow")
             {
@@ -185,13 +185,13 @@ namespace Project_Hashtag.Pages
                 database.Follows.Remove(f);
                 database.SaveChanges();
 
-                return RedirectToPage("Profile", new { id = userId });
+                return RedirectToPage("Profile", new { userID = userId });
             }
 
             
 
 
-            return RedirectToPage("Profile", new { id = userId });
+            return RedirectToPage("Profile", new { userID = userId });
         }
 
 
@@ -247,7 +247,7 @@ namespace Project_Hashtag.Pages
                 database.Posts.Remove(post);
                 database.SaveChanges();
 
-                return RedirectToPage("Profile", new { id = userID });
+                return RedirectToPage("Profile", new { userID = userID });
             }
             catch
             {

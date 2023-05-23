@@ -39,12 +39,6 @@ namespace Project_Hashtag.Pages
 
         public IActionResult OnGet()
         {
-            string searchQuery = Request.Query["search"];
-
-            if (!string.IsNullOrEmpty(searchQuery))
-            {
-                return RedirectToPage("/search", new { search = searchQuery });
-            }
 
             FollowingIds = database.Follows
                 .Where(f => f.FollowingId == LoggedIn.LoggedInAccountID)
@@ -210,9 +204,10 @@ namespace Project_Hashtag.Pages
 
             try
             {
+                Post? post = new Post { UserID = LoggedIn.LoggedInAccountID, Tag = Post.FormatTag(this.Tag), Description = desc };
+
                 if (photo == null)
                 {
-                    var post = new Post { UserID = LoggedIn.LoggedInAccountID, Tag = Post.FormatTag(this.Tag), Description = desc };
                     database.Posts.Add(post);
                     await database.SaveChangesAsync();
                 }
@@ -226,13 +221,13 @@ namespace Project_Hashtag.Pages
                     string path = Path.Combine(
                     Guid.NewGuid().ToString() + "-" + photo.FileName);
                     await uploads.SaveFileAsync(photo, path);
-                    var post = new Post { UserID = LoggedIn.LoggedInAccountID, Tag = Post.FormatTag(this.Tag), Description = desc, PictureUrl = "/uploads/" + path };
+                    post = new Post { UserID = LoggedIn.LoggedInAccountID, Tag = Post.FormatTag(this.Tag), Description = desc, PictureUrl = "/uploads/" + path };
                     database.Posts.Add(post);
 
                     await database.SaveChangesAsync();
                 }
+                return RedirectToPage("Post", new { postID = post.ID});
 
-                return RedirectToPage("/index");
             }
             catch
             {
