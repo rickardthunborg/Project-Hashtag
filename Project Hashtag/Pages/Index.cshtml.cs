@@ -84,7 +84,7 @@ namespace Project_Hashtag.Pages
                 Comment.DeleteComment(comment, database);
 
                 string returnUrl = Url.Page("/index") + "#" + id;
-                return Redirect(returnUrl);
+                return Redirect(returnUrl);      
             }
             catch
             {

@@ -544,7 +544,7 @@ Below is flow styling
 
 
 .interaction form p {
-    margin-left: 1.8em;
+    margin-left: 1.5em;
     margin-top: 0.2em;
     font-size: 14px;
 }
@@ -555,7 +555,7 @@ Below is flow styling
     font-size: 14px;
 }
 
-.interaction label:hover {
+.interaction #like:hover {
     cursor: pointer;
     color: #d91670;
     background-image: url(..//likehover.png);
@@ -564,7 +564,7 @@ Below is flow styling
 }
 
 .interaction form .liked {
-    background-image: url(..//likeliked.png);
+    background-image: url(..//likeliked.png) !important;
 }
 
 .comments {
@@ -585,12 +585,11 @@ Below is flow styling
     border-color: rgba(29, 156, 240, 0.2);
 }
 
-.interaction a .tags{
+.interaction form .tags{
     background-image: url(..//hashtag.png);
     background-size: 25px;
-    width: 25px;
     background-repeat: no-repeat;
-    background-position: center;
+    background-position: 0% 50%;
     overflow:visible;
     display: flex;
     border: 4px solid transparent;
@@ -599,7 +598,8 @@ Below is flow styling
     transition: all 200ms ease;
 }
 
-.interaction .tagContainer:hover {
+.interaction .tags:hover {
+    cursor: pointer;
     color: #c2cdcd;
     background-color: rgb(213,175,52, 0.2);
     border-color: rgb(213,175,52, 0.2);
@@ -997,20 +997,28 @@ Followers and Following page css
     z-index: 9999;
 }
 
-#Xbutton {
-    position: absolute;
-    top: 6%;
-    right: 5%;
-    background-color: #BA962F;
-    font-size: 20px;
-    color: white;
-    border: none;
-    width: 25px;
-    border-radius: 2px;
+
+.listedUser img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
 }
 
-#Xbutton:hover {
-    transform: scale(1.03);
-    cursor: pointer;
+.listedUser {
+    margin-top: 0.5em;
 }
+
+.queryUser h3{
+    margin-bottom: 1em;
+}
+
+.listedUser a {
+    text-decoration: none;
+    color: #f1dba7;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 2em;
+}
+
 

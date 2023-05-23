@@ -134,14 +134,14 @@
                 <form method="post" asp-page-handler="like" asp-route-id="@post.ID">
                     @if (post.IsLiked(Model.LoggedIn.LoggedInAccountID, Model.database))
                     {
-                        <label class="liked">
+                        <label id="like"class="liked">
                             <button type="submit"></button>
                             <p>@post.LikeCount</p>
                         </label>
                     }
                     else
                     {
-                        <label>
+                        <label id="like">
                             <button type="submit"></button>
                             <p>@post.LikeCount</p>
                         </label>
@@ -154,10 +154,13 @@
                 </a>
                 @if (post.Tag != "" && post.Tag != null)
                 {
-                    <a asp-page="Search" class="tagContainer">
-                        <div class="tags"></div>
-                        <p>@post.Tag </p>
-                    </a>
+                    <form method="get" asp-page="Search" class="tagContainer">
+                        <input type="hidden" name="search" value="@post.Tag" >
+                        <label class="tags">
+                            <button type="submit"></button>
+                            <p>@post.Tag</p>
+                        </label>
+                    </form>
                 }
             </div>
             @if (@Model.Comments.Where(x => x.PostID == post.ID).Count() > 0)
