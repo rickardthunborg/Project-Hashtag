@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.IO;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -16,13 +17,26 @@ namespace Project_Hashtag.Pages
         public Project_Hashtag.Data.AppDbContext database;
         public AccessControl LoggedIn;
         public List<int> FollowingIds;
+        
+        private readonly string baseDirectoryPath;
 
 
-        public ProfileModel(Project_Hashtag.Data.AppDbContext context, AccessControl accessControl)
+
+
+
+        public ProfileModel(Project_Hashtag.Data.AppDbContext context, AccessControl accessControl, IWebHostEnvironment webHostEnvironment)
         {
             database = context;
             this.LoggedIn = accessControl;
-            
+
+
+            string currentDirectory = Directory.GetCurrentDirectory();
+            string parentDirectory = Directory.GetParent(currentDirectory)?.FullName;
+            string grandparentDirectory = Directory.GetParent(parentDirectory)?.FullName;
+            baseDirectoryPath = Path.Combine(grandparentDirectory, "UploadedFiles");
+
+
+
         }
 
 
@@ -40,28 +54,6 @@ namespace Project_Hashtag.Pages
         public List<Follow> PeopleYouFollow;
 
 
-
-
-        public IActionResult OnPostDelete(int id, int userId)
-        {
-
-            try
-            {
-                Post post = database.Posts.Find(id);
-                if(post.UserID != userId)
-                {
-                    return Forbid();
-                }
-                Post.DeletePost(post, database);
-
-                return RedirectToPage("Profile", new { id = userId });
-            }
-            catch
-            {
-                return NotFound();
-            }
-
-        }
 
         public IActionResult OnPostReport(int id)
         {
@@ -223,6 +215,43 @@ namespace Project_Hashtag.Pages
                      .ToList();
 
                 this.Reports = database.Reports.ToList();
+            }
+        }
+
+        public async Task<IActionResult> OnPostDelete(int postID, int userID)
+        {
+
+            try
+            {
+                Post post = database.Posts.Find(postID);
+                if (post.UserID != userID)
+                {
+                    return Forbid();
+                }
+
+                string relativePath = post.PictureUrl.Replace("/uploads/", string.Empty);
+                string imagePath = baseDirectoryPath + "\\" + relativePath;
+
+
+                if (System.IO.File.Exists(imagePath))
+                {
+                    // Delete the file
+                    System.IO.File.Delete(imagePath);
+                    Console.WriteLine("Image deleted successfully.");
+                }
+                else
+                {
+                    Console.WriteLine("Image file not found.");
+                }
+
+                database.Posts.Remove(post);
+                database.SaveChanges();
+
+                return RedirectToPage("Profile", new { id = userID });
+            }
+            catch
+            {
+                return NotFound();
             }
         }
     }
