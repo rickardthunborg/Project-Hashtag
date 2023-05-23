@@ -97,6 +97,9 @@ button[type="submit"]:hover {
     align-items: center;
 }
 
+
+
+
 .div3NavBar {
     grid-area: c;
     display: flex;
@@ -105,6 +108,66 @@ button[type="submit"]:hover {
     text-align: center;
     background-color: #1f1f1f; /* Add background color for visibility */
     padding: 0px 20px
+}
+
+.div3NavBar label {
+    background-image: url(..//notificationbell.png);
+    width: 30px;
+    height: 30px;
+    background-size: 100%;
+    background-repeat: no-repeat;
+    margin-right: 20px;
+}
+
+.div3NavBar label:hover {
+    cursor: pointer;
+}
+
+.div3NavBar label button {
+    display: none;
+}
+
+.notificationDiv{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#notificationList {
+    display: flex;
+    flex-direction: column;
+    border-radius: 5px;
+    background-color: #1f1f1f;
+    position: absolute;
+    top: 10vh;
+}
+
+#notificationList li{
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    padding: 1rem;
+    background-color: #1f1f1f;
+    border: 2px solid #45464a;
+    border-radius: 5px;
+}
+
+#notificationList li:hover{
+    background-color: #2E3136;
+}
+
+#notificationList a{
+    display: block;
+    text-decoration: none;
+    color: white;
+}
+
+
+
+#sinceFollow{
+    color: deepskyblue;
+    font-size: small;
 }
 
 .div3NavBar > a {

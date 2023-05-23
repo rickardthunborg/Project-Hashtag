@@ -10,7 +10,7 @@ let liCounter = 0;
 
 //function GetAd(tag)
 //{
-//    let post = document.querySelectorAll("ul.flow > li:nth-child(" + liCounter + ")");
+//    let post = document.querySelector("ul.flow > li:nth-child(" + liCounter + ")");
 
 //    let url = `https://laboutique.azurewebsites.net/api/Product/GetByName?name=${tag}`
 
@@ -28,11 +28,26 @@ let liCounter = 0;
 //    let adSpace = post.createElement('div');
 //    adSpace.setAttribute("id", "adDiv");
 
-//    adSpace.appendChild()
+//    let adSpaceText = post.createElement('p')
+//    adSpace.appendChild(adSpaceText)
 
 //    liCounter++;
 
 //}
+
+var notificationButton = document.querySelector('#notificationButton')
+var notificationList = document.querySelector('#notificationList')
+
+notificationButton.addEventListener('click', function () {
+    notificationList.classList.toggle('hidden')
+});
+
+//document.addEventListener('click', function (event) {
+//     var targetElement = event.target;
+//     if (targetElement !== notificationButton && !notificationList.contains(targetElement)) {
+//     notificationList.classList.add('hidden');
+//        }
+//    });
 
 
 if (fileInput != null) {
