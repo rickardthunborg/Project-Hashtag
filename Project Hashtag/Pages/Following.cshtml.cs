@@ -51,7 +51,10 @@ public class FollowingModel : PageModel
             Users = database.Users.ToList();
             FollowText = Follow.GetFollowStatus(userId, accessControl.LoggedInAccountID, database);
             
-            //this counts
+            
+            
+            amountOfFollowers = database.Follows.Where(f => f.UserID == userId).Count();
+
             amountFollowing = database.Follows.Where(f => f.FollowingId == userId).Count();
 
             
