@@ -346,6 +346,11 @@ Below is flow styling
     height: 10vh;
 }
 
+.spacerTop {
+    width: 1px;
+    height: 2em;
+}
+
 .stuck {
     border-radius: 0 !important;
     position: fixed !important;
