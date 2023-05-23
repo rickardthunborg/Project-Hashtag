@@ -28,7 +28,7 @@ namespace Project_Hashtag.Controllers
             var users = database.Users.ToList();
 
             Post? post = posts.OrderByDescending(p => p.LikeCount).FirstOrDefault();
-            User user = users.FirstOrDefault(u => u.ID == post.UserID);
+            User? user = users.FirstOrDefault(u => u.ID == post.UserID);
 
             if (post == null || user == null)
             {
