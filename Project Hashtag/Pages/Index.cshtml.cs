@@ -39,12 +39,6 @@ namespace Project_Hashtag.Pages
 
         public IActionResult OnGet()
         {
-            string searchQuery = Request.Query["search"];
-
-            if (!string.IsNullOrEmpty(searchQuery))
-            {
-                return RedirectToPage("/search", new { search = searchQuery });
-            }
 
             FollowingIds = database.Follows
                 .Where(f => f.FollowingId == LoggedIn.LoggedInAccountID)
