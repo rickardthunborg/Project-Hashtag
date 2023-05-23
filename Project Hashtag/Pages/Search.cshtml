@@ -157,7 +157,7 @@
 
                 }
             }
-            <form method="post" asp-page-handler="comment" asp-route-id="@post.ID" id="postComment">
+            <form method="post" asp-page-handler="comment" asp-route-postID="@post.ID" id="postComment">
                 <img class="pic-top" src="@Model.database.Users.Single(x => x.ID == @Model.LoggedIn.LoggedInAccountID).Avatar" alt="error">
                 <textarea required name="content" placeholder="Add a comment..." rows="1" oninput="autoExpand(this)"></textarea>
                 <input hidden name="userId" value="@post.UserID">
