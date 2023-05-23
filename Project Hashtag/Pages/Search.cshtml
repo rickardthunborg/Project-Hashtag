@@ -9,9 +9,37 @@
 
     <div class="spacerTop"></div>
 
-    <li>
+    <li id="topSearch">
         <h3>Posts containing "@Model.Search"</h3>
-
+        <form method="get" asp-page="Search" id="sortSearch">
+            <h4>Sort by:</h4>
+            <input type="hidden" name="search" value="@Model.Search">
+            @if (Model.orderByLikes)
+            {
+                <input id="new"type="radio" name="sort" value="new">
+                <label for="new" class="option">
+                    Newest
+                </label>
+                <input id="pop"type="radio" name="sort" value="pop" checked>
+                <label for="pop" class="option">
+                    Popular
+                </label>
+            }
+            else
+            {
+                <input id="new" type="radio" name="sort" value="new" checked>
+                <label for="new" class="option">
+                    Newest
+                </label>
+                <input id="pop" type="radio" name="sort" value="pop">
+                <label for="pop" class="option">
+                    Popular
+                </label>
+            }
+            <label id="refresh">
+                <button type="submit"></button>
+            </label>
+        </form>
     </li>
 
 	@foreach (var post in Model.QueriedPosts)

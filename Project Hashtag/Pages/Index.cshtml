@@ -193,25 +193,4 @@
         </li>
     }
 </ul>
-@*<p>Comments: </p>
-            <ul>
-                @foreach (var comment in Model.Comments.Where(x => x.PostID == post.ID).OrderBy(z => z.CreatedDate))
-                {
-                    var user = Model.Users.Single(x => x.ID == comment.UserID);
 
-                    <li>
-                        <p>@comment.Text </p>
-                        <a asp-page="Profile" asp-route-userId="@user.ID"><pre>  by: @user.Name</pre></a>
-                        @if(comment.UserID == Model.LoggedIn.LoggedInAccountID)
-                        {
-                        <form method="post" asp-page-handler="deletecomment" asp-route-id="@post.ID"><button type="submit">Delete Comment</button></form>
-                        }
-
-                    </li>
-                }
-            </ul>
-
-            <form method="post" asp-page-handler="comment" asp-route-id="@post.ID">
-                <input type="text" name="content">
-                <button type="submit">Comment</button>
-                </form>*@

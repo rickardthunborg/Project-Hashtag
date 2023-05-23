@@ -176,6 +176,63 @@ button[type="submit"]:hover {
     visibility: hidden;
 }
 
+#topSearch input[type="radio"]:checked + label {
+    color: #D5AF34;
+    background-color: #dbb84e3a;
+    border-color: #dbb84e;
+}
+
+#topSearch input, #topSearch button {
+    display: none;
+}
+
+#topSearch h4 {
+    font-weight: 500;
+    font-size: 16px;
+    color: #c2cdcd;
+}
+
+#topSearch form {
+    margin: 1em 0 0.3em 0;
+    display: flex;
+    align-items: center;
+}
+
+#topSearch .option   {
+    text-align: center;
+    width: 6em;
+    font-size: 14px;
+    font-weight: 500;
+    padding: 0.2em 0.4em;
+    margin-left: 0.5em;
+    color: #c2cdcd;
+    border: 1px solid #c2cdcd77;
+    border-radius: 5px;
+    transition: all 150ms ease;
+}
+
+#topSearch .option:hover {
+    cursor: pointer;
+    background-color: #dbb84e3a;
+}
+
+#topSearch #refresh {
+    width: 25px;
+    height: 25px;
+    background-image: url("..//refresh.png");
+    background-size: 90%;
+    background-repeat: no-repeat;
+    background-position: center;
+    margin-left: 0.6em;
+    transition: all 100ms ease;
+}
+
+#topSearch #refresh:hover {
+    transform: rotate(-20deg);
+    cursor: pointer;
+}
+
+
 /* ----------
 
 Add new post styling
@@ -1048,7 +1105,7 @@ Followers and Following page css
     color: white;
 }
 
-.FollowerItem:hover{ border;
+.FollowerItem:hover{ 
     border: 1px solid gray;
 }
 

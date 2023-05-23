@@ -42,8 +42,9 @@ namespace Project_Hashtag.Pages
 
         }
 
-        public IActionResult OnGet(string? search)
+        public IActionResult OnGet(string? search, string? sort)
         {
+            this.orderByLikes = sort == "pop";
             this.Search = search;
 
             search = search.ToLower();
@@ -59,7 +60,7 @@ namespace Project_Hashtag.Pages
                 .OrderByDescending(p => p.CreatedDate)
                 .ToList();
 
-            if (!orderByLikes)
+            if (orderByLikes)
             {
                 QueriedPosts = QueriedPosts
                     .OrderByDescending(p => p.LikeCount)
