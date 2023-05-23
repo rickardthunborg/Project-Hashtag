@@ -83,7 +83,8 @@ namespace Project_Hashtag.Pages
                 }
                 Comment.DeleteComment(comment, database);
 
-                return RedirectToPage("/index");
+                string returnUrl = Url.Page("/index") + "#" + id;
+                return Redirect(returnUrl);
             }
             catch
             {
@@ -97,7 +98,8 @@ namespace Project_Hashtag.Pages
             {
                 Comment.AddComment(LoggedIn.LoggedInAccountID, id, content, database);
 
-                return RedirectToPage("/index");
+                string returnUrl = Url.Page("/index") + "#" + id;
+                return Redirect(returnUrl);
             }
             catch
             {
@@ -118,7 +120,8 @@ namespace Project_Hashtag.Pages
                     database.Reports.Add(report);
                     database.SaveChanges();
 
-                    return RedirectToPage();
+                    string returnUrl = Url.Page("/index") + "#" + id;
+                    return Redirect(returnUrl);
                 }
                 catch
                 {
@@ -133,7 +136,8 @@ namespace Project_Hashtag.Pages
                     database.Reports.Remove(report);
                     database.SaveChanges();
 
-                    return RedirectToPage();
+                    string returnUrl = Url.Page("/index") + "#" + id;
+                    return Redirect(returnUrl);
                 }
                 catch
                 {
@@ -159,7 +163,8 @@ namespace Project_Hashtag.Pages
                     post.LikeCount += 1;
                     database.SaveChanges();
 
-                    return RedirectToPage();
+                    string returnUrl = Url.Page("/index") + "#" + id;
+                    return Redirect(returnUrl);
                 }
                 catch
                 {
@@ -175,7 +180,8 @@ namespace Project_Hashtag.Pages
                     post.LikeCount--;
                     database.SaveChanges();
 
-                    return RedirectToPage();
+                    string returnUrl = Url.Page("/index") + "#" + id;
+                    return Redirect(returnUrl);
                 }
                 catch
                 {

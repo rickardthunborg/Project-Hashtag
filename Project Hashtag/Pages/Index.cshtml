@@ -5,13 +5,12 @@
     ViewData["Title"] = "Facegram";
 }
 
-
 <ul class="flow">
     <div class="spacerTop"></div>
     <li class="addNewPost">
         <form method="post" enctype="multipart/form-data">
             <div id="newPostTitle">
-                <img class="pic-top" src="@Model.database.Users.Single(x => x.ID == @Model.LoggedIn.LoggedInAccountID).Avatar" alt="error">
+                <img class="pic-top" src="@Model.database.Users.Single(x => x.ID == @Model.LoggedIn.LoggedInAccountID).Avatar" alt="Error">
                 <textarea required name="desc" placeholder="What's happening?" rows="1" oninput="autoExpand(this)"></textarea>
                 <span asp-validation-for="desc" class="text-danger"></span>
             </div>
@@ -35,15 +34,22 @@
     </div>
     <div class="spacer"></div>
 
-    @if (Model.FollowingIds.Count() == 0)
+    @if (Model.FollowingPosts.Count() == 0)
     {
         <li id="followPrompt">
             <img src="~/followbirdie.png" />
             <p>It's empty here!</p>
-            <p>Follow other users to prioritize their posts.</p>
+            @if (Model.FollowingIds.Count == 0)
+            {
+                <p>Follow other users to prioritize their posts.</p>
+            }
+            else
+            {
+                <p>No one you follow has updated lately :(</p>
+            }
         </li>
     }
-    
+
     @for (int i = 0; i < Model.FollowingPosts.Count() + Model.OtherPosts.Count(); i++)
     {
         var post = Model.Post;
@@ -71,7 +77,7 @@
         {
             continue;
         }
-        <li>
+        <li id="@post.ID">
             @if (reports == 1)
             {
                 <div class="reportWarning"> <img src="~/information.png" /> <p> @reports person you follow has reported this post as untrustworthy.</p></div>
