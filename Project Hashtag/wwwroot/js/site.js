@@ -96,3 +96,25 @@ function stickBanderoll() {
 }
 
 
+var scrollButton = document.getElementById("scrollButton");
+
+scrollButton.addEventListener("click", function() {
+  scrollToBottom();});
+
+  function scrollToBottom() {
+    var scrollTo = document.documentElement.scrollHeight - window.innerHeight;
+    scrollToPosition(scrollTo, document.documentElement.scrollHeight * 3.5);
+  }
+  
+  function scrollToPosition(to, duration) {
+    if (duration <= 0) return;
+  
+    var difference = to - window.scrollY;
+    var perTick = (difference / duration) * 10;
+  
+    setTimeout(function() {
+      window.scrollTo(0, window.scrollY + perTick);
+      if (window.scrollY === to) return;
+      scrollToPosition(to, duration - 10);
+    }, 10);
+  }

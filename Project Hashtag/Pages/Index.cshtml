@@ -5,8 +5,20 @@
     ViewData["Title"] = "Facegram";
 }
 
+@if (Model.TimeLineMode)
+{
+    <link rel="stylesheet" href="~/css/test.css" asp-append-version="true">
+}
+
+<form method="get">
+    <input type="hidden" name="timeline" value="true"/>
+    <button type="submit">Try timeline mode</button>
+</form>
+<div class="spacerTop"></div>
 <ul class="flow">
-    <div class="spacerTop"></div>
+    <label id="scrollButtonContainer">
+        <button id="scrollButton"></button>
+    </label>
     <li class="addNewPost">
         <form method="post" enctype="multipart/form-data">
             <div id="newPostTitle">
@@ -29,6 +41,7 @@
             </div>
         </form>
     </li>
+
     <div id="banderoll1">
         <h3># Following</h3>
     </div>
@@ -70,14 +83,18 @@
             <div class="spacer"></div>
         }
 
+        string classType = "item-type-" + (i % 6 + 1);
+
         var reportedByUser = @Model.database.Reports.Any(x => x.UserID == Model.LoggedIn.LoggedInAccountID && x.PostID == post.ID);
         var reports = @Model.database.Reports.Where(r => Model.FollowingIds.Contains(r.UserID) && r.PostID == post.ID).Count();
         var poster = Model.Users.Single(x => post.UserID == x.ID);
+
         if (post.UserID == Model.LoggedIn.LoggedInAccountID)
         {
             continue;
         }
-        <li id="@post.ID">
+
+        <li id="@post.ID" class="@classType">
             @if (reports == 1)
             {
                 <div class="reportWarning"> <img src="~/information.png" /> <p> @reports person you follow has reported this post as untrustworthy.</p></div>

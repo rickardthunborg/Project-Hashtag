@@ -1,0 +1,70 @@
+.flow {
+    position: relative;
+    z-index: 0;
+}
+
+.flow::before {
+    content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  border-left: 3px solid #f1db9a;
+}
+
+.flow > li {
+    position: relative;
+    transition: all 200ms ease;
+    border-color: #f1db9ac0;
+}
+
+.item-type-1{
+    left: -10em;
+    bottom: -3em;
+    z-index: 1;
+}
+.item-type-2{
+    left: 9em;
+    z-index: 2;
+}
+.item-type-3{
+    left: -3em;
+    top: -3em;
+    z-index: 1;
+}
+.item-type-4{
+    left: 6em;
+    bottom: -3em;
+}
+.item-type-5{
+    left: -6em;
+}
+.item-type-6{
+    left: 9em;
+    top: -3em;
+}
+
+.flow > li:hover {
+    z-index: 3;
+}
+
+#followPrompt, #banderoll1, #banderoll2, .spacer {
+    display: none;
+}
+
+
+#scrollButtonContainer {
+    position: relative;
+    left: 50%;
+    transform: translateX(-48%);
+    display: block;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background-color: #121211;
+    margin-bottom: 2em;
+    border: 2px solid #f1db9a;
+    background-image: url(..//play.png);
+    background-position: 60% 50%;
+    background-size: 80%;
+}

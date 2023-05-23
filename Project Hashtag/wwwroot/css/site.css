@@ -75,7 +75,7 @@ button[type="submit"]:hover {
 .parentNavBarContainer {
     display: grid;
     position: fixed;
-    z-index: 2;
+    z-index: 100;
     width: 100vw;
     grid-template: "a b c" /1fr 1fr 1fr;
     height: 10vh; /* 10% of viewport height */
@@ -356,6 +356,10 @@ Add new post styling
     margin-left: 7px;
 }
 
+#scrollButton {
+    display: none;
+}
+
 
 /* ----------
 
@@ -388,7 +392,7 @@ Below is flow styling
     backdrop-filter: blur(15px);
     height: 50px;
     width: 500px;
-    z-index: 1;
+    z-index: 4;
     border-radius: 5px;
     border-left: 1px solid transparent;
     border-right: 1px solid transparent;
@@ -496,7 +500,7 @@ Below is flow styling
     gap: 0.4em;
     padding-bottom: 1em;
     position: relative;
-    z-index: 0;
+    z-index: 3;
 }
 
 
