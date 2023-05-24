@@ -46,16 +46,26 @@
                     <button id="notificationButton" type="button"></button>
                 </label>
                 <ul id="notificationList" class="hidden">
-                    @foreach (var person in peopleWhoFollow.Take(5))
+                    @if(peopleWhoFollow.Count < 1)
                     {
-                        var follow = yourFollowers.Where(f => f.FollowingId == person.ID).FirstOrDefault();
-                        <a asp-page="Profile" asp-route-userId="@person.ID">
-                        <li>
-                            <p>@person.Name has followed you!</p>
-                            <p id="sinceFollow">@follow.TimeSinceFollow() ago</p>
+                        <li id="noFollows">
+                            <p>You have no new followers :(</p>
                         </li>
-                        </a>
                     }
+                    else
+                    {
+                        @foreach (var person in peopleWhoFollow.Take(5))
+                        {
+                            var follow = yourFollowers.Where(f => f.FollowingId == person.ID).FirstOrDefault();
+                            <a asp-page="Profile" asp-route-userId="@person.ID">
+                            <li>
+                                <p>@person.Name has followed you!</p>
+                                <p id="sinceFollow">@follow.TimeSinceFollow() ago</p>
+                            </li>
+                            </a>
+                        }
+                    }
+                    
                 </ul>
             </div>
             <a asp-page="Profile" asp-route-userId="@accessControl.LoggedInAccountID">
