@@ -16,7 +16,7 @@ namespace Project_Hashtag.Data
                 OpenIDSubject = "1111111111",
                 Name = "Brad",
                 Biography = "I'm a pizza-loving astronaut who dreams of playing guitar on Mars.",
-                Avatar = "/uploads/standard-profile-pic.png"
+                Avatar = "/standard-profile-pic.png"
             });
             database.Users.Add(new User
             {
@@ -24,7 +24,7 @@ namespace Project_Hashtag.Data
                 OpenIDSubject = "2222222222",
                 Name = "Angelina",
                 Biography = "I'm a ninja cat whisperer with a passion for knitting sweaters for trees.",
-                Avatar = "/uploads/standard-profile-pic.png"
+                Avatar = "/standard-profile-pic.png"
             });
             database.Users.Add(new User
             {
@@ -32,7 +32,7 @@ namespace Project_Hashtag.Data
                 OpenIDSubject = "3333333333",
                 Name = "Will",
                 Biography = "I'm a time-traveling pirate who searches for buried treasure in alternate dimensions.",
-                Avatar = "/uploads/standard-profile-pic.png"
+                Avatar = "/standard-profile-pic.png"
             });
             
             database.Users.Add(new User
@@ -41,7 +41,7 @@ namespace Project_Hashtag.Data
                 OpenIDSubject = "4444444444",
                 Name = "Oliver",
                 Biography = "I'm a tech-savvy inventor who fights for digital privacy and open-source software.",
-                Avatar = "/uploads/standard-profile-pic.png"
+                Avatar = "/standard-profile-pic.png"
             });
             database.Users.Add(new User
             {
@@ -49,7 +49,7 @@ namespace Project_Hashtag.Data
                 OpenIDSubject = "5555555555",
                 Name = "Margaret Thatcher",
                 Biography = "I am a former Prime Minister who championed conservative principles and free-market economics.",
-                Avatar = "/uploads/standard-profile-pic.png"
+                Avatar = "/standard-profile-pic.png"
             });
             database.Users.Add(new User
             {
@@ -57,7 +57,7 @@ namespace Project_Hashtag.Data
                 OpenIDSubject = "6666666666",
                 Name = "Che Guevara",
                 Biography = "I was a Marxist revolutionary and guerrilla leader, advocating for socialist ideals and armed struggle.",
-                Avatar = "/uploads/standard-profile-pic.png"
+                Avatar = "/standard-profile-pic.png"
             });
             database.Users.Add(new User
             {
@@ -65,7 +65,7 @@ namespace Project_Hashtag.Data
                 OpenIDSubject = "7777777777",
                 Name = "Nelson Mandela",
                 Biography = "I was a South African anti-apartheid revolutionary and politician, fighting for equality and human rights.",
-                Avatar = "/uploads/standard-profile-pic.png"
+                Avatar = "/standard-profile-pic.png"
             });
             database.Users.Add(new User
             {
@@ -73,7 +73,7 @@ namespace Project_Hashtag.Data
                 OpenIDSubject = "8888888888",
                 Name = "Winston Churchill",
                 Biography = "I was a British statesman and Prime Minister during World War II, known for my leadership and rhetoric.",
-                Avatar = "/uploads/standard-profile-pic.png"
+                Avatar = "/standard-profile-pic.png"
             });
             database.Users.Add(new User
             {
@@ -81,7 +81,7 @@ namespace Project_Hashtag.Data
                 OpenIDSubject = "9999999999",
                 Name = "Karl Marx",
                 Biography = "I was a philosopher, economist, and socialist revolutionary, developing the theory of communism.",
-                Avatar = "/uploads/standard-profile-pic.png"
+                Avatar = "/standard-profile-pic.png"
             });
             database.Users.Add(new User
             {
@@ -89,7 +89,7 @@ namespace Project_Hashtag.Data
                 OpenIDSubject = "0000000000",
                 Name = "Ronald Reagan",
                 Biography = "I was an American actor and politician, serving as the 40th President and advocating conservative policies.",
-                Avatar = "/uploads/standard-profile-pic.png"
+                Avatar = "/standard-profile-pic.png"
             });
             database.Users.Add(new User
             {
@@ -97,7 +97,7 @@ namespace Project_Hashtag.Data
                 OpenIDSubject = "1234567890",
                 Name = "Mahatma Gandhi",
                 Biography = "I was an Indian lawyer, anti-colonial nationalist, and spiritual leader, promoting nonviolent resistance.",
-                Avatar = "/uploads/standard-profile-pic.png"
+                Avatar = "/standard-profile-pic.png"
             });
             database.Users.Add(new User
             {
@@ -105,7 +105,7 @@ namespace Project_Hashtag.Data
                 OpenIDSubject = "9876543210",
                 Name = "Mao Zedong",
                 Biography = "I was a Chinese communist revolutionary and founding father of the People's Republic of China.",
-                Avatar = "/uploads/standard-profile-pic.png"
+                Avatar = "/standard-profile-pic.png"
             });
 
             database.SaveChanges();
