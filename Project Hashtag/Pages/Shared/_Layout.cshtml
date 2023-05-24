@@ -46,12 +46,12 @@
                     <button id="notificationButton" type="button"></button>
                 </label>
                 <ul id="notificationList" class="hidden">
-                    @foreach (var person in peopleWhoFollow)
+                    @foreach (var person in peopleWhoFollow.Take(5))
                     {
                         var follow = yourFollowers.Where(f => f.FollowingId == person.ID).FirstOrDefault();
                         <a asp-page="Profile" asp-route-userId="@person.ID">
                         <li>
-                            <p>@person.Name just followed you!</p>
+                            <p>@person.Name has followed you!</p>
                             <p id="sinceFollow">@follow.TimeSinceFollow() ago</p>
                         </li>
                         </a>
@@ -76,7 +76,7 @@
         <p>School project made by: </p>
         <ul>
             <li>
-                <a>Rickard Thunborg</a>
+                <a href="https://www.linkedin.com/in/rickard-thunborg-472596242/">Rickard Thunborg</a>
             </li>
             <li>
                 <a href="https://www.linkedin.com/in/alex-grundell/">Alex Grundell</a>
