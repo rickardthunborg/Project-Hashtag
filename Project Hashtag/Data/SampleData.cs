@@ -122,8 +122,8 @@ namespace Project_Hashtag.Data
                     {
                         database.Follows.Add(new Follow
                         {
-                            UserID = user.ID,
-                            FollowingId = oliver.ID
+                            UserID = oliver.ID,
+                            FollowingId = user.ID
                         });
                     }
                 }

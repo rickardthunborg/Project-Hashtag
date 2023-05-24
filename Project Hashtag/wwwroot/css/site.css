@@ -156,10 +156,14 @@ button[type="submit"]:hover {
     background-size: 100%;
     background-repeat: no-repeat;
     margin-right: 20px;
+    transition: width 0.2s, height 0.2s;
+
 }
 
 .div3NavBar label:hover {
     cursor: pointer;
+    width: 40px;
+    height: 40px;
 }
 
 .div3NavBar label button {
@@ -182,6 +186,7 @@ button[type="submit"]:hover {
     top: 10vh;
 }
 
+
 #notificationList li{
     display: flex;
     flex-direction: column;
@@ -192,7 +197,7 @@ button[type="submit"]:hover {
     border-radius: 5px;
 }
 
-#notificationList li:hover{
+#notificationList li:not(#noFollows):hover {
     background-color: #2E3136;
 }
 
