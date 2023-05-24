@@ -67,4 +67,92 @@
     background-image: url(..//play.png);
     background-position: 60% 50%;
     background-size: 80%;
+    transition: all 200ms ease;
+}
+
+#scrollButtonContainer:hover {
+    cursor: pointer;
+    background-size: 90%;
+}
+
+
+
+.flow > li{
+    opacity: 0;
+    transform: translateY(75px);
+    transition: opacity 1s ease, transform 1s ease;
+}
+
+.showing {
+    opacity: 1 !important;
+    transform: translateY(0) !important;
+}
+
+
+#mostLiked, #mostComments, #mostReports {
+    position: absolute;
+    width: 7em;
+    height: 4em;
+    text-align: center;
+    border-radius: 7px;
+    font-size: 14px;
+}
+
+#mostComments{
+    width: 8.5em;
+    transform: translateY(-50%);
+    top: 50%;
+    right: -9em;
+    background-color: rgba(29, 156, 240, 0.411);
+    border: 2px solid rgba(29, 156, 240, 0.74);
+}
+
+#mostLiked {
+    transform: translateY(-50%);
+    top: 50%;
+    left: -7.5em;
+    background-color: rgba(217, 22, 113, 0.411);
+    border: 2px solid rgba(217, 22, 113, 0.747);
+}
+
+#mostReports{
+    width: 8.5em;
+    transform: translateY(-50%);
+    top: 30%;
+    right: -9em;
+    background-color: rgba(255, 64, 64, 0.411);
+    border: 2px solid rgba(255, 64, 64, 0.747);
+}
+
+#mostComments > div {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    top: -18px;
+    right: -13px;
+    background-image: url(..//commentfilled.png);
+    transform: rotate(10deg);
+    background-size: contain;
+}
+
+#mostReports > div {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    top: -25px;
+    right: -10px;
+    background-image: url(..//report-flag-red.png);
+    transform: rotate(-10deg);
+    background-size: contain;
+}
+
+#mostLiked > div{
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    top: -15px;
+    left: -10px;
+    background-image: url(..//likeliked.png);
+    transform: rotate(-10deg);
+    background-size: contain;
 }

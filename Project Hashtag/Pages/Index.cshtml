@@ -11,7 +11,7 @@
 }
 
 <form method="get">
-    <input type="hidden" name="timeline" value="true"/>
+    <input type="hidden" name="timeLine" value="true"/>
     <button type="submit">Try timeline mode</button>
 </form>
 <div class="spacerTop"></div>
@@ -19,7 +19,7 @@
     <label id="scrollButtonContainer">
         <button id="scrollButton"></button>
     </label>
-    <li class="addNewPost">
+    <li class="addNewPost showing">
         <form method="post" enctype="multipart/form-data">
             <div id="newPostTitle">
                 <img class="pic-top" src="@Model.database.Users.Single(x => x.ID == @Model.LoggedIn.LoggedInAccountID).Avatar" alt="Error">
@@ -89,12 +89,41 @@
         var reports = @Model.database.Reports.Where(r => Model.FollowingIds.Contains(r.UserID) && r.PostID == post.ID).Count();
         var poster = Model.Users.Single(x => post.UserID == x.ID);
 
-        if (post.UserID == Model.LoggedIn.LoggedInAccountID)
+        if (post.UserID == Model.LoggedIn.LoggedInAccountID && !Model.TimeLineMode)
         {
             continue;
         }
 
-        <li id="@post.ID" class="@classType">
+
+
+        <li id="@post.ID" class="@classType animatePost @(i < 3 ? "showing" : "")">
+
+            @if (Model.TimeLineMode)
+            {
+                @if(post == Model.MostLiked)
+                {
+                    <div id="mostLiked">
+                        <div></div>
+                        <h2> Most Likes</h2>
+                    </div>
+                }
+                @if (post == Model.MostComments)
+                {
+                    <div id="mostComments">
+                        <div></div>
+                        <h2> Most Comments</h2>
+                    </div>
+                }
+                @if (post == Model.MostReports)
+                {
+                    <div id="mostReports">
+                        <div></div>
+                        <h2> Most Reports</h2>
+                    </div>
+                }
+                
+            }
+
             @if (reports == 1)
             {
                 <div class="reportWarning"> <img src="~/information.png" /> <p> @reports person you follow has reported this post as untrustworthy.</p></div>
@@ -149,6 +178,10 @@
             }
             <div class="interaction">
                 <form method="post" asp-page-handler="like" asp-route-id="@post.ID">
+                    @if (Model.TimeLineMode)
+                    {
+                      <input type="hidden" name="timeLine" value="true"/>
+                    }
                     @if (post.IsLiked(Model.LoggedIn.LoggedInAccountID, Model.database))
                     {
                         <label id="like"class="liked">

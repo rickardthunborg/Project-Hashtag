@@ -66,14 +66,14 @@
                 <form method="post" asp-page-handler="like" asp-route-id="@Model.Post.ID">
                     @if (Model.Post.IsLiked(Model.LoggedIn.LoggedInAccountID, Model.database))
                     {
-                        <label class="liked">
+                        <label id="like" class="liked">
                             <button type="submit"></button>
                             <p>@Model.Post.LikeCount</p>
                         </label>
                     }
                     else
                     {
-                        <label>
+                    <label id="like">
                             <button type="submit"></button>
                             <p>@Model.Post.LikeCount</p>
                         </label>

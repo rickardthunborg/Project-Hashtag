@@ -87,6 +87,8 @@ closeButtons.forEach(function (button) {
 });
 
 
+
+//Javascript to stick stick the banderolls to the top
 window.onscroll = function () { stickBanderoll() };
 var header = document.getElementById("banderoll1");
 var sticky = header.offsetTop;
@@ -111,6 +113,9 @@ function stickBanderoll() {
 }
 
 
+
+
+//Scroll funtion for the timeline
 var scrollButton = document.getElementById("scrollButton");
 
 scrollButton.addEventListener("click", function() {
@@ -132,4 +137,27 @@ scrollButton.addEventListener("click", function() {
       if (window.scrollY === to) return;
       scrollToPosition(to, duration - 10);
     }, 10);
+}
+
+
+
+//Code for showing the posts in the timeline
+const contentDivs = document.querySelectorAll('.animatePost');
+
+window.addEventListener('scroll', showBoxesInView);
+
+function elementInView(element) {
+  const rect = element.getBoundingClientRect();
+  const windowHeight = window.innerHeight || document.documentElement.clientHeight;
+
+  return (rect.top <= windowHeight) && ((rect.top + rect.height) >= 0);
+}
+ 
+
+function showBoxesInView() {
+  for (let div of contentDivs) {
+    if (elementInView(div)) {
+      div.classList.add('showing');
+    }
   }
+}

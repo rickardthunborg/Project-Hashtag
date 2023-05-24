@@ -18,6 +18,11 @@ namespace Project_Hashtag.Pages
 
         public List<Post> FollowingPosts = new List<Post>();
         public List<Post> OtherPosts = new List<Post>();
+        public Post? MostLiked;
+        public Post? MostComments;
+        public Post? MostReports;
+
+
 
         public Post Post;
         public List<User> Users;
@@ -38,33 +43,49 @@ namespace Project_Hashtag.Pages
 
         }
 
-        public IActionResult OnGet(bool timeline)
+        public IActionResult OnGet(bool timeLine)
         {
 
-            TimeLineMode = timeline;
+            TimeLineMode = timeLine;
 
             FollowingIds = database.Follows
                 .Where(f => f.FollowingId == LoggedIn.LoggedInAccountID)
                 .Select(f => f.UserID)
                 .ToList();
 
-            this.FollowingPosts = database.Posts
-                 .Where(p => p.UserID != LoggedIn.LoggedInAccountID) 
-                 .Where(p => FollowingIds.Contains(p.UserID)) 
-                 .Where(p => p.CreatedDate >= DateTime.Now.AddDays(-1))
-                 .OrderByDescending(x => x.CreatedDate)
-                 .ToList();
+            if (!TimeLineMode)
+            {
+                this.FollowingPosts = database.Posts
+                     .Where(p => p.UserID != LoggedIn.LoggedInAccountID) 
+                     .Where(p => FollowingIds.Contains(p.UserID)) 
+                     .Where(p => p.CreatedDate >= DateTime.Now.AddDays(-1))
+                     .OrderByDescending(x => x.CreatedDate)
+                     .ToList();
 
-            OtherPosts = database.Posts
-                .Where(p => p.UserID != LoggedIn.LoggedInAccountID) 
-                .OrderByDescending(x => x.CreatedDate)
-                .ToList()
-                .Except(this.FollowingPosts)
-                .ToList();
+                OtherPosts = database.Posts
+                    .Where(p => p.UserID != LoggedIn.LoggedInAccountID) 
+                    .OrderByDescending(x => x.CreatedDate)
+                    .ToList()
+                    .Except(this.FollowingPosts)
+                    .ToList();
+            }
+            else
+            {
+                OtherPosts = database.Posts
+                    .OrderByDescending(x => x.CreatedDate)
+                    .ToList();
+            }
+
 
             this.Users = database.Users.ToList();
             this.Comments = database.Comments.ToList();
             this.Reports = database.Reports.ToList();
+
+            this.MostLiked = database.Posts.OrderByDescending(x => x.LikeCount).FirstOrDefault();
+            this.MostComments = database.Posts.OrderByDescending(x => x.Comments.Count()).FirstOrDefault();
+            this.MostReports = database.Posts.OrderByDescending(x => x.Reports.Count()).FirstOrDefault();
+
+
             return Page();
 
         }
@@ -117,7 +138,7 @@ namespace Project_Hashtag.Pages
                     database.Reports.Add(report);
                     database.SaveChanges();
 
-                    string returnUrl = Url.Page("/index") + "#" + id;
+                    string returnUrl = Url.Page("/index?timeline=" + TimeLineMode) + "#" + id;
                     return Redirect(returnUrl);
                 }
                 catch
@@ -144,7 +165,7 @@ namespace Project_Hashtag.Pages
 
         }
 
-        public IActionResult OnPostLike(int id, string returnURL)
+        public IActionResult OnPostLike(int id, string returnURL, bool timeLine)
         {
 
 
@@ -160,7 +181,7 @@ namespace Project_Hashtag.Pages
                     post.LikeCount += 1;
                     database.SaveChanges();
 
-                    string returnUrl = Url.Page("/index") + "#" + id;
+                    string returnUrl = Url.Page("/index") +"?timeline=" + timeLine + "#" + id;
                     return Redirect(returnUrl);
                 }
                 catch
@@ -177,7 +198,7 @@ namespace Project_Hashtag.Pages
                     post.LikeCount--;
                     database.SaveChanges();
 
-                    string returnUrl = Url.Page("/index") + "#" + id;
+                    string returnUrl = Url.Page("/index") + "?timeline=" + timeLine + "#" + id;
                     return Redirect(returnUrl);
                 }
                 catch
