@@ -19,6 +19,41 @@ html, body {
     color: #F0F7EE;
 }
 
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+footer {
+    text-align: center;
+    height: 14em;
+    background-color: #1f1f1f;
+    margin-top: auto;
+}
+
+footer p {
+    font-weight: 500;
+    margin: 2em 0;
+}
+
+footer ul {
+    display: flex;
+    margin: auto;
+    justify-content: center;
+    gap: 5vw;
+}
+
+footer a {
+    color: #f1dba7;
+}
+
+footer a:hover {
+    color: #BA962F;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
 ul {
     list-style-type: none;
     padding: 0;
@@ -433,6 +468,7 @@ Below is flow styling
 .flow {
     width: clamp(200px, 100%, 500px);
     margin: auto;
+    margin-bottom: 5em;
 }
 
 .flow > li {

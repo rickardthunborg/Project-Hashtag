@@ -14,62 +14,80 @@
     @await RenderSectionAsync("Scripts", required: false)
 </head>
 <body>
-<header class="parentNavBarContainer">
-    <div class="div1NavBar">
-        <form method="get" asp-page="Search" id="searchbar">
-            <input type="text" name="search" placeholder="Search" autocomplete="off">
-            <label>
-                <button type="submit"></button>
-            </label>
-        </form>
-    </div>
-    <a class="div2NavBar" asp-page="./index">
-        <img src="~/FaceGramLogo.svg" alt="FaceGram Logo Gold" class="svg-logo" type="image/svg+xml" id="FaceGramNavBarLogo">
-    </a>
-    <div class="div3NavBar">
-        @{
-            var users = database.Users.ToList();
-            var likes = database.Likes.ToList();
-            var follows = database.Follows.ToList();
-            var loggedIn = accessControl;
-            var yourFollowers = follows.Where(f => f.UserID == loggedIn.LoggedInAccountID).ToList();
-            var peopleWhoFollow = users
+    <header class="parentNavBarContainer">
+        <div class="div1NavBar">
+            <form method="get" asp-page="Search" id="searchbar">
+                <input type="text" name="search" placeholder="Search" autocomplete="off">
+                <label>
+                    <button type="submit"></button>
+                </label>
+            </form>
+        </div>
+        <a class="div2NavBar" asp-page="./index">
+            <img src="~/FaceGramLogo.svg" alt="FaceGram Logo Gold" class="svg-logo" type="image/svg+xml" id="FaceGramNavBarLogo">
+        </a>
+        <div class="div3NavBar">
+            @{
+                var users = database.Users.ToList();
+                var likes = database.Likes.ToList();
+                var follows = database.Follows.ToList();
+                var loggedIn = accessControl;
+                var yourFollowers = follows.Where(f => f.UserID == loggedIn.LoggedInAccountID).ToList();
+                var peopleWhoFollow = users
                 .Where(u => yourFollowers.Any(f => f.FollowingId == u.ID))
                 .OrderByDescending(u => yourFollowers
                 .Where(f => f.FollowingId == u.ID)
                 .Select(f => f.DateFollowed)
-                .FirstOrDefault()) 
+                .FirstOrDefault())
                 .ToList();
-        }
-        <div class="notificationDiv">
+            }
+            <div class="notificationDiv">
                 <label>
                     <button id="notificationButton" type="button"></button>
                 </label>
                 <ul id="notificationList" class="hidden">
-                @foreach(var person in peopleWhoFollow)
+                    @foreach (var person in peopleWhoFollow)
                     {
                         var follow = yourFollowers.Where(f => f.FollowingId == person.ID).FirstOrDefault();
                         <a asp-page="Profile" asp-route-userId="@person.ID">
                         <li>
-                        <p>@person.Name just followed you!</p>
-                        <p id="sinceFollow">@follow.TimeSinceFollow() ago</p>
-                    </li>
-                       </a>
+                            <p>@person.Name just followed you!</p>
+                            <p id="sinceFollow">@follow.TimeSinceFollow() ago</p>
+                        </li>
+                        </a>
                     }
                 </ul>
+            </div>
+            <a asp-page="Profile" asp-route-userId="@accessControl.LoggedInAccountID">
+                <img class="pic-top" src="@database.Users.Find(accessControl.LoggedInAccountID).Avatar" alt="error">
+                <p>@accessControl.LoggedInAccountName</p>
+            </a>
         </div>
-        <a asp-page="Profile" asp-route-userId="@accessControl.LoggedInAccountID">
-            <img class="pic-top" src="@database.Users.Find(accessControl.LoggedInAccountID).Avatar" alt="error">
-        <p>@accessControl.LoggedInAccountName</p> </a>
+    </header>
+    <div id="fakeLogin">
+        <environment names="Development">
+            @await Component.InvokeAsync(nameof(FakeLoginMenu))
+        </environment>
     </div>
-</header>
-<div id="fakeLogin">
-    <environment names="Development">
-        @await Component.InvokeAsync(nameof(FakeLoginMenu))
-    </environment>
-</div>
-<main>
-    @RenderBody()
-</main>
+    <main>
+        @RenderBody()
+    </main>
+    <footer>
+        <p>School project made by: </p>
+        <ul>
+            <li>
+                <a>Rickard Thunborg</a>
+            </li>
+            <li>
+                <a href="https://www.linkedin.com/in/alex-grundell/">Alex Grundell</a>
+            </li>
+            <li>
+                <a>Gustav Mårtensson</a>
+            </li>
+            <li>
+                <a>Oliver Talcoth</a>
+            </li>
+        </ul>
+    </footer>
 </body>
 </html>
