@@ -81,9 +81,9 @@ namespace Project_Hashtag.Pages
             this.Comments = database.Comments.ToList();
             this.Reports = database.Reports.ToList();
 
-            this.MostLiked = database.Posts.OrderByDescending(x => x.LikeCount).FirstOrDefault();
-            this.MostComments = database.Posts.OrderByDescending(x => x.Comments.Count()).FirstOrDefault();
-            this.MostReports = database.Posts.OrderByDescending(x => x.Reports.Count()).FirstOrDefault();
+            this.MostLiked = database.Posts.Where(x => x.LikeCount > 0).OrderByDescending(x => x.LikeCount).FirstOrDefault();
+            this.MostComments = database.Posts.Where(x => x.Comments.Count() > 0).OrderByDescending(x => x.Comments.Count()).FirstOrDefault();
+            this.MostReports = database.Posts.Where(x => x.Reports.Count() > 0).OrderByDescending(x => x.Reports.Count()).FirstOrDefault();
 
 
             return Page();

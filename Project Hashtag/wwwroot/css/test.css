@@ -101,7 +101,7 @@
 #mostComments{
     width: 8.5em;
     transform: translateY(-50%);
-    top: 50%;
+    top: 65%;
     right: -9em;
     background-color: rgba(29, 156, 240, 0.411);
     border: 2px solid rgba(29, 156, 240, 0.74);
