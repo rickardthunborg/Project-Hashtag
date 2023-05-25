@@ -40,10 +40,8 @@ namespace Project_Hashtag.Pages
 
         public List<User> Users;
 
-        public void OnGet()
+        public void OnGet(int userId)
         {
-            int userId = accessControl.LoggedInAccountID;
-
             if (database.Users != null)
             {
                 User = database.Users.Find(userId);

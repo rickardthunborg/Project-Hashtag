@@ -13,9 +13,9 @@
     
 <div id="postsCount" class="profileCounter"> <p> <b> @Model.userPosts.Count()</b></p> <p>Posts</p></div>
 
-<div id="followerCount" class="profileCounter clickable"> <a asp-page="./followers" ><p> <b> @Model.amountOfFollowers</b></p> <p>Followers</p></a></div>
+    <div id="followerCount" class="profileCounter clickable"> <a asp-page="./followers" asp-route-userId="@Model.User.ID"><p> <b> @Model.amountOfFollowers</b></p> <p>Followers</p></a></div>
 
-<div id="followingCount" class="profileCounter clickable"> <a asp-page="./following" ><p> <b> @Model.amountFollowing</b></p> <p>Following</p></a></div>
+    <div id="followingCount" class="profileCounter clickable"> <a asp-page="./following" asp-route-userId="@Model.User.ID"><p> <b> @Model.amountFollowing</b></p> <p>Following</p></a></div>
 
     
 

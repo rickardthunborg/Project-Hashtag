@@ -10,7 +10,7 @@
 <body>
 <div class="FollowersBox">
     <h2>Following</h2>
-    <a asp-page="Profile" asp-route-userId="@accessControl.LoggedInAccountID">
+    <a asp-page="Profile" asp-route-userId="@Model.User.ID">
         <button id="Xbutton">X</button>
     </a>
     <div id="FollowersBoxDivider"></div>
