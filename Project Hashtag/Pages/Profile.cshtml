@@ -180,7 +180,7 @@
             {
                 <form method="post" asp-page-handler="delete" asp-route-postID="@post.ID">
                     <input hidden name="userId" value="@Model.User.ID">
-                    <button type="submit">Delete</button>
+                    <button type="submit" id="deleteButton">Delete</button>
                 </form>
             }
 
