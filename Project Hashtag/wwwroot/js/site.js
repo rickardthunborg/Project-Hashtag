@@ -11,28 +11,28 @@ let liCounter = 0;
 //function GetAd(tag)
 //{
 //    let post = document.querySelector("ul.flow > li:nth-child(" + liCounter + ")");
-
+//
 //    let url = `https://laboutique.azurewebsites.net/api/Product/GetByName?name=${tag}`
-
+//
 //    let response = await fetch(url);
 //    let json = await response.json();   
-
+//
 //    let URL = json.URL;
-
+//
 //    if (json == null)
 //    {
 //        liCounter++;
 //        return;
 //    }
-
+//
 //    let adSpace = post.createElement('div');
 //    adSpace.setAttribute("id", "adDiv");
-
+//
 //    let adSpaceText = post.createElement('p')
-//    adSpace.appendChild(adSpaceText)
-
+//   adSpace.appendChild(adSpaceText)
+//
 //    liCounter++;
-
+//
 //}
 
 var notificationButton = document.querySelector('#notificationButton')
@@ -42,12 +42,6 @@ notificationButton.addEventListener('click', function () {
     notificationList.classList.toggle('hidden')
 });
 
-//document.addEventListener('click', function (event) {
-//     var targetElement = event.target;
-//     if (targetElement !== notificationButton && !notificationList.contains(targetElement)) {
-//     notificationList.classList.add('hidden');
-//        }
-//    });
 
 
 if (fileInput != null) {
@@ -160,4 +154,17 @@ function showBoxesInView() {
       div.classList.add('showing');
     }
   }
+}
+
+
+document.addEventListener('DOMContentLoaded', function() {
+  var liElements = document.querySelectorAll('.flow li');
+  liElements.forEach(function(li) {
+    var tag = li.getAttribute('data-tag');
+    LoadAd(tag);
+  });
+});
+
+function LoadAd(tag) {
+  console.log(tag)
 }

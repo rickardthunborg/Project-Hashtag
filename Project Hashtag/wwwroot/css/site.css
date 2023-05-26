@@ -1340,3 +1340,7 @@ Followers and Following page css
         grid-area: c;
     }
 }
+
+.singlePost {
+    margin-top: 1em;
+}

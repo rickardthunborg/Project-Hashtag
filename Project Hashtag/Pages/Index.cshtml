@@ -101,7 +101,7 @@ else
 
 
 
-        <li id="@post.ID" class="@classType animatePost @(i < 2 ? "showing" : "")">
+        <li id="@post.ID" class="@classType animatePost @(i < 2 ? "showing" : "")" data-tag="@post.Tag">
 
             @if (Model.TimeLineMode)
             {

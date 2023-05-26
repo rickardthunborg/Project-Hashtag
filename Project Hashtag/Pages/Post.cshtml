@@ -6,7 +6,7 @@
 
 <ul class="flow">
 
-            <li>
+            <li class="singlePost">
                 @{
                     var reportedByUser = @Model.database.Reports.Any(x => x.UserID == Model.LoggedIn.LoggedInAccountID && x.PostID == Model.Post.ID);
                     var reports = @Model.database.Reports.Where(r => Model.FollowingIds.Contains(r.UserID) && r.PostID == Model.Post.ID).Count();
