@@ -9,12 +9,16 @@
 {
     <link rel="stylesheet" href="~/css/test.css" asp-append-version="true">
 }
+else
+{
+    <form method="get" id="timeLineInput">
+        <p>Check out the timeline mode for a different feed!</p>
+        <input type="hidden" name="timeLine" value="true" />
+        <button type="submit">Timeline <img src="~/timeline.png"/></button>
+    </form>
 
-<form method="get" id="timeLineInput">
-    <p>Check out the timeline for a different feed experience!</p>
-    <input type="hidden" name="timeLine" value="true"/>
-    <button type="submit">Try</button>
-</form>
+}
+
 <div class="spacerTop"></div>
 <ul class="flow">
     <label id="scrollButtonContainer">
@@ -101,7 +105,7 @@
 
             @if (Model.TimeLineMode)
             {
-                @if(post == Model.MostLiked)
+                @if (post == Model.MostLiked)
                 {
                     <div id="mostLiked">
                         <div></div>
@@ -122,7 +126,7 @@
                         <h2> Most Reports</h2>
                     </div>
                 }
-                
+
             }
 
             @if (reports == 1)
@@ -150,18 +154,18 @@
 
                 <p>· @post.TimeSincePost()</p>
             </div>
-            
-@*  
-    
-            Below is the report popup
 
-*@
+            @*
+
+        Below is the report popup
+
+        *@
             <div class="popupForm" style="display: none;">
                 @if (reportedByUser)
                 {
                     <p>Do you want to remove your report on this post?</p>
                 }
-                else 
+                else
                 {
                     <p>Do you want to report this post?</p>
                 }
@@ -181,11 +185,11 @@
                 <form method="post" asp-page-handler="like" asp-route-id="@post.ID">
                     @if (Model.TimeLineMode)
                     {
-                      <input type="hidden" name="timeLine" value="true"/>
+                        <input type="hidden" name="timeLine" value="true" />
                     }
                     @if (post.IsLiked(Model.LoggedIn.LoggedInAccountID, Model.database))
                     {
-                        <label id="like"class="liked">
+                        <label id="like" class="liked">
                             <button type="submit"></button>
                             <p>@post.LikeCount</p>
                         </label>
@@ -206,7 +210,7 @@
                 @if (post.Tag != "" && post.Tag != null)
                 {
                     <form method="get" asp-page="Search" class="tagContainer">
-                        <input type="hidden" name="search" value="@post.Tag" >
+                        <input type="hidden" name="search" value="@post.Tag">
                         <label class="tags">
                             <button type="submit"></button>
                             <p>@post.Tag</p>

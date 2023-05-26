@@ -160,14 +160,14 @@ button[type="submit"]:hover {
     background-size: 100%;
     background-repeat: no-repeat;
     margin-right: 20px;
-    transition: width 0.2s, height 0.2s;
+    transition: all 100ms ease;
+    opacity: 0.6;
 
 }
 
 .div3NavBar label:hover {
     cursor: pointer;
-    width: 40px;
-    height: 40px;
+    opacity: 1;
 }
 
 .div3NavBar label button {
@@ -1274,4 +1274,35 @@ Followers and Following page css
 #timeLineInput {
     width: clamp(200px, 100%, 500px);
     margin: 1em auto 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: rgba(0, 0, 0, 0.397);
+    backdrop-filter: blur(15px);
+    padding: 0.5em;
+    border-radius: 5px;
+}
+
+#timeLineInput p {
+    font-size: 14px;
+}
+
+#timeLineInput button {
+    display: flex;
+    align-items: center;
+    color: #dbb84e;
+    background-color: #2E3136;
+    font-size: 16px;
+    border: 1px solid transparent;
+}
+
+#timeLineInput button img {
+    height: 25px;
+    margin-left: 0.3em;
+}
+
+#timeLineInput button:hover {
+    transform: none;
+    opacity: 0.8;
+    border: 1px solid #d5af3497;
 }
