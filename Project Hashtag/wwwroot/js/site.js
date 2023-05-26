@@ -137,27 +137,27 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 });
 
-function LoadAd(li, tag) {
-    let post = li;
+//function LoadAd(li, tag) {
+//    let post = li;
 
-    let url = `https://laboutique.azurewebsites.net/api/Product/GetByName?name=${tag}`
+//    let url = `https://laboutique.azurewebsites.net/api/Product/GetByName?name=${tag}`
 
-    let response = await fetch(url);
-    let json = await response.json();
+//    let response = await fetch(url);
+//    let json = await response.json();
 
-    if (json == null) {
-        return;
-    }
+//    if (json == null) {
+//        return;
+//    }
 
-    let description = json.description;
-    let productID = json.productID;
-    let price = json.price;
+//    let description = json.description;
+//    let productID = json.productID;
+//    let price = json.price;
 
-    let adSpace = document.createElement('div');
-    adSpace.setAttribute("id", "adDiv");
-    post.appendChild(adSpace);
+//    let adSpace = document.createElement('div');
+//    adSpace.setAttribute("id", "adDiv");
+//    post.appendChild(adSpace);
 
-    let adSpaceText = document.createElement('p')
-    adSpaceText.textContent = description;
-    adSpace.appendChild(adSpaceText)
-}
+//    let adSpaceText = document.createElement('p')
+//    adSpaceText.textContent = description;
+//    adSpace.appendChild(adSpaceText)
+//}
