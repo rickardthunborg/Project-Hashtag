@@ -1132,6 +1132,10 @@ Mobile optimization
         padding: 0px 10px
     }
 
+    .div3NavBar label{
+        opacity: 1;
+    }
+
     .profilePageBox{
         grid-template: "a a a a" "b c d e" "f f f f" "g g g g"/1fr 1fr 1fr 1fr;
     }
