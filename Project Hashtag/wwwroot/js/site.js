@@ -133,31 +133,34 @@ document.addEventListener('DOMContentLoaded', function() {
   var liElements = document.querySelectorAll('.flow li');
   liElements.forEach(function(li) {
     var tag = li.getAttribute('data-tag');
-    LoadAd(tag);
+    LoadAd(tag, li);
   });
 });
 
-//function LoadAd(li, tag) {
-//    let post = li;
+async function LoadAd(tag, li) {
 
-//    let url = `https://laboutique.azurewebsites.net/api/Product/GetByName?name=${tag}`
+    let url = `https://laboutique.azurewebsites.net/api/Product/GetByName?name=${tag}`
 
-//    let response = await fetch(url);
-//    let json = await response.json();
+    let response;
+    let json;
+    try {
+        response = await fetch(url);
+        json = await response.json();
+    }
+    catch (error) {
+        console.log(error)
+        return;
+    }
+    
+    let description = json.description;
+    let productID = json.productID;
+    let price = json.price;
 
-//    if (json == null) {
-//        return;
-//    }
+    let adSpace = document.createElement('div');
+    adSpace.setAttribute("id", "adDiv");
+    post.appendChild(adSpace);
 
-//    let description = json.description;
-//    let productID = json.productID;
-//    let price = json.price;
-
-//    let adSpace = document.createElement('div');
-//    adSpace.setAttribute("id", "adDiv");
-//    post.appendChild(adSpace);
-
-//    let adSpaceText = document.createElement('p')
-//    adSpaceText.textContent = description;
-//    adSpace.appendChild(adSpaceText)
-//}
+    let adSpaceText = document.createElement('p')
+    adSpaceText.textContent = description;
+    adSpace.appendChild(adSpaceText)
+}
