@@ -1306,3 +1306,33 @@ Followers and Following page css
     opacity: 0.8;
     border: 1px solid #d5af3497;
 }
+
+@media (max-width: 1090px) {
+    #timeLineInput {
+        display: none;
+    }
+}
+
+@media (max-width: 450px) {
+    #addPostBottom {
+        display: grid; 
+        grid-template: "a b c" "d d d" /1fr 0.5fr 1fr;
+    }
+
+    #addPostBottom button {
+        grid-area: d;
+        position:initial;
+        margin-top: 0.5em;
+    }
+
+    #addTag {
+        grid-area: a;
+    }
+
+    #addPostBottom .imageText {
+        grid-area: b;
+    }
+    #addPostBottom > label {
+        grid-area: c;
+    }
+}
