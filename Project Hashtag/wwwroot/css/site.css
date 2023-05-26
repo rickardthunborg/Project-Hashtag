@@ -677,6 +677,7 @@ Below is flow styling
 .postText {
     width: 74%;
     margin: auto;
+    margin-bottom: 1em;
 }
 
 .interaction {
@@ -1117,7 +1118,7 @@ Mobile optimization
 
 @media only screen and (max-width: 535px) {
 
-    .div3NavBar p {
+    .div3NavBar .profileName {
         display: none;
     }
 }
@@ -1142,6 +1143,14 @@ Mobile optimization
     .profilePageBox img {
         width: 60px;
         height: 60px;
+    }
+
+    #searchbar > input {
+        width: 4em;
+    }
+
+    #searchbar > input:focus {
+        width: 65%;
     }
 }
 

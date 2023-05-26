@@ -70,7 +70,7 @@
             </div>
             <a asp-page="Profile" asp-route-userId="@accessControl.LoggedInAccountID">
                 <img class="pic-top" src="@database.Users.Find(accessControl.LoggedInAccountID).Avatar" alt="error">
-                <p>@accessControl.LoggedInAccountName</p>
+                <p class="profileName">@accessControl.LoggedInAccountName</p>
             </a>
         </div>
     </header>
