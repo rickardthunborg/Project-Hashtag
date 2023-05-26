@@ -111,7 +111,7 @@ button[type="submit"]:hover {
 }
 
 #deleteButton {
-    width: 90%;
+    width: 100%;
     margin: auto;
 }
 
@@ -1132,7 +1132,11 @@ Mobile optimization
     }
 
     .profilePageBox{
-        grid-template: "a a a a a" "b c d e ." "f f f f f" "g g g g g"/1fr 1fr 1fr 1fr 0.5fr;
+        grid-template: "a a a a" "b c d e" "f f f f" "g g g g"/1fr 1fr 1fr 1fr;
+    }
+
+    .profilePageBox #postsCount {
+        margin: 0;
     }
 
     .profilePageBox img {
@@ -1169,7 +1173,7 @@ Followers and Following page css
 
 .FollowersBox {
     background-color: #1f1f1f;
-    width: 35vw;
+    width: clamp(200px, 90%, 600px);
     height: 42vh;
     margin: auto;
     border-radius: 10px;
