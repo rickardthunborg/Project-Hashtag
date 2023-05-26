@@ -5,35 +5,7 @@
 
 const fileInput = document.getElementById('photo-input');
 const fileLabel = document.getElementById('file-label');
-let liCounter = 0;
 
-
-//function GetAd(tag)
-//{
-//    let post = document.querySelector("ul.flow > li:nth-child(" + liCounter + ")");
-//
-//    let url = `https://laboutique.azurewebsites.net/api/Product/GetByName?name=${tag}`
-//
-//    let response = await fetch(url);
-//    let json = await response.json();   
-//
-//    let URL = json.URL;
-//
-//    if (json == null)
-//    {
-//        liCounter++;
-//        return;
-//    }
-//
-//    let adSpace = post.createElement('div');
-//    adSpace.setAttribute("id", "adDiv");
-//
-//    let adSpaceText = post.createElement('p')
-//   adSpace.appendChild(adSpaceText)
-//
-//    liCounter++;
-//
-//}
 
 var notificationButton = document.querySelector('#notificationButton')
 var notificationList = document.querySelector('#notificationList')
@@ -165,6 +137,27 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 });
 
-function LoadAd(tag) {
-  console.log(tag)
+function LoadAd(li, tag) {
+    let post = li;
+
+    let url = `https://laboutique.azurewebsites.net/api/Product/GetByName?name=${tag}`
+
+    let response = await fetch(url);
+    let json = await response.json();
+
+    if (json == null) {
+        return;
+    }
+
+    let description = json.description;
+    let productID = json.productID;
+    let price = json.price;
+
+    let adSpace = document.createElement('div');
+    adSpace.setAttribute("id", "adDiv");
+    post.appendChild(adSpace);
+
+    let adSpaceText = document.createElement('p')
+    adSpaceText.textContent = description;
+    adSpace.appendChild(adSpaceText)
 }
