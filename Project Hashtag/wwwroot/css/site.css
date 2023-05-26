@@ -1126,6 +1126,19 @@ Mobile optimization
     #banderoll1, #banderoll2 {
         width: 100%
     }
+
+    .div3NavBar {
+        padding: 0px 10px
+    }
+
+    .profilePageBox{
+        grid-template: "a a a a a" "b c d e ." "f f f f f" "g g g g g"/1fr 1fr 1fr 1fr 0.5fr;
+    }
+
+    .profilePageBox img {
+        width: 60px;
+        height: 60px;
+    }
 }
 
 /*
