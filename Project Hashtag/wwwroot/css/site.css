@@ -657,11 +657,11 @@ Below is flow styling
 }
 
 .image {
-    width: 85%;
+    width: 75%;
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: auto;
+    margin: 1em auto 0 auto;
     height: clamp(100px, 100%, 500px);
     border: 1px solid  grey;
     border-radius: 10px;
