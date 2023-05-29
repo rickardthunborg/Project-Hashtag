@@ -143,6 +143,7 @@ async function LoadAd(tag, li) {
 
     let response;
     let json;
+
     try {
         response = await fetch(url);
         json = await response.json();
@@ -155,10 +156,11 @@ async function LoadAd(tag, li) {
     let description = json.description;
     let productID = json.productID;
     let price = json.price;
+    let link = `https://laboutique.azurewebsites.net/ProductPage?id=${productID}`
 
     let adSpace = document.createElement('div');
     adSpace.setAttribute("id", "adDiv");
-    post.appendChild(adSpace);
+    li.appendChild(adSpace);
 
     let adSpaceText = document.createElement('p')
     adSpaceText.textContent = description;

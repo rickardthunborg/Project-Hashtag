@@ -27,13 +27,20 @@ namespace Project_Hashtag.Controllers
             var posts = database.Posts.Where(p => p.Tag.ToLower() == tag.ToLower()).ToList();
             var users = database.Users.ToList();
 
-            Post? post = posts.OrderByDescending(p => p.LikeCount).FirstOrDefault();
-            User? user = users.FirstOrDefault(u => u.ID == post.UserID);
+            Post? post = null;
+            User? user = null;
 
-            if (post == null || user == null)
+            try
+            {
+                post = posts.OrderByDescending(p => p.LikeCount).FirstOrDefault();
+                user = users.FirstOrDefault(u => u.ID == post.UserID);
+            }
+            catch
             {
                 return NotFound(new { message = "No relatable posts were found." });
+
             }
+
 
             var postURL = "https://facegram.azurewebsites.net/Post/" + post.ID;
 
