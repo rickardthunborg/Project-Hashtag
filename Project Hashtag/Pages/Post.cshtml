@@ -89,13 +89,16 @@
                 @*
                     Adds tag if tag is not null
                 *@
-                @if (Model.Post.Tag != "" && Model.Post.Tag != null)
-                {
-                    <a asp-page="Search" class="tagContainer">
-                        <div class="tags"></div>
-                        <p>@Model.Post.Tag </p>
-                    </a>
-                }
+            @if (Model.Post.Tag != "" && Model.Post.Tag != null)
+            {
+                <form method="get" asp-page="Search" class="tagContainer">
+                    <input type="hidden" name="search" value="@Model.Post.Tag">
+                    <label class="tags">
+                        <button type="submit"></button>
+                        <p>@Model.Post.Tag</p>
+                    </label>
+                </form>
+            }
             </div>
             
         

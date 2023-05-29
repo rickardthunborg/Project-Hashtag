@@ -142,10 +142,13 @@
                 *@
                 @if (post.Tag != "" && post.Tag != null)
                 {
-                    <a asp-page="Search" class="tagContainer">
-                        <div class="tags"></div>
-                        <p>@post.Tag </p>
-                    </a>
+                    <form method="get" asp-page="Search" class="tagContainer">
+                        <input type="hidden" name="search" value="@post.Tag">
+                        <label class="tags">
+                            <button type="submit"></button>
+                            <p>@post.Tag</p>
+                        </label>
+                    </form>
                 }
             </div>
             @if (@Model.Comments.Where(x => x.PostID == post.ID).Count() > 0)
