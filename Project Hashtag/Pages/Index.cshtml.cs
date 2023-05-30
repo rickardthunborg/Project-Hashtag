@@ -90,18 +90,20 @@ namespace Project_Hashtag.Pages
 
         }
 
-        public IActionResult OnPostDeleteComment(int id)
+        public IActionResult OnPostDeleteComment(int id, int postId)
         {
             try
             {
-                Comment comment = database.Comments.Single(c => c.PostID == id);
+                Comment? comment = database.Comments.Find(id);
                 if (comment.UserID != LoggedIn.LoggedInAccountID)
                 {
                     return Forbid();
                 }
-                Comment.DeleteComment(comment, database);
 
-                string returnUrl = Url.Page("/index") + "#" + id;
+                database.Comments.Remove(comment);
+                database.SaveChanges();
+
+                string returnUrl = Url.Page("/index") + "#" + postId;
                 return Redirect(returnUrl);      
             }
             catch

@@ -825,6 +825,7 @@ Below is flow styling
     font-size: 14px;
     max-width: 18em;
     word-wrap: break-word;
+    position: relative;
 }
 
 #comment .commentText a {
@@ -841,6 +842,28 @@ Below is flow styling
     font-size: 12px;
     color: #c2cdcd;
     margin: 0.3em 0 0.3em 5.6em;
+}
+
+.deleteComment button {
+    display: none;
+}
+
+.deleteComment label {
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    right: -25px;
+    top: 50%;
+    transform: translateY(-50%);
+    background-image: url(..//deleteComment.png);
+    background-size: contain;
+    background-position: center;
+    opacity: 0.7;
+}
+
+.deleteComment label:hover {
+    cursor: pointer;
+    opacity: 1;
 }
 
 #postComment {
