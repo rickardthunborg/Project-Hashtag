@@ -108,18 +108,21 @@ namespace Project_Hashtag.Pages
             }
         }
 
-        public IActionResult OnPostDeleteComment(int commentId)
+        public IActionResult OnPostDeleteComment(int id, int postId)
         {
             try
             {
-                Comment comment = database.Comments.Find(commentId);
+                Comment? comment = database.Comments.Find(id);
                 if (comment.UserID != LoggedIn.LoggedInAccountID)
                 {
                     return Forbid();
                 }
-                Comment.DeleteComment(comment, database);
 
-                return RedirectToPage();
+                database.Comments.Remove(comment);
+                database.SaveChanges();
+
+                string returnUrl = Url.Page("/index") + "#" + postId;
+                return Redirect(returnUrl);
             }
             catch
             {

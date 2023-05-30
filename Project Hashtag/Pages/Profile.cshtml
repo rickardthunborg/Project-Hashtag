@@ -166,6 +166,14 @@
                         <div class="commentText">
                             <a asp-page="Profile" asp-route-userId="@comment.User.ID"> @comment.User.Name</a>
                             <p>@comment.Text </p>
+                            @if (Model.LoggedIn.LoggedInAccountID == comment.UserID)
+                            {
+                                <form method="post" asp-page-handler="DeleteComment" class="deleteComment" asp-route-id="@comment.Id" asp-route-postId="@post.ID">
+                                    <label>
+                                        <button type="submit"></button>
+                                    </label>
+                                </form>
+                            }
                         </div>
                     </div>
                     <p class="commentTime">@comment.TimeSinceComment()</p>

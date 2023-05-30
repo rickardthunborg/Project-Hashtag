@@ -68,24 +68,26 @@ namespace Project_Hashtag.Pages
             }
         }
 
-		public IActionResult OnPostDeleteComment(int commentId)
-		{
-			try
-			{
-				Comment comment = database.Comments.Find(commentId);
-				if (comment.UserID != LoggedIn.LoggedInAccountID)
-				{
-					return Forbid();
-				}
-				Comment.DeleteComment(comment, database);
+        public IActionResult OnPostDeleteComment(int id)
+        {
+            try
+            {
+                Comment? comment = database.Comments.Find(id);
+                if (comment.UserID != LoggedIn.LoggedInAccountID)
+                {
+                    return Forbid();
+                }
 
-				return RedirectToPage();
-			}
-			catch
-			{
-				return RedirectToPage();
-			}
-		}
+                database.Comments.Remove(comment);
+                database.SaveChanges();
+
+                return RedirectToPage();
+            }
+            catch
+            {
+                return RedirectToPage();
+            }
+        }
 
         public IActionResult OnPostLike(int postID)
         {

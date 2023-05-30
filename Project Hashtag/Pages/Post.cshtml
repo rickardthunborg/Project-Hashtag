@@ -1,29 +1,29 @@
 ﻿@page "{postID:int}"
 @model Project_Hashtag.Pages.PostModel
 @{
-	ViewData["Title"] = Model.Post.User.Name;
+    ViewData["Title"] = Model.Post.User.Name;
 }
 
 <ul class="flow">
 
-            <li class="singlePost">
-                @{
-                    var reportedByUser = @Model.database.Reports.Any(x => x.UserID == Model.LoggedIn.LoggedInAccountID && x.PostID == Model.Post.ID);
-                    var reports = @Model.database.Reports.Where(r => Model.FollowingIds.Contains(r.UserID) && r.PostID == Model.Post.ID).Count();
-                    var poster = Model.User;
-                }
+    <li class="singlePost">
+        @{
+            var reportedByUser = @Model.database.Reports.Any(x => x.UserID == Model.LoggedIn.LoggedInAccountID && x.PostID == Model.Post.ID);
+            var reports = @Model.database.Reports.Where(r => Model.FollowingIds.Contains(r.UserID) && r.PostID == Model.Post.ID).Count();
+            var poster = Model.User;
+        }
 
-                @if (poster.ID != Model.LoggedIn.LoggedInAccountID)
-                {
-                    @if (reports == 1)
-                    {
-                        <div class="reportWarning"> <img src="~/information.png" /> <p> @reports person you follow has reported this post as untrustworthy.</p></div>
-                    }
-                    else if (reports > 0)
-                    {
-                        <div class="reportWarning"> <img src="~/information.png" /> <p> @reports people you follow have reported this post as untrustworthy.</p></div>
-                    }
-                }
+        @if (poster.ID != Model.LoggedIn.LoggedInAccountID)
+        {
+            @if (reports == 1)
+            {
+                <div class="reportWarning"> <img src="~/information.png" /> <p> @reports person you follow has reported this post as untrustworthy.</p></div>
+            }
+            else if (reports > 0)
+            {
+                <div class="reportWarning"> <img src="~/information.png" /> <p> @reports people you follow have reported this post as untrustworthy.</p></div>
+            }
+        }
         <div class="postProfile">
             <a asp-page="Profile" asp-route-userId="@poster.ID" class="postProfileBox">
                 <img class="pic-top" src="@poster.Avatar" alt="error">
@@ -55,40 +55,40 @@
             <button id="closeButton">No</button>
         </div>
 
-                <p class="postText"> @Model.Post.Description</p>
-                 @if (Model.Post.PictureUrl != null)
-                 {
-                <div class="image">
-                    <img src="@Model.Post.PictureUrl" alt="Error loading picture" />
-                </div>
-                 }
-                <div class="interaction">
-                <form method="post" asp-page-handler="like" asp-route-id="@Model.Post.ID">
-                    @if (Model.Post.IsLiked(Model.LoggedIn.LoggedInAccountID, Model.database))
-                    {
-                        <label id="like" class="liked">
-                            <button type="submit"></button>
-                            <p>@Model.Post.LikeCount</p>
-                        </label>
-                    }
-                    else
-                    {
+        <p class="postText"> @Model.Post.Description</p>
+        @if (Model.Post.PictureUrl != null)
+        {
+            <div class="image">
+                <img src="@Model.Post.PictureUrl" alt="Error loading picture" />
+            </div>
+        }
+        <div class="interaction">
+            <form method="post" asp-page-handler="like" asp-route-id="@Model.Post.ID">
+                @if (Model.Post.IsLiked(Model.LoggedIn.LoggedInAccountID, Model.database))
+                {
+                    <label id="like" class="liked">
+                        <button type="submit"></button>
+                        <p>@Model.Post.LikeCount</p>
+                    </label>
+                }
+                else
+                {
                     <label id="like">
-                            <button type="submit"></button>
-                            <p>@Model.Post.LikeCount</p>
-                        </label>
-                    }
-                </form>
-                <a asp-page="post" asp-route-postID="@Model.Post.ID" class="commentContainer">
-                    <div class="comments">
-                    </div>
-                    <p class="commentCount">@Model.Comments.Where(x => x.PostID == Model.Post.ID).Count()</p>
-                </a>
+                        <button type="submit"></button>
+                        <p>@Model.Post.LikeCount</p>
+                    </label>
+                }
+            </form>
+            <a asp-page="post" asp-route-postID="@Model.Post.ID" class="commentContainer">
+                <div class="comments">
+                </div>
+                <p class="commentCount">@Model.Comments.Where(x => x.PostID == Model.Post.ID).Count()</p>
+            </a>
 
 
-                @*
-                    Adds tag if tag is not null
-                *@
+            @*
+            Adds tag if tag is not null
+            *@
             @if (Model.Post.Tag != "" && Model.Post.Tag != null)
             {
                 <form method="get" asp-page="Search" class="tagContainer">
@@ -99,46 +99,54 @@
                     </label>
                 </form>
             }
-            </div>
-            
-        
+        </div>
+
+
 
         @if (@Model.Comments.Where(x => x.PostID == Model.Post.ID).Count() > 0)
+        {
+            <p class="commentSectionText">Comments: <a asp-page="post" asp-route-postID="@Model.Post.ID"> View all</a> </p>
+            @for (int j = 0; j < Math.Min(3, Model.Comments.Where(c => c.PostID == Model.Post.ID).Count()); j++)
             {
-                <p class="commentSectionText">Comments: <a asp-page="post" asp-route-postID="@Model.Post.ID"> View all</a> </p>
-                @for (int j = 0; j < Math.Min(3, Model.Comments.Where(c => c.PostID == Model.Post.ID).Count()); j++)
-                {
-                    var comment = @Model.Comments.Where(c => c.PostID == Model.Post.ID).OrderByDescending(c => c.CreatedDate).ToList()[j];
-                    <div id="comment">
-                        <div class="commentProfilePic">
-                            <a asp-page="Profile" asp-route-userId="@comment.User.ID">
-                                <img src="@comment.User.Avatar" class="pic-top" />
-                            </a>
-                        </div>
-                        <div class="commentText">
-                            <a asp-page="Profile" asp-route-userId="@comment.User.ID"> @comment.User.Name</a>
-                            <p>@comment.Text </p>
-                        </div>
+                var comment = @Model.Comments.Where(c => c.PostID == Model.Post.ID).OrderByDescending(c => c.CreatedDate).ToList()[j];
+                <div id="comment">
+                    <div class="commentProfilePic">
+                        <a asp-page="Profile" asp-route-userId="@comment.User.ID">
+                            <img src="@comment.User.Avatar" class="pic-top" />
+                        </a>
                     </div>
-                    <p class="commentTime">@comment.TimeSinceComment()</p>
+                    <div class="commentText">
+                        <a asp-page="Profile" asp-route-userId="@comment.User.ID"> @comment.User.Name</a>
+                        <p>@comment.Text </p>
+                        @if (Model.LoggedIn.LoggedInAccountID == comment.UserID)
+                        {
+                            <form method="post" asp-page-handler="DeleteComment" class="deleteComment" asp-route-id="@comment.Id">
+                                <label>
+                                    <button type="submit"></button>
+                                </label>
+                            </form>
+                        }
+                    </div>
+                </div>
+                <p class="commentTime">@comment.TimeSinceComment()</p>
 
-                }
             }
-            <form method="post" asp-page-handler="comment" asp-route-id="@Model.Post.ID" id="postComment">
-                <img class="pic-top" src="@Model.database.Users.Single(x => x.ID == @Model.LoggedIn.LoggedInAccountID).Avatar" alt="error">
-                <textarea required name="content" placeholder="Add a comment..." rows="1" oninput="autoExpand(this)"></textarea>
-                <input hidden name="userId" value="@Model.Post.UserID">
-                <button type="submit">Comment</button>
+        }
+        <form method="post" asp-page-handler="comment" asp-route-id="@Model.Post.ID" id="postComment">
+            <img class="pic-top" src="@Model.database.Users.Single(x => x.ID == @Model.LoggedIn.LoggedInAccountID).Avatar" alt="error">
+            <textarea required name="content" placeholder="Add a comment..." rows="1" oninput="autoExpand(this)"></textarea>
+            <input hidden name="userId" value="@Model.Post.UserID">
+            <button type="submit">Comment</button>
+        </form>
+
+        @if (Model.User.ID == Model.LoggedIn.LoggedInAccountID)
+        {
+            <form method="post" asp-page-handler="delete" asp-route-id="@Model.Post.ID">
+                <input hidden name="userId" value="@Model.User.ID">
+                <button type="submit">Delete</button>
             </form>
+        }
 
-            @if (Model.User.ID == Model.LoggedIn.LoggedInAccountID)
-            {
-                <form method="post" asp-page-handler="delete" asp-route-id="@Model.Post.ID">
-                    <input hidden name="userId" value="@Model.User.ID">
-                    <button type="submit">Delete</button>
-                </form>
-            }
-
-        </li>
+    </li>
 
 </ul>
