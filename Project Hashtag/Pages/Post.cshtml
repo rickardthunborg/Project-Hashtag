@@ -6,7 +6,7 @@
 
 <ul class="flow">
 
-    <li class="singlePost">
+    <li class="singlePost" data-tag="@Model.Post.Tag">
         @{
             var reportedByUser = @Model.database.Reports.Any(x => x.UserID == Model.LoggedIn.LoggedInAccountID && x.PostID == Model.Post.ID);
             var reports = @Model.database.Reports.Where(r => Model.FollowingIds.Contains(r.UserID) && r.PostID == Model.Post.ID).Count();
@@ -62,6 +62,7 @@
                 <img src="@Model.Post.PictureUrl" alt="Error loading picture" />
             </div>
         }
+        <a id="adSpace" target="_blank"></a>
         <div class="interaction">
             <form method="post" asp-page-handler="like" asp-route-id="@Model.Post.ID">
                 @if (Model.Post.IsLiked(Model.LoggedIn.LoggedInAccountID, Model.database))

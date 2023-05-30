@@ -50,7 +50,7 @@
         var reports = @Model.database.Reports.Where(r => Model.FollowingIds.Contains(r.UserID) && r.PostID == post.ID).Count();
         var poster = Model.User;
 
-        <li>
+        <li data-tag="@post.Tag">
 
             @if (poster.ID != Model.LoggedIn.LoggedInAccountID)
             {
@@ -108,7 +108,7 @@
                     <img src="@post.PictureUrl" alt="Error loading picture" />
                 </div>
             }
-
+            <a id="adSpace" target="_blank"></a>
 
             @*
              Interaction bar conatins: like button, comment button and tag

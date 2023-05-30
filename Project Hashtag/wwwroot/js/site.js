@@ -57,25 +57,37 @@ closeButtons.forEach(function (button) {
 //Javascript to stick stick the banderolls to the top
 window.onscroll = function () { stickBanderoll() };
 var header = document.getElementById("banderoll1");
-var sticky = header.offsetTop;
+var sticky;
+
+if (header) {
+  sticky = header.offsetTop;
+}
 
 var banderoll2 = document.getElementById("banderoll2")
-var sticky2 = banderoll2.offsetTop
+var sticky2;
+
+if (banderoll2) {
+  sticky2 = banderoll2.offsetTop;
+}
 
 function stickBanderoll() {
-    if (window.pageYOffset > (sticky - (window.innerHeight * 0.1 ))) {
-        header.classList.add("stuck");
-    } else {
-        header.classList.remove("stuck");
+    if (header && banderoll2) {
+
+      if (window.pageYOffset > (sticky - (window.innerHeight * 0.1 ))) {
+          header.classList.add("stuck");
+      } else {
+          header.classList.remove("stuck");
+      }
+  
+      if (window.pageYOffset >= sticky2 - (window.innerHeight * 0.1) ) {
+          banderoll2.classList.add("stuck");
+          header.classList.add("hidden");
+        } else {
+          banderoll2.classList.remove("stuck");
+          header.classList.remove("hidden")
+        }
     }
 
-    if (window.pageYOffset >= sticky2 - (window.innerHeight * 0.1) ) {
-        banderoll2.classList.add("stuck");
-        header.classList.add("hidden");
-      } else {
-        banderoll2.classList.remove("stuck");
-        header.classList.remove("hidden")
-      }
 }
 
 
@@ -84,25 +96,29 @@ function stickBanderoll() {
 //Scroll funtion for the timeline
 var scrollButton = document.getElementById("scrollButton");
 
-scrollButton.addEventListener("click", function() {
-  scrollToBottom();});
-
-  function scrollToBottom() {
-    var scrollTo = document.documentElement.scrollHeight - window.innerHeight;
-    scrollToPosition(scrollTo, document.documentElement.scrollHeight * 3.5);
+if (scrollButton){
+  
+  scrollButton.addEventListener("click", function() {
+    scrollToBottom();});
+  
+    function scrollToBottom() {
+      var scrollTo = document.documentElement.scrollHeight - window.innerHeight;
+      scrollToPosition(scrollTo, document.documentElement.scrollHeight * 3.5);
+    }
+    
+    function scrollToPosition(to, duration) {
+      if (duration <= 0) return;
+    
+      var difference = to - window.scrollY;
+      var perTick = (difference / duration) * 10;
+    
+      setTimeout(function() {
+        window.scrollTo(0, window.scrollY + perTick);
+        if (window.scrollY === to) return;
+        scrollToPosition(to, duration - 10);
+      }, 10);
   }
-  
-  function scrollToPosition(to, duration) {
-    if (duration <= 0) return;
-  
-    var difference = to - window.scrollY;
-    var perTick = (difference / duration) * 10;
-  
-    setTimeout(function() {
-      window.scrollTo(0, window.scrollY + perTick);
-      if (window.scrollY === to) return;
-      scrollToPosition(to, duration - 10);
-    }, 10);
+
 }
 
 

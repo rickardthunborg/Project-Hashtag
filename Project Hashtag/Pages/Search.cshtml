@@ -48,7 +48,7 @@
         var reports = @Model.database.Reports.Where(r => Model.FollowingIds.Contains(r.UserID) && r.PostID == post.ID).Count();
         var poster = Model.Users.Where(u => u.ID == post.UserID).SingleOrDefault();
 
-        <li>
+        <li data-tag="@post.Tag">
 
             @if (poster.ID != Model.LoggedIn.LoggedInAccountID)
             {
@@ -111,6 +111,7 @@
                 </div>
             }
 
+            <a id="adSpace" target="_blank"></a>
 
             @*
         Interaction bar conatins: like button, comment button and tag
