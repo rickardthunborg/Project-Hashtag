@@ -133,36 +133,111 @@ document.addEventListener('DOMContentLoaded', function() {
   var liElements = document.querySelectorAll('.flow li');
   liElements.forEach(function(li) {
     var tag = li.getAttribute('data-tag');
-    LoadAd(tag, li);
+    LoadAd(tag, li, true);
   });
 });
 
-async function LoadAd(tag, li) {
+async function LoadAd(tag, li, fakeApi) {
 
     let url = `https://laboutique.azurewebsites.net/api/Product/GetByName?name=${tag}`
 
     let response;
     let json;
 
-    try {
-        response = await fetch(url);
-        json = await response.json();
-    }
-    catch (error) {
-        console.log(error)
-        return;
-    }
+    let description;
+    let productID; 
+    let price;
+    let stock; 
+    let link;
+    let imageLink; 
     
-    let description = json.description;
-    let productID = json.productID;
-    let price = json.price;
-    let link = `https://laboutique.azurewebsites.net/ProductPage?id=${productID}`
+    if (!fakeApi)
+    {
+      try {
+          response = await fetch(url);
+          json = await response.json();
+      }
+      catch (error) {
+          console.log(error)
+          return;
+      }
+    }
+      else {
+        json = jsonData.find(j => j.productName === tag);
 
-    let adSpace = document.createElement('div');
-    adSpace.setAttribute("id", "adDiv");
-    li.appendChild(adSpace);
+        if (!json){
+          return;
+        }
 
+        description = json.description;
+        productID = json.productID;
+        price = json.price;
+        stock = json.stock;
+        link = `https://www.example.com`;
+        imageLink = json.imageLink;
+    }
+
+    
+
+    let adSpace = li.querySelector('#adSpace');
+    adSpace.classList.add('adVisible')
+    adSpace.setAttribute("href", imageLink)
+
+    let adPrompt = document.createElement('div')
+    let text = document.createElement('p')
+    text.textContent = "Ad:"
+    adPrompt.appendChild(text)
+    adPrompt.classList.add("adPromptBox")
+    adSpace.appendChild(adPrompt)
+
+    let image = document.createElement("img")
+    image.src = imageLink;
+    image.classList.add("adImage")
+    adSpace.appendChild(image);
+
+
+    let adSpaceContainer = document.createElement('div')
+    adSpaceContainer.classList.add('adText')
     let adSpaceText = document.createElement('p')
+    adSpaceText.classList.add('adTextMain')
     adSpaceText.textContent = description;
-    adSpace.appendChild(adSpaceText)
+    let priceText = document.createElement('p');
+    priceText.textContent = "Price: " + price + " SEK";
+
+    let stockText = document.createElement('p');
+    stockText.textContent = "Stock: " + stock;
+
+    adSpaceContainer.appendChild(adSpaceText);
+    adSpaceContainer.appendChild(priceText);
+    adSpaceContainer.appendChild(stockText);
+
+    adSpace.appendChild(adSpaceContainer);
 }
+
+
+const jsonData = [
+  {
+    "productName": "apple",
+    "description": "Delicious Green Apple",
+    "productID": 111111,
+    "imageLink": "https://healthiersteps.com/wp-content/uploads/2021/12/green-apple-benefits.jpeg",
+    "price": 20,
+    "stock": 2031
+  },
+  {
+    "productName": "banana",
+    "description": "Sweet Yellow Banana",
+    "productID": 222222,
+    "imageLink": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/Banana-Single.jpg/2324px-Banana-Single.jpg",
+    "price": 15,
+    "stock": 415
+  },
+  {
+    "productName": "orange",
+    "description": "Juicy Orange",
+    "imageLink": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c4/Orange-Fruit-Pieces.jpg/1200px-Orange-Fruit-Pieces.jpg",
+    "productID": 333333,
+    "price": 10,
+    "stock": 32
+  }
+];

@@ -161,13 +161,13 @@ button[type="submit"]:hover {
     background-repeat: no-repeat;
     margin-right: 20px;
     transition: all 100ms ease;
-    opacity: 0.6;
+    opacity: 1;
 
 }
 
 .div3NavBar label:hover {
     cursor: pointer;
-    opacity: 1;
+    opacity: 0.7;
 }
 
 .div3NavBar label button {
@@ -1383,4 +1383,56 @@ Followers and Following page css
 
 .singlePost {
     margin-top: 1em;
+}
+
+.adVisible {
+    width: 75%;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    margin: 1em auto;
+    border-top: 1px solid  grey;
+    border-bottom: 1px solid  grey;
+    color: white;
+    opacity: 0.8;
+    transition: all 200ms ease;
+    text-decoration: none;
+}
+
+.adVisible:hover {
+    opacity: 1;
+    cursor: pointer;
+    border-color: #dbb84e48;
+}
+
+.adImage {
+    height: 99%;
+}
+
+.adPromptBox {
+    display: flex;
+    font-size: 15px;
+    align-items: center;
+    justify-content: center;
+    width: 3em;
+    font-style: italic;
+    color: #f1dba7;
+    height: 100%;
+    background-color: #2e313660;
+}
+
+.adText {
+    margin-left: 0.5em;
+}
+
+.adText .adTextMain {
+    font-size: 15px;
+    color: white;
+    opacity: 1;
+}
+
+.adText p {
+    font-size: 12px;
+    color: #c2c2c2;
+    opacity: 0.6;
 }
