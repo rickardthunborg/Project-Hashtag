@@ -197,10 +197,10 @@ namespace Project_Hashtag.Pages
 				}
 
 				database.Posts.Remove(post);
-                database.SaveChanges();
+                await database.SaveChangesAsync();
 
-                return RedirectToPage("Profile", new { postID});
-            }
+				return RedirectToPage("index");
+			}
             catch
             {
                 return NotFound();
