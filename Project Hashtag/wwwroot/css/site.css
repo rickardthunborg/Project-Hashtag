@@ -1058,7 +1058,7 @@ Profile styling
 
 #ProfileSettingsDiv {
     background-color: #2E3136;
-    width: 55vw;
+    width: 500px;
     height: 70vh;
     margin: auto;
     border-radius: 10px;
@@ -1082,8 +1082,9 @@ Profile styling
 #ProfileSettingsDiv .editBio {
     display: flex;
     flex-wrap: wrap;
-    align-items: center;
     margin-bottom: 10px;
+    margin-top: 10px;
+
 }
 
 #ProfileSettingsDiv .leftBio {
@@ -1142,6 +1143,13 @@ Mobile optimization
 
 .banderollContainer {
     padding: 50px 0 0 0;
+}
+
+@media only screen and (max-width: 500px) {
+
+    #ProfileSettingsDiv{
+        width: 100%;
+    }
 }
 
 @media only screen and (max-width: 535px) {

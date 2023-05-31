@@ -94,7 +94,7 @@ namespace Project_Hashtag.Pages
 
                 User.Biography = content;
                 database.SaveChanges();
-                return RedirectToPage("/index");
+                return Page();
         }
     }
 }
