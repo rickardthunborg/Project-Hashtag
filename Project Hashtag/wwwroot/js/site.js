@@ -111,7 +111,7 @@ if (scrollButton){
     
       var difference = to - window.scrollY;
       var perTick = (difference / duration) * 10;
-    
+
       setTimeout(function() {
         window.scrollTo(0, window.scrollY + perTick);
         if (window.scrollY === to) return;

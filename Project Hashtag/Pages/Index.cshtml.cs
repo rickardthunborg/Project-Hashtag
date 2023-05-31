@@ -112,13 +112,13 @@ namespace Project_Hashtag.Pages
             }
         }
 
-        public IActionResult OnPostComment(int id, string content)
+        public IActionResult OnPostComment(int id, string content, bool timeLine)
         {
             try
             {
                 Comment.AddComment(LoggedIn.LoggedInAccountID, id, content, database);
 
-                string returnUrl = Url.Page("/index") + "#" + id;
+                string returnUrl = Url.Page("/index") + "?timeline=" + timeLine + "#" + id;
                 return Redirect(returnUrl);
             }
             catch
@@ -127,7 +127,7 @@ namespace Project_Hashtag.Pages
             }
         }
 
-        public IActionResult OnPostReport(int id)
+        public IActionResult OnPostReport(int id, bool timeLine)
         {
             Post post = database.Posts.FirstOrDefault(x => x.ID == id);
             Report report = database.Reports.FirstOrDefault(x => x.PostID == post.ID && x.UserID == LoggedIn.LoggedInAccountID);
@@ -140,7 +140,7 @@ namespace Project_Hashtag.Pages
                     database.Reports.Add(report);
                     database.SaveChanges();
 
-                    string returnUrl = Url.Page("/index?timeline=" + TimeLineMode) + "#" + id;
+                    string returnUrl = Url.Page("/index") + "?timeline=" + timeLine + "#" + id;
                     return Redirect(returnUrl);
                 }
                 catch
@@ -156,7 +156,7 @@ namespace Project_Hashtag.Pages
                     database.Reports.Remove(report);
                     database.SaveChanges();
 
-                    string returnUrl = Url.Page("/index") + "#" + id;
+                    string returnUrl = Url.Page("/index") + "?timeline=" + timeLine + "#" + id;
                     return Redirect(returnUrl);
                 }
                 catch
