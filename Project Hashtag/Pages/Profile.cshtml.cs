@@ -232,23 +232,25 @@ namespace Project_Hashtag.Pages
                     return Forbid();
                 }
 
-                string relativePath = post.PictureUrl.Replace("/uploads/", string.Empty);
-                string imagePath = baseDirectoryPath + "\\" + relativePath;
-
-
-                if (System.IO.File.Exists(imagePath))
+                if (post.PictureUrl != null)
                 {
-                    // Delete the file
-                    System.IO.File.Delete(imagePath);
-                    Console.WriteLine("Image deleted successfully.");
-                }
-                else
-                {
-                    Console.WriteLine("Image file not found.");
+                    string relativePath = post.PictureUrl.Replace("/uploads/", string.Empty);
+                    string imagePath = baseDirectoryPath + "\\" + relativePath;
+
+                    if (System.IO.File.Exists(imagePath))
+                    {
+                        // Delete the file
+                        System.IO.File.Delete(imagePath);
+                        Console.WriteLine("Image deleted successfully.");
+                    }
+                    else
+                    {
+                        Console.WriteLine("Image file not found.");
+                    }
                 }
 
                 database.Posts.Remove(post);
-                database.SaveChanges();
+                await database.SaveChangesAsync();
 
                 return RedirectToPage("Profile", new { userID = userID });
             }
