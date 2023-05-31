@@ -169,7 +169,13 @@ else
                 {
                     <p>Do you want to report this post?</p>
                 }
-                <form method="post" asp-page-handler="report" asp-route-id="@post.ID"> <button type="submit">Yes</button> </form>
+                <form method="post" asp-page-handler="report" asp-route-id="@post.ID">
+                    @if (Model.TimeLineMode)
+                    {
+                        <input type="hidden" name="timeLine" value="true" />
+                    }
+                    <button type="submit">Yes</button> 
+                </form>
                 <button id="closeButton">No</button>
             </div>
 
@@ -249,6 +255,10 @@ else
                 }
             }
             <form method="post" asp-page-handler="comment" asp-route-id="@post.ID" id="postComment">
+                @if (Model.TimeLineMode)
+                {
+                    <input type="hidden" name="timeLine" value="true" />
+                }
                 <img class="pic-top" src="@Model.database.Users.Single(x => x.ID == @Model.LoggedIn.LoggedInAccountID).Avatar" alt="error">
                 <textarea required name="content" placeholder="Add a comment..." rows="1" oninput="autoExpand(this)"></textarea>
                 <input hidden name="userId" value="@post.UserID">

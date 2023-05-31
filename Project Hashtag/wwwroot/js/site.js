@@ -71,14 +71,15 @@ if (banderoll2) {
 }
 
 function stickBanderoll() {
-    if (header && banderoll2) {
+    if (header) {
 
       if (window.pageYOffset > (sticky - (window.innerHeight * 0.1 ))) {
           header.classList.add("stuck");
       } else {
           header.classList.remove("stuck");
       }
-  
+    }
+    if (banderoll2){
       if (window.pageYOffset >= sticky2 - (window.innerHeight * 0.1) ) {
           banderoll2.classList.add("stuck");
           header.classList.add("hidden");
@@ -87,7 +88,6 @@ function stickBanderoll() {
           header.classList.remove("hidden")
         }
     }
-
 }
 
 
@@ -111,7 +111,7 @@ if (scrollButton){
     
       var difference = to - window.scrollY;
       var perTick = (difference / duration) * 10;
-    
+
       setTimeout(function() {
         window.scrollTo(0, window.scrollY + perTick);
         if (window.scrollY === to) return;

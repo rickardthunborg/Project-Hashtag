@@ -90,7 +90,6 @@ button[type="submit"] {
 
 button[type="submit"]:hover {
     background-color: #BA962F;
-    transform: scale(1.03); /* Added transform property */
 }
 
 .editProfileButton {
@@ -110,9 +109,31 @@ button[type="submit"]:hover {
     transform: scale(1.02); /* Added transform property */
 }
 
-#deleteButton {
+.spacerPost {
+    width: 1px;
+    height: 2em;
+}
+
+#deletePost {
+    position: absolute;
+    bottom: 0;
+    left: 0;
     width: 100%;
-    margin: auto;
+    margin: 1em auto 0 auto;
+}
+
+#deletePost > button {
+    width: 100%;
+    background-color: rgba(66, 66, 66, 0.118);
+    border-top: 1px solid #c2cdcd44;
+    transition: all 200ms ease;
+    border-radius: 0 0 7px 7px;
+}
+
+#deletePost > button:hover {
+    transform: scale(1);
+    border-color: #ff3030;
+    background-color: #ff3c3c4b;
 }
 
 .parentNavBarContainer {
@@ -490,6 +511,7 @@ Below is flow styling
     border-radius: 7px;
     padding: 1em;
     background-color: #1f1f1f;
+    position: relative;
 }
 
 .addNewPost {
@@ -888,6 +910,10 @@ Below is flow styling
     align-items: center;
     justify-content: center;
     background-color: #dbb84e;
+}
+
+#postComment button:hover {
+    opacity: 0.7;
 }
 
 #postComment textarea {
@@ -1363,6 +1389,11 @@ Followers and Following page css
 @media (max-width: 1090px) {
     #timeLineInput {
         display: none;
+    }
+
+    #deletePost > button {
+        border-color: #ff3030;
+        background-color: #ff3c3c4b;
     }
 }
 
