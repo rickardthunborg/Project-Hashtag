@@ -6,8 +6,7 @@
 }
 
 <div id="ProfileSettingsDiv">
-	<h1>Edit Profile</h1>
-	<p>@Model.User.Name</p>
+	<h1>Edit Profile - @Model.User.Name</h1>
 	<div class="editBio">
 		<aside class="leftBio">
 			<label for="bio">Biography</label>
@@ -16,19 +15,26 @@
 			<form method="post" asp-page-handler="biography">
 
 				<input hidden name="userId" value="@Model.User.ID">
-				<textarea name="content" id="bio" type="text" oninput="autoExpand(this)">@Model.User.Biography</textarea>
-				<button type="submit">Update bio</button>
+				<textarea rows="1" name="content" id="bio" type="text" oninput="autoExpand(this)">@Model.User.Biography</textarea>
+				<button type="submit" id="bioButton">Update bio</button>
 			</form>
 		</div>
 	</div>
-	<h3>Choose a new profile picture: </h3>
 	<div class="editBio">
 		<aside class="leftBio">
-			<img src="@Model.User.Avatar" />
+			<h3>Profile picture: </h3>
 		</aside>
-		<div class="rightBio">
-			<form method="post" enctype="multipart/form-data">
-				<input type="file" name="photo" required>
+		<div class="rightBio picAddEdit">
+			<img src="@Model.User.Avatar" id="oldImage"/>
+			<form method="post" enctype="multipart/form-data" class="editPicForm">
+				<div>
+					<p>New picture: </p>
+				<label id="addPic">
+					<input type="file" name="photo" id="photo-input">
+					<span id="file-label"></span>
+				</label>
+
+				</div>
 				<button type="submit">Update picture</button>
 			</form>
 		</div>

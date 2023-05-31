@@ -392,6 +392,7 @@ Add new post styling
 }
 
 #addPic {
+    display: block;
     width: 30px;
     height: 30px;
     background-color: #1F2023;
@@ -1069,7 +1070,7 @@ Profile styling
 }
 
 .profileCounter.clickable a:hover {
-    transform: scale(1.03);
+    opacity: 0.7;
 }
 
 
@@ -1083,8 +1084,9 @@ Profile styling
 
 
 #ProfileSettingsDiv {
-    background-color: #2E3136;
-    width: 55vw;
+    position: relative;
+    background-color: #1f1f1f;
+    width: clamp(300px, 100%, 600px);
     height: 70vh;
     margin: auto;
     border-radius: 10px;
@@ -1095,8 +1097,29 @@ Profile styling
 
 #ProfileSettingsDiv h1 {
     color: #F0F7EE;
+    font-weight: 500;
     margin-bottom: 10px;
-    font-size: 24px;
+    font-size: 22px;
+}
+
+#ProfileSettingsDiv textarea {
+    resize: none;
+    background-color: transparent;
+    color: white;
+    padding: 8px;
+    border-radius: 3px;
+    font-size: 14px;
+    width: 100%;
+    min-height: 3em;
+}
+
+#ProfileSettingsDiv textarea:focus {
+    outline: none;
+}
+
+#ProfileSettingsDiv h3 {
+    font-size: 20px;
+    font-weight: 500;
 }
 
 #ProfileSettingsDiv p {
@@ -1108,17 +1131,61 @@ Profile styling
 #ProfileSettingsDiv .editBio {
     display: flex;
     flex-wrap: wrap;
-    align-items: center;
-    margin-bottom: 10px;
+    margin: 10px 0 30px 0;
+    padding: 10px 0;
+    border-top: 1px solid #c2cdcd67;
 }
 
 #ProfileSettingsDiv .leftBio {
     margin-right: 10px;
-    flex: 0 0 150px;
+    flex: 1;
 }
 
 #ProfileSettingsDiv .rightBio {
-    flex: 1;
+    flex: 2;
+}
+
+#ProfileSettingsDiv .rightBio form {
+    position: relative;
+}
+
+#ProfileSettingsDiv .picAddEdit {
+    display: flex;
+    
+}
+
+#ProfileSettingsDiv #addPic {
+    width: 60px;
+    height: 60px;
+    border: 1px solid #c2cdcd;
+}
+
+#bioButton {
+    position: absolute;
+    right: 0;
+    bottom: -3em
+}
+
+.editPicForm {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    flex-direction: column;
+    gap: 1em;
+    position: relative;
+}
+
+.editPicForm div {
+    display: flex;
+    align-items: center; 
+    gap: 1em;
+}
+
+.editPicForm button {
+    width: 9em;
+    position: absolute;
+    right: 0;
+    top: 6em;
 }
 
 #ProfileSettingsDiv .editBio label {
@@ -1126,13 +1193,7 @@ Profile styling
     font-size: 20px;
 }
 
-#ProfileSettingsDiv .editBio textarea {
-    width: 100%;
-    resize: vertical;
-    font-size: 14px;
-}
-
-#ProfileSettingsDiv .editBio img {
+#ProfileSettingsDiv .editBio #oldImage {
     margin-right: 10px;
     width: 60px;
     height: 60px;
@@ -1141,6 +1202,9 @@ Profile styling
 }
 
 #backToProfileButton {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
     background-color: #D5AF34;
     color: white;
     border: none;
@@ -1149,9 +1213,6 @@ Profile styling
     cursor: pointer;
     transition: transform 0.2s ease-in-out;
     text-decoration: none;
-    display: inline-block;
-    width: 30%;
-    margin-right: 10px;
 }
 
 #backToProfileButton:hover {
