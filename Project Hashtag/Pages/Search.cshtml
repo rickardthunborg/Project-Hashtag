@@ -184,16 +184,6 @@
                 <button type="submit">Comment</button>
             </form>
 
-            @if (poster.ID == Model.LoggedIn.LoggedInAccountID)
-            {
-                <form method="post" asp-page-handler="delete" asp-route-id="@post.ID">
-                    <input hidden name="userId" value="@poster.ID">
-                    <input type="hidden" name="search" value="@Request.Query["search"]" />
-                    <button type="submit">Delete</button>
-                </form>
-            }
-
-
         </li>
     }
 </ul>

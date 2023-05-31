@@ -110,9 +110,22 @@ button[type="submit"]:hover {
     transform: scale(1.02); /* Added transform property */
 }
 
-#deleteButton {
+#deletePost {
+    width: 80%;
+    margin: 1em auto 0 auto;
+}
+
+#deletePost > button {
     width: 100%;
-    margin: auto;
+    background-color: rgba(66, 66, 66, 0.118);
+    border: 1px solid #c2cdcd44;
+    transition: all 200ms ease;
+}
+
+#deletePost > button:hover {
+    transform: scale(1);
+    border-color: #ff3030;
+    background-color: #ff3c3c4b;
 }
 
 .parentNavBarContainer {
