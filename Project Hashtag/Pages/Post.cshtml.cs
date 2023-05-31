@@ -196,6 +196,13 @@ namespace Project_Hashtag.Pages
 					}
 				}
 
+				var likesToRemove = database.Likes.Where(l => l.PostID == postID);
+
+				if (likesToRemove.Count() > 0)
+				{
+					database.Likes.RemoveRange(likesToRemove);
+				}
+
 				database.Posts.Remove(post);
                 await database.SaveChangesAsync();
 

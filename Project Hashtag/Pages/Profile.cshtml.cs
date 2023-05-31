@@ -35,8 +35,6 @@ namespace Project_Hashtag.Pages
             string grandparentDirectory = Directory.GetParent(parentDirectory)?.FullName;
             baseDirectoryPath = Path.Combine(grandparentDirectory, "UploadedFiles");
 
-
-
         }
 
 
@@ -224,6 +222,7 @@ namespace Project_Hashtag.Pages
         public async Task<IActionResult> OnPostDelete(int postID, int userID)
         {
 
+
             try
             {
                 Post post = database.Posts.Find(postID);
@@ -249,6 +248,13 @@ namespace Project_Hashtag.Pages
                         Console.WriteLine("Image file not found.");
                     }
 
+                }
+
+                var likesToRemove = database.Likes.Where(l => l.PostID == postID);
+
+                if (likesToRemove.Count() > 0)
+                {
+                    database.Likes.RemoveRange(likesToRemove);
                 }
 
                 database.Posts.Remove(post);
