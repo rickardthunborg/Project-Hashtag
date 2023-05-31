@@ -189,6 +189,7 @@
 
             @if (Model.User.ID == Model.LoggedIn.LoggedInAccountID)
             {
+                <div class="spacerPost"></div>
                 <form method="post" asp-page-handler="delete" asp-route-postID="@post.ID" id="deletePost">
                     <input hidden name="userId" value="@Model.User.ID">
                     <button type="submit">Delete</button>
