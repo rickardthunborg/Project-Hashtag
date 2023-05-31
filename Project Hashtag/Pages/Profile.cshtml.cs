@@ -237,6 +237,7 @@ namespace Project_Hashtag.Pages
                     string relativePath = post.PictureUrl.Replace("/uploads/", string.Empty);
                     string imagePath = baseDirectoryPath + "\\" + relativePath;
 
+
                     if (System.IO.File.Exists(imagePath))
                     {
                         // Delete the file
@@ -247,12 +248,13 @@ namespace Project_Hashtag.Pages
                     {
                         Console.WriteLine("Image file not found.");
                     }
+
                 }
 
                 database.Posts.Remove(post);
                 await database.SaveChangesAsync();
 
-                return RedirectToPage("Profile", new { userID = userID });
+                return RedirectToPage("Profile", new { userID });
             }
             catch
             {

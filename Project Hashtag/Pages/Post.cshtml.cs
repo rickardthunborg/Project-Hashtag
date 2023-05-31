@@ -199,7 +199,7 @@ namespace Project_Hashtag.Pages
 				database.Posts.Remove(post);
                 database.SaveChanges();
 
-                return RedirectToPage("Profile", new { userID = userID});
+                return RedirectToPage("Profile", new { postID});
             }
             catch
             {
